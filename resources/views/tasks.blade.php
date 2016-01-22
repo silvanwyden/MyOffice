@@ -47,13 +47,21 @@
 					<div class="panel-body">
 						<table class="table table-striped task-table">
 							<thead>
+								<th>ID</th>
 								<th>Task</th>
-								<th>&nbsp;</th>
+								<th>Created</th>
+								<th>Modified</th>
+								<th>Deadline</th>
+								<th>Action</th>
 							</thead>
 							<tbody>
 								@foreach ($tasks as $task)
 									<tr>
+										<td class="table-text"><div>{{ $task->id }}</div></td>
 										<td class="table-text"><div>{{ $task->name }}</div></td>
+										<td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->created_at)) }}</div></td>
+										<td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->modiefied_at)) }}</div></td>
+										<td class="table-text"><div>{{ $task->deadline }}</div></td>
 
 										<!-- Task Delete Button -->
 										<td>
