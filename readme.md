@@ -1,3 +1,3 @@
-# Laravel Quickstart - Basic
+# MyPrivateOffice
 
-http://laravel.com/docs/quickstart
+http://www.wyden.com
