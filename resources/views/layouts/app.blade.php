@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -48,19 +49,41 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="#">Task List</a>
-					<a class="navbar-brand" href="#">My Notes</a>
+					<a class="navbar-brand" href="/tasks">Task List</a>
+					<a class="navbar-brand" href="/notes">My Notes</a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						&nbsp;
 					</ul>
+					
+					<ul class="nav navbar-nav navbar-right">
+						@if (Auth::guest())
+							<li><a href="/auth/register"><i class="fa fa-btn fa-heart"></i>Register</a></li>
+							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
+						@else
+							<li class="navbar-text"><i class="fa fa-btn fa-user"></i>{{ Auth::user()->name }}</li>
+							<li><a href="/auth/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+						@endif
+					</ul>
+					
 				</div>
 			</div>
 		</nav>
 	</div>
 
 	@yield('content')
+	
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+		  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		  <script>
+		  $(function() {
+			  $( "#datepicker" ).datepicker();
+			  $( "#format" ).change(function() {
+			  $( "#datepicker" ).datepicker( "option", "dateFormat", 'd.m.Y' );});
+		  });
+	  </script>
+	
 </body>
 </html>

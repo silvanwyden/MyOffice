@@ -21,7 +21,16 @@
 							<label for="task-name" class="col-sm-3 control-label">Task</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="name" id="task-name" class="form-control" value="{{ old('task') }}">
+								<input type="text" name="name" id="task-name" class="form-control" value="{{ old('name') }}">
+							</div>
+						</div>
+						
+						<!-- Deadline -->
+						<div class="form-group">
+							<label for="task-name" class="col-sm-3 control-label">Deadline</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ old('deadline') }}">
 							</div>
 						</div>
 
@@ -29,7 +38,7 @@
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-6">
 								<button type="submit" class="btn btn-default">
-									<i class="fa fa-plus"></i>Add Task
+									<i class="fa fa-btn fa-plus"></i>Add Task
 								</button>
 							</div>
 						</div>
@@ -69,8 +78,8 @@
 												{{ csrf_field() }}
 												{{ method_field('DELETE') }}
 
-												<button type="submit" class="btn btn-danger">
-													<i class="fa fa-trash"></i>Delete
+												<button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
+													<i class="fa fa-btn fa-trash"></i>Delete
 												</button>
 											</form>
 										</td>
