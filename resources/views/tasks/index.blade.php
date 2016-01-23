@@ -87,6 +87,7 @@
 								@endforeach
 							</tbody>
 						</table>
+						{!! $tasks->appends(['sort' => 'name'])->render() !!}
 					</div>
 				</div>
 			@endif

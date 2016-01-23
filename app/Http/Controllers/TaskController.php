@@ -38,8 +38,11 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+
+    	$tasks = Task::where('user_id', '=', $request->user()->id)->paginate(2);
+    	
         return view('tasks.index', [
-            'tasks' => $this->tasks->forUser($request->user()),
+            'tasks' => $tasks,
         ]);
     }
 
