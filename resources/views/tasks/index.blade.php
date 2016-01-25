@@ -66,10 +66,10 @@
 							<tbody>
 								@foreach ($tasks as $task)
 									<tr>
-										<td class="table-text"><div>{{ $task->id }}</div></td>
+										<!-- td class="table-text"><div>{{ $task->id }}</div></td-->
 										<td class="table-text"><div>{{ $task->name }}</div></td>
-										<td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->created_at)) }}</div></td>
-										<td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->modiefied_at)) }}</div></td>
+										<!-- td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->created_at)) }}</div></td-->
+										<!-- td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->modiefied_at)) }}</div></td-->
 										<td class="table-text"><div>{{ $task->deadline }}</div></td>
 
 										<!-- Task Delete Button -->
