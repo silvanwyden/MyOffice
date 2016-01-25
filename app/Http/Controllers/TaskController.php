@@ -40,7 +40,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
 
-    	$tasks = Task::where('user_id', '=', $request->user()->id)->paginate(2);
+    	$tasks = Task::where('user_id', '=', $request->user()->id)->paginate(20);
     	
         return view('tasks.index', [
             'tasks' => $tasks,
@@ -62,6 +62,7 @@ class TaskController extends Controller
         //echo "deadline:" . $request->deadline;
         $deadline = DateTime::createFromFormat('d/m/Y', $request->deadline);
         $deadline->format('Y-m-d');
+        print $deadline;
         //echo "deadline:" . $deadline;
         
         $request->user()->tasks()->create([
