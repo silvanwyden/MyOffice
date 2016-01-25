@@ -61,7 +61,7 @@ class TaskController extends Controller
 
         echo "deadline:" . $request->deadline;
         $deadline = DateTime::createFromFormat('d/m/Y', $request->deadline);
-        echo $date->format('Y-m-d');
+        echo $deadline->format('Y-m-d');
         echo "deadline:" . $deadline;
         
         $request->user()->tasks()->create([
