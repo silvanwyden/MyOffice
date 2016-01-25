@@ -69,6 +69,15 @@ class TaskController extends Controller
 
         return redirect('/tasks');
     }
+    
+    
+    public function update(Request $request, Task $task) {
+    	
+    	//return View::make('tasks.update', compact(1));
+    	return view('tasks.update', [
+    			'task' => $task,
+    			]);
+    }
 
     /**
      * Destroy the given task.

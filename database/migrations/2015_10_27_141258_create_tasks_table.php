@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->timestamps();
             $table->date('deadline');
             $table->integer('user_id')->index();
+            $table->integer('category_id')->index();
         });
     }
 

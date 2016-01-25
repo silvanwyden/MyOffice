@@ -74,6 +74,12 @@
 
 										<!-- Task Delete Button -->
 										<td>
+											<a href="/task/{{ $task->id }}/update">
+												
+												
+													<i class="fa fa-btn fa-edit"></i>Edit
+													
+											</a>
 											<form action="/task/{{ $task->id }}" method="POST">
 												{{ csrf_field() }}
 												{{ method_field('DELETE') }}

@@ -18,6 +18,7 @@ Route::get('/', function () {
 // Task Routes
 Route::get('/tasks', 'TaskController@index');
 Route::post('/task', 'TaskController@store');
+Route::get('/task/{task}/update', 'TaskController@update');
 Route::delete('/task/{task}', 'TaskController@destroy');
 
 // Authentication Routes...
