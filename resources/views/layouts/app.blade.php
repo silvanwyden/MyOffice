@@ -83,6 +83,17 @@
 			  $( "#format" ).change(function() {
 			  $( "#datepicker" ).datepicker( "option", "dateFormat", 'd.m.Y' );});
 		  });
+
+		  $(document).ready(function() {
+
+			    $('#clickable tr').click(function() {
+			        var href = $(this).find("a").attr("href");
+			        if(href) {
+			            window.location = href;
+			        }
+			    });
+
+			});
 	  </script>
 	
 </body>

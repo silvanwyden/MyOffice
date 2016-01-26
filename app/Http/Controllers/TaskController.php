@@ -73,6 +73,9 @@ class TaskController extends Controller
     
     public function update(Request $request, Task $task) {
     	
+    	//return View::('update');
+    	 
+    	
     	//return View::make('tasks.update', compact(1));
     	return view('tasks.update', [
     			'task' => $task,
