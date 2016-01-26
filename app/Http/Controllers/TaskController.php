@@ -70,8 +70,17 @@ class TaskController extends Controller
         return redirect('/tasks');
     }
     
+    public function create(Request $request) {
+    
+    	return view('tasks.update', []);
+    	
+    }
+    
     
     public function update(Request $request, Task $task) {
+    	
+    	//return View::('update');
+    	 
     	
     	//return View::make('tasks.update', compact(1));
     	return view('tasks.update', [

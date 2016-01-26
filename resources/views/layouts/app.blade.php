@@ -11,6 +11,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -49,8 +50,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="/tasks">Task List</a>
-					<a class="navbar-brand" href="/notes">My Notes</a>
+					<a class="navbar-brand" href="/tasks">My Tasks</a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
@@ -83,6 +83,17 @@
 			  $( "#format" ).change(function() {
 			  $( "#datepicker" ).datepicker( "option", "dateFormat", 'd.m.Y' );});
 		  });
+
+		  $(document).ready(function() {
+
+			    $('#clickable tr').click(function() {
+			        var href = $(this).find("a").attr("href");
+			        if(href) {
+			            window.location = href;
+			        }
+			    });
+
+			});
 	  </script>
 	
 </body>
