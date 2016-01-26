@@ -5,7 +5,7 @@
 		<div class="col-sm-offset-2 col-sm-8">
 			<!-- Current Tasks -->
 			
-			<a href="/task">New Task</a>
+			<a href="/task" class="btn btn-danger">Create New Task</a><br><br>
 			
 			@if (count($tasks) > 0)
 				<div class="panel panel-default">

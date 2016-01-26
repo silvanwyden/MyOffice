@@ -50,8 +50,7 @@
 						<span class="icon-bar"></span>
 					</button>
 
-					<a class="navbar-brand" href="/tasks">Task List</a>
-					<a class="navbar-brand" href="/notes">My Notes</a>
+					<a class="navbar-brand" href="/tasks">My Tasks</a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
