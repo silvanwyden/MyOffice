@@ -4,6 +4,9 @@
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
 			<!-- Current Tasks -->
+			
+			<a href="/task">New Task</a>
+			
 			@if (count($tasks) > 0)
 				<div class="panel panel-default">
 					<div class="panel-heading">

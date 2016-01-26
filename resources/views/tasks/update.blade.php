@@ -12,10 +12,7 @@
 					<!-- Display Validation Errors -->
 					@include('common.errors')
 
-					
-					{!! Form::open(array('url' => 'foo/bar')) !!}
-    //
-{!! Form::close() !!}
+				
 					
 					
 					<!-- New Task Form -->
