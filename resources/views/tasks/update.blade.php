@@ -35,15 +35,12 @@
 								  </button>
 								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 								  	@foreach ($categories as $category)
-									    <li><a href="#">{{ $category->name }}</a></li>
+									    <li><a href="#" ref="{{ $category->id }}">{{ $category->name }}</a></li>
 								    @endforeach
 								  </ul>
 								</div>
 							</div>
-							<input type="hidden" name="category" value="1">
-							<!-- 
-							http://stackoverflow.com/questions/27801873/how-to-send-value-from-dropdown-menu-of-bootstrap-to-php
-							 -->
+							<input type="hidden" id="category" name="category" value="0">
 						</div>
 						
 						<!-- Deadline -->
@@ -77,4 +74,6 @@
 			</div>
 		</div>
 	</div>
+	
+	
 @endsection
