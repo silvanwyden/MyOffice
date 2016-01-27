@@ -33,9 +33,15 @@
 											</a>
 										</td>
 										<td class="table-text"><div class="btn {{ $task->category['css_class'] }}">{{ $task->category['name'] }}</div></td>
-										<td class="table-text"><div>{{ $task->priority_id }}</div></td>
-										<td class="table-text"><div>{{ date('d.m.Y', strtotime($task->deadline)) }}</div></td>
-										<td class="table-text"><div>{{ $task->state_id }}</div></td>
+										<td class="table-text"><div>{{ $task->priority['name'] }}</div></td>
+										<td class="table-text">
+											<div>
+												@if ($task->deadline != '0000-00-00')
+													{{ date('d.m.Y', strtotime($task->deadline)) }}
+												@endif
+											</div>
+										</td>
+										<td class="table-text"><div>{{ $task->stage['name'] }}</div></td>
 										
 										<!-- Task Delete Button -->
 										<td>

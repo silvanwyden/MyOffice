@@ -18,7 +18,7 @@ class CreateStagesTable extends Migration
         });
         
         DB::table('stages')->insert(array('name' => 'Open'));
-        DB::table('stages')->insert(array('name' => 'Canel'));
+        DB::table('stages')->insert(array('name' => 'Cancel'));
         DB::table('stages')->insert(array('name' => 'Done'));
         
     }

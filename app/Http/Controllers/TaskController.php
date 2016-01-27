@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\Category;
+use App\Priority;
+use App\Stage;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -60,14 +62,20 @@ class TaskController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $deadline = DateTime::createFromFormat('m/d/Y', $request->deadline);
-        $deadline = $deadline->format('Y-m-d');
+
+        $deadline = False;
+        if ($request->deadline) {
+        	$deadline = DateTime::createFromFormat('m/d/Y', $request->deadline);
+        	$deadline = $deadline->format('Y-m-d');
+        }
         
         $request->user()->tasks()->create([
             'name' => $request->name,
         	'deadline' => $deadline,
         	'description' => $request->description,
-        	'category_id' => $request->category
+        	'category_id' => $request->category,
+        	'priority_id' => $request->priority,
+        	'stage_id' => $request->stage,
         ]);
 
         return redirect('/tasks');
@@ -76,22 +84,28 @@ class TaskController extends Controller
     public function create(Request $request) {
     
     	$categories = Category::All(['id', 'name']);
+    	$priorities = Priority::All(['id', 'name']);
+    	$stages = Stage::All(['id', 'name']);
 
     	return view('tasks.update', [
     			'categories' => $categories,
+    			'priorities' => $priorities,
+    			'stages' => $stages,
     			]);
     	
     }
     
     
     public function update(Request $request, Task $task) {
-    	
-    	//return View::('update');
-    	 
-    
-    	
-    	//return View::make('tasks.update', compact(1));
+
+    	$categories = Category::All(['id', 'name']);
+    	$priorities = Priority::All(['id', 'name']);
+    	$stages = Stage::All(['id', 'name']);
+
     	return view('tasks.update', [
+    			'categories' => $categories,
+    			'priorities' => $priorities,
+    			'stages' => $stages,
     			'task' => $task,
     			]);
     }

@@ -95,15 +95,6 @@
 
 			});
 
-
-
-		  $(".dropdown-menu li a").click(function(){
-
-			  $(this).parents(".dropdown").find('.selection').text($(this).text());
-			  $(this).parents(".dropdown").find('.selection').val($(this).text());
-			  $('#category').val($(this).attr('ref'));
-
-			});
 	  </script>
 	
 </body>
