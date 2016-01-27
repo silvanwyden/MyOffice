@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -12,7 +13,7 @@ class Task extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'deadline', 'description'];
+    protected $fillable = ['name', 'deadline', 'description', 'category_id'];
 
     /**
      * Get the user that owns the task.
@@ -21,4 +22,13 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    /**
+     * Get the category that belongs to the task.
+     */
+    public function category()
+    {
+    	return $this->belongsTo(Category::class);
+    }
+    
 }

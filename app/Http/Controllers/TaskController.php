@@ -62,11 +62,12 @@ class TaskController extends Controller
 
         $deadline = DateTime::createFromFormat('m/d/Y', $request->deadline);
         $deadline = $deadline->format('Y-m-d');
-
+        
         $request->user()->tasks()->create([
             'name' => $request->name,
         	'deadline' => $deadline,
-        	'description' => $request->description
+        	'description' => $request->description,
+        	'category_id' => $request->category
         ]);
 
         return redirect('/tasks');

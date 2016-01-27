@@ -16,11 +16,11 @@
 					<div class="panel-body">
 						<table class="table table-striped task-table" id="clickable">
 							<thead>
-								<!-- th>ID</th-->
 								<th>Task</th>
-								<!-- th>Created</th-->
-								<!-- th>Modified</th-->
+								<th>Category</th>
+								<th>Priority</th>
 								<th>Deadline</th>
+								<th>State</th>
 								<th>Action</th>
 							</thead>
 							<tbody>
@@ -32,10 +32,11 @@
 												<div>{{ $task->name }}</div>
 											</a>
 										</td>
-										<!-- td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->created_at)) }}</div></td-->
-										<!-- td class="table-text"><div>{{ date('d.m.Y H:i', strtotime($task->modiefied_at)) }}</div></td-->
+										<td class="table-text"><div class="btn {{ $task->category['css_class'] }}">{{ $task->category['name'] }}</div></td>
+										<td class="table-text"><div>{{ $task->priority_id }}</div></td>
 										<td class="table-text"><div>{{ date('d.m.Y', strtotime($task->deadline)) }}</div></td>
-
+										<td class="table-text"><div>{{ $task->state_id }}</div></td>
+										
 										<!-- Task Delete Button -->
 										<td>
 											<form action="/task/{{ $task->id }}" method="POST">

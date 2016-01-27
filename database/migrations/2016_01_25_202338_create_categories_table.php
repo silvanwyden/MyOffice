@@ -14,13 +14,13 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('name');
-            $table->string('color');
+            $table->integer('seq');
+            $table->string('css_class');
         });
         
-        DB::table('categories')->insert(array('name' => 'Private'));
-        DB::table('categories')->insert(array('name' => 'Company'));
+        DB::table('categories')->insert(array('name' => 'Private', 'seq' => '50', 'css_class' => 'btn-success'));
+        DB::table('categories')->insert(array('name' => 'Company', 'seq' => '10', 'css_class' => 'btn-warning'));
         
     }
 

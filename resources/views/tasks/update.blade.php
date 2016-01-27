@@ -28,20 +28,22 @@
 						<!-- Category -->
 						<div class="form-group">
 							<label for="task-category" class="col-sm-3 control-label">Category</label>
-							{{ $categories }}
 							<div class="col-sm-6">
 								<div class="dropdown">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">--not selected--</span>&nbsp;&nbsp;<span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								    <li><a href="#">Action</a></li>
-								    <li><a href="#">Another action</a></li>
-								    <li><a href="#">Something else here</a></li>
-								    <li><a href="#">Separated link</a></li>
+								  	@foreach ($categories as $category)
+									    <li><a href="#">{{ $category->name }}</a></li>
+								    @endforeach
 								  </ul>
 								</div>
 							</div>
+							<input type="hidden" name="category" value="1">
+							<!-- 
+							http://stackoverflow.com/questions/27801873/how-to-send-value-from-dropdown-menu-of-bootstrap-to-php
+							 -->
 						</div>
 						
 						<!-- Deadline -->

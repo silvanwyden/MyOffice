@@ -12,6 +12,7 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
+    	
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -21,7 +22,9 @@ class CreateTasksTable extends Migration
             $table->integer('user_id')->index();
             $table->integer('category_id')->index();
             $table->string('stage_id')->index();
+            $table->string('priority_id')->index();
         });
+        
     }
 
     /**
