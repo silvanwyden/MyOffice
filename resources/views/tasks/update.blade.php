@@ -12,9 +12,6 @@
 					<!-- Display Validation Errors -->
 					@include('common.errors')
 
-				
-					
-					
 					<!-- New Task Form -->
 					<form action="/task" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
@@ -28,12 +25,40 @@
 							</div>
 						</div>
 						
+						<!-- Category -->
+						<div class="form-group">
+							<label for="task-category" class="col-sm-3 control-label">Category</label>
+							{{ $categories }}
+							<div class="col-sm-6">
+								<div class="dropdown">
+								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								     <span class="selection">--not selected--</span>&nbsp;&nbsp;<span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								    <li><a href="#">Action</a></li>
+								    <li><a href="#">Another action</a></li>
+								    <li><a href="#">Something else here</a></li>
+								    <li><a href="#">Separated link</a></li>
+								  </ul>
+								</div>
+							</div>
+						</div>
+						
 						<!-- Deadline -->
 						<div class="form-group">
 							<label for="task-name" class="col-sm-3 control-label">Deadline</label>
 
 							<div class="col-sm-6">
 								<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ old('deadline') }}">
+							</div>
+						</div>
+						
+						<!-- Description -->
+						<div class="form-group">
+							<label for="task-description" class="col-sm-3 control-label">Description</label>
+
+							<div class="col-sm-6">
+								<textarea name="description" id="task-description" class="form-control" rows="10">{{ old('description') }}</textarea>
 							</div>
 						</div>
 

@@ -18,6 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('color');
         });
+        
+        DB::table('categories')->insert(array('name' => 'Private'));
+        DB::table('categories')->insert(array('name' => 'Company'));
+        
     }
 
     /**

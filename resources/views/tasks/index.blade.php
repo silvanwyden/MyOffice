@@ -5,7 +5,7 @@
 		<div class="col-sm-offset-2 col-sm-8">
 			<!-- Current Tasks -->
 			
-			<a href="/task" class="btn btn-danger">Create New Task</a><br><br>
+			<a href="/task" class="btn btn-primary">Create New Task</a><br><br>
 			
 			@if (count($tasks) > 0)
 				<div class="panel panel-default">
@@ -43,7 +43,7 @@
 												{{ method_field('DELETE') }}
 
 												<button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
-													<i class="fa fa-btn fa-trash"></i>Delete
+													<i class="fa fa-btn fa-trash"></i>
 												</button>
 											</form>
 										</td>

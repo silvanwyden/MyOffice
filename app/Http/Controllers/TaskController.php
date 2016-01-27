@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Category;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -61,10 +62,11 @@ class TaskController extends Controller
 
         $deadline = DateTime::createFromFormat('m/d/Y', $request->deadline);
         $deadline = $deadline->format('Y-m-d');
-   
+
         $request->user()->tasks()->create([
             'name' => $request->name,
-        	'deadline' => $deadline
+        	'deadline' => $deadline,
+        	'description' => $request->description
         ]);
 
         return redirect('/tasks');
@@ -72,7 +74,11 @@ class TaskController extends Controller
     
     public function create(Request $request) {
     
-    	return view('tasks.update', []);
+    	$categories = Category::All(['id', 'name']);
+
+    	return view('tasks.update', [
+    			'categories' => $categories,
+    			]);
     	
     }
     
@@ -81,6 +87,7 @@ class TaskController extends Controller
     	
     	//return View::('update');
     	 
+    
     	
     	//return View::make('tasks.update', compact(1));
     	return view('tasks.update', [
