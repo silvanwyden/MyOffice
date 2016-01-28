@@ -16,11 +16,11 @@
 					<div class="panel-body">
 						<table class="table table-striped task-table" id="clickable">
 							<thead>
-								<th>Task</th>
-								<th>Category</th>
-								<th>Priority</th>
-								<th>Deadline</th>
-								<th>State</th>
+								<th><a href="{{ createOrderLink('name', $order, $dir) }}">Task</a></th>
+								<th><a href="{{ createOrderLink('category_id', $order, $dir) }}">Category</a></th>
+								<th><a href="{{ createOrderLink('priority_id', $order, $dir) }}">Priority</a></th>
+								<th><a href="{{ createOrderLink('deadline', $order, $dir) }}">Deadline</a></th>
+								<th><a href="{{ createOrderLink('stage_id', $order, $dir) }}">State</a></th>
 								<th>Action</th>
 							</thead>
 							<tbody>

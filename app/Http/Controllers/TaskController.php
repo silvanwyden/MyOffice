@@ -43,12 +43,24 @@ class TaskController extends Controller
     public function index(Request $request)
     {
 
-    	$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy('priority_id', 'ASC')->paginate(20);
+    	$order = 'priority_id';
+    	if ($request->order)
+    		$order = $request->order;
+    	
+    	$dir = 'ASC';
+    	if ($request->dir)
+    		$dir = $request->dir;
+
+    	$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->paginate(20);
     	
         return view('tasks.index', [
             'tasks' => $tasks,
+        	'order' => $order,
+        	'dir' => $dir,
         ]);
+        
     }
+
 
     /**
      * Create a new task.
