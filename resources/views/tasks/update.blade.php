@@ -15,13 +15,16 @@
 					<!-- New Task Form -->
 					<form action="/task" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
+						
+						
+						<input type="hidden" name="task_id" value="{{ $task->id or '' }}" />
 
 						<!-- Task Name -->
 						<div class="form-group">
 							<label for="task-name" class="col-sm-3 control-label">Task</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="name" id="task-name" class="form-control" value="{{ old('name') }}">
+								<input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name or old('name') }}">
 							</div>
 						</div>
 						
@@ -100,7 +103,7 @@
 								$('#stage').val($(this).attr('ref'));
 							});
 
-							$old_category="{{ old('category') }}";
+							$old_category="{{ $task->category_id or old('category') }}";
 							if ($old_category > 0) {
 								$('#category').val($old_category);
 								$old_category_name=$("li[js_id='category_"+$old_category+"']").text();
@@ -108,7 +111,7 @@
 								$(".dropdown-category .dropdown-menu li a").parents(".dropdown-category").find('.selection').val($old_category_name);
 							};
 
-							$old_priority="{{ old('priority') }}";
+							$old_priority="{{ $task->priority_id or old('priority') }}";
 							if ($old_priority > 0) {
 								$('#priority').val($old_priority);
 								$old_priority_name=$("li[js_id='priority_"+$old_priority+"']").text();
@@ -116,7 +119,7 @@
 								$(".dropdown-priority .dropdown-menu li a").parents(".dropdown-priority").find('.selection').val($old_priority_name);
 							};
 
-							$old_stage="{{ old('stage') }}";
+							$old_stage="{{ $task->stage_id or old('stage') }}";
 							if ($old_stage > 0) {
 								$('#stage').val($old_stage);
 								$old_stage_name=$("li[js_id='stage_"+$old_stage+"']").text();
@@ -132,7 +135,11 @@
 							<label for="task-name" class="col-sm-3 control-label">Deadline</label>
 
 							<div class="col-sm-6">
-								<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ old('deadline') }}">
+								@if ($task->deadline > 0)
+									<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ date('d.m.Y', strtotime($task->deadline)) }}">
+								@else
+									<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ old('deadline') }}">
+								@endif
 							</div>
 						</div>
 						
@@ -141,7 +148,7 @@
 							<label for="task-description" class="col-sm-3 control-label">Description</label>
 
 							<div class="col-sm-6">
-								<textarea name="description" id="task-description" class="form-control" rows="10">{{ old('description') }}</textarea>
+								<textarea name="description" id="task-description" class="form-control" rows="10">{{ $task->description or old('description') }}</textarea>
 							</div>
 						</div>
 
@@ -149,7 +156,7 @@
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-6">
 								<button type="submit" class="btn btn-default">
-									<i class="fa fa-btn fa-plus"></i>Add Task
+									<i class="fa fa-btn fa-plus"></i>Save Task
 								</button>
 							</div>
 						</div>

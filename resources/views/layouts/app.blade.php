@@ -79,21 +79,24 @@
 		  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		  <script>
 		  $(function() {
-			  $( "#datepicker" ).datepicker();
-			  $( "#format" ).change(function() {
-			  $( "#datepicker" ).datepicker( "option", "dateFormat", 'd.m.Y' );});
+			  $( "#datepicker" ).datepicker({ dateFormat: 'd.m.yy' });
 		  });
 
+		  $(".delete").on("submit", function(){
+		        return confirm("Do you want to delete this item?");
+		    });
+		  
 		  $(document).ready(function() {
 
-			    $('#clickable tr').click(function() {
-			        var href = $(this).find("a").attr("href");
-			        if(href) {
-			            window.location = href;
-			        }
-			    });
+			  $('#clickable .table-text').click(function() {
+				  window.location.href = $(this).parent().find("a").attr("href");
+				});
+			  
+			   
 
 			});
+
+		   
 
 	  </script>
 	

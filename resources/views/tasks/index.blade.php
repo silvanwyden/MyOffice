@@ -3,6 +3,17 @@
 @section('content')
 	<div class="container">
 		<div class="col-sm-offset-2 col-sm-8">
+		
+		
+			<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+		
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+		      @endif
+		    @endforeach
+		  </div> <!-- end .flash-message -->
+		
 			<!-- Current Tasks -->
 			
 			<a href="/task" class="btn btn-primary">Create New Task</a><br><br>
@@ -45,7 +56,7 @@
 										
 										<!-- Task Delete Button -->
 										<td>
-											<form action="/task/{{ $task->id }}" method="POST">
+											<form class="delete" action="/task/{{ $task->id }}" method="POST">
 												{{ csrf_field() }}
 												{{ method_field('DELETE') }}
 
@@ -53,6 +64,9 @@
 													<i class="fa fa-btn fa-trash"></i>
 												</button>
 											</form>
+											
+											
+											
 										</td>
 									</tr>
 								@endforeach

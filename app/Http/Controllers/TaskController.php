@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\TaskRepository;
 use DateTime;
+use App\Session;
 
 class TaskController extends Controller
 {
@@ -74,22 +75,37 @@ class TaskController extends Controller
             'name' => 'required|max:255',
         ]);
 
-
         $deadline = False;
         if ($request->deadline) {
-        	$deadline = DateTime::createFromFormat('m/d/Y', $request->deadline);
+        	$deadline = DateTime::createFromFormat('d.m.Y', $request->deadline);
         	$deadline = $deadline->format('Y-m-d');
         }
         
-        $request->user()->tasks()->create([
-            'name' => $request->name,
-        	'deadline' => $deadline,
-        	'description' => $request->description,
-        	'category_id' => $request->category,
-        	'priority_id' => $request->priority,
-        	'stage_id' => $request->stage,
-        ]);
+        $input = array(
+	            'name' => $request->name,
+	        	'deadline' => $deadline,
+	        	'description' => $request->description,
+	        	'category_id' => $request->category,
+	        	'priority_id' => $request->priority,
+	        	'stage_id' => $request->stage,
+	        );
+        
+        if ($request->task_id) {
+        	
+        	$task = Task::find($request->task_id);
+        	$task->fill($input)->save();
+        	$request->session()->flash('alert-success', 'Task was successful updated!');
+        	
+        	}
+        else {
+        	
+	        $request->user()->tasks()->create($input);
+	        $request->session()->flash('alert-success', 'Task was successful added!');
+	        
+	        }
 
+        	
+        	
         return redirect('/tasks');
     }
     
@@ -103,7 +119,7 @@ class TaskController extends Controller
     			'categories' => $categories,
     			'priorities' => $priorities,
     			'stages' => $stages,
-    			]);
+    			])->withTask(new Task());
     	
     }
     
@@ -119,7 +135,7 @@ class TaskController extends Controller
     			'priorities' => $priorities,
     			'stages' => $stages,
     			'task' => $task,
-    			]);
+    			])->withTask($task);
     }
 
     /**
