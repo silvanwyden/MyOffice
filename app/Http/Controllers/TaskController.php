@@ -43,6 +43,10 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+    	
+    	$categories = Category::All(['id', 'name']);
+    	$priorities = Priority::All(['id', 'name']);
+    	$stages = Stage::All(['id', 'name']);
 
     	$order = 'priority_id';
     	if ($request->order)
@@ -51,17 +55,88 @@ class TaskController extends Controller
     	$dir = 'ASC';
     	if ($request->dir)
     		$dir = $request->dir;
-
-    	$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->paginate(20);
+    	
+    	
+    	//handle stages filter
+    	if ($request->stage_id)
+    		if ($request->stage_id > 0) {
+    			$request->session()->put('stage_id', $request->stage_id);
+    			$request->session()->put('stage', Stage::find($request->stage_id)->name);
+    	}
+    		else {
+    			$request->session()->forget('stage_id');
+    			$request->session()->forget('stage');
+    		}
+    	
+    	$ses_stage_id = $request->session()->get('stage_id');
+    	
+    	//handle categories filter
+    	if ($request->category_id)
+    		if ($request->category_id > 0) {
+    		$request->session()->put('category_id', $request->category_id);
+    		$request->session()->put('category', Category::find($request->category_id)->name);
+    	}
+    	else {
+    		$request->session()->forget('category_id');
+    		$request->session()->forget('category');
+    	}
+    	 
+    	$ses_category_id = $request->session()->get('category_id');
+    	 
+    	if ($ses_stage_id && $ses_category_id) 
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->paginate(200);
+    	elseif ($ses_stage_id) 
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->orderBy($order, $dir)->paginate(200);
+    	elseif ($ses_category_id)
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->paginate(200);
+    	else 
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->paginate(200);
+    	
     	
         return view('tasks.index', [
+        	'categories' => $categories,
+        	'priorities' => $priorities,
+        	'stages' => $stages,
             'tasks' => $tasks,
         	'order' => $order,
         	'dir' => $dir,
+        	'stage' => $request->session()->get('stage'),
+        	'category' => $request->session()->get('category')
         ]);
         
     }
 
+    
+    
+    public function create(Request $request) {
+    
+    	$categories = Category::All(['id', 'name']);
+    	$priorities = Priority::All(['id', 'name']);
+    	$stages = Stage::All(['id', 'name']);
+    
+    	return view('tasks.update', [
+    			'categories' => $categories,
+    			'priorities' => $priorities,
+    			'stages' => $stages,
+    			])->withTask(new Task());
+    	 
+    }
+    
+    
+    public function update(Request $request, Task $task) {
+    
+    	$categories = Category::All(['id', 'name']);
+    	$priorities = Priority::All(['id', 'name']);
+    	$stages = Stage::All(['id', 'name']);
+    
+    	return view('tasks.update', [
+    			'categories' => $categories,
+    			'priorities' => $priorities,
+    			'stages' => $stages,
+    			'task' => $task,
+    			])->withTask($task);
+    }
+    
 
     /**
      * Create a new task.
@@ -109,34 +184,7 @@ class TaskController extends Controller
         return redirect('/tasks');
     }
     
-    public function create(Request $request) {
     
-    	$categories = Category::All(['id', 'name']);
-    	$priorities = Priority::All(['id', 'name']);
-    	$stages = Stage::All(['id', 'name']);
-
-    	return view('tasks.update', [
-    			'categories' => $categories,
-    			'priorities' => $priorities,
-    			'stages' => $stages,
-    			])->withTask(new Task());
-    	
-    }
-    
-    
-    public function update(Request $request, Task $task) {
-
-    	$categories = Category::All(['id', 'name']);
-    	$priorities = Priority::All(['id', 'name']);
-    	$stages = Stage::All(['id', 'name']);
-
-    	return view('tasks.update', [
-    			'categories' => $categories,
-    			'priorities' => $priorities,
-    			'stages' => $stages,
-    			'task' => $task,
-    			])->withTask($task);
-    }
 
     /**
      * Destroy the given task.
