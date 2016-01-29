@@ -28,7 +28,7 @@
     		$color = "btn-info";
     	if ($difference <= 3)
     		$color = 'btn-warning';
-    	if ($difference < 0)
+    	if ($difference <= 0)
     		$color = 'btn-danger';
     	
     	return " btn " . $color;
