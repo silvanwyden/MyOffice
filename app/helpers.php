@@ -14,6 +14,9 @@
     
     function getColorDate($date) {
     	
+    	if ($date == '0000-00-00')
+    		return '';
+    	
     	$datetime1 = new DateTime($date);
     	$datetime2 = new DateTime('2016-01-29');
     	$difference = $datetime2->diff($datetime1);
