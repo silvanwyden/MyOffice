@@ -83,7 +83,7 @@
 										<td class="table-text"><div class="btn {{ $task->category['css_class'] }}">{{ $task->category['name'] }}</div></td>
 										<td class="table-text"><div>{{ $task->priority['name'] }}</div></td>
 										<td class="table-text">
-											<div>
+											<div class=" {{ getColorDate($task->deadline) }}">
 												@if ($task->deadline != '0000-00-00')
 													{{ date('d.m.Y', strtotime($task->deadline)) }}
 												@endif
