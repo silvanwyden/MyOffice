@@ -7,6 +7,7 @@ use App\Category;
 use App\Priority;
 use App\Stage;
 use App\Http\Requests;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\TaskRepository;
@@ -44,6 +45,8 @@ class TaskController extends Controller
     public function index(Request $request)
     {
     	
+    	$user = User::find($request->user()->id);
+    	
     	$categories = Category::All(['id', 'name']);
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
@@ -60,28 +63,32 @@ class TaskController extends Controller
     	//handle stages filter
     	if ($request->stage_id)
     		if ($request->stage_id > 0) {
-    			$request->session()->put('stage_id', $request->stage_id);
-    			$request->session()->put('stage', Stage::find($request->stage_id)->name);
-    	}
+    			$user->stage_id = $request->stage_id;
+	    		$user->stage = Stage::find($request->stage_id)->name;
+	    		$user->save();
+    		}
     		else {
-    			$request->session()->forget('stage_id');
-    			$request->session()->forget('stage');
+    			$user->stage_id = False;
+    			$user->stage = "--all Stages--";
+    			$user->save();
     		}
     	
-    	$ses_stage_id = $request->session()->get('stage_id');
+    	$ses_stage_id = $user->stage_id;
     	
     	//handle categories filter
     	if ($request->category_id)
     		if ($request->category_id > 0) {
-    		$request->session()->put('category_id', $request->category_id);
-    		$request->session()->put('category', Category::find($request->category_id)->name);
-    	}
-    	else {
-    		$request->session()->forget('category_id');
-    		$request->session()->forget('category');
+	    		$user->category_id = $request->category_id;
+	    		$user->category = Category::find($request->category_id)->name;
+	    		$user->save();
+	    	}
+	    	else {
+	    		$user->category_id = False;
+	    		$user->category = "--all Categories--";
+	    		$user->save();
     	}
     	 
-    	$ses_category_id = $request->session()->get('category_id');
+    	$ses_category_id = $user->category_id;
     	 
     	if ($ses_stage_id && $ses_category_id) 
     		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->paginate(200);
@@ -100,8 +107,8 @@ class TaskController extends Controller
             'tasks' => $tasks,
         	'order' => $order,
         	'dir' => $dir,
-        	'stage' => $request->session()->get('stage'),
-        	'category' => $request->session()->get('category')
+        	'stage' => $user->stage,
+        	'category' => $user->category,
         ]);
         
     }

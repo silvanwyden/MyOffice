@@ -20,22 +20,8 @@
 			
 			<!-- Filters -->
 			<div class="form-group">
-				<div class="col-sm-6">
-					<div class="dropdown-stage">
-					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					     <span class="selection">{{ $stage or "--all Stages--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					  	<li><a href="?stage_id=-1">--all Stages--</a></li>
-					  	@foreach ($stages as $stage)
-						    <li><a href="?stage_id={{ $stage->id }}">{{ $stage->name }}</a></li>
-					    @endforeach
-					  </ul>
-					</div>
-				</div>
 
-
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<div class="dropdown-category">
 					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 					     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -48,6 +34,22 @@
 					  </ul>
 					</div>
 				</div>
+				
+				<div class="col-sm-3">
+					<div class="dropdown-stage">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					     <span class="selection">{{ $stage or "--all Stages--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					  	<li><a href="?stage_id=-1">--all Stages--</a></li>
+					  	@foreach ($stages as $stage)
+						    <li><a href="?stage_id={{ $stage->id }}">{{ $stage->name }}</a></li>
+					    @endforeach
+					  </ul>
+					</div>
+				</div>
+				
+				
 			</div>
 			
 			

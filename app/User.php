@@ -44,4 +44,28 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany(Task::class);
     }
+    
+    /**
+     * Get the category that belongs to the task.
+     */
+    public function category()
+    {
+    	return $this->belongsTo(Category::class);
+    }
+    
+    /**
+     * Get the priority that belongs to the task.
+     */
+    public function priority()
+    {
+    	return $this->belongsTo(Priority::class);
+    }
+    
+    /**
+     * Get the stage that belongs to the task.
+     */
+    public function stage()
+    {
+    	return $this->belongsTo(Stage::class);
+    }
 }
