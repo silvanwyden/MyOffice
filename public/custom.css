@@ -13,3 +13,7 @@
 	#unseen table td:nth-child(6),
 	#unseen table th:nth-child(6){display: none;}
 }
+
+.panel-body {
+	padding: 0px;
+}
