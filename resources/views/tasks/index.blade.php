@@ -61,15 +61,17 @@
 						Current Tasks
 					</div>
 
-					<div class="panel-body">
+					<div class="panel-body" id="unseen">
 						<table class="table table-striped task-table" id="clickable">
 							<thead>
+							<tr>
 								<th><a href="{{ createOrderLink('name', $order, $dir) }}">Task</a></th>
 								<th><a href="{{ createOrderLink('category_id', $order, $dir) }}">Category</a></th>
 								<th><a href="{{ createOrderLink('priority_id', $order, $dir) }}">Priority</a></th>
 								<th><a href="{{ createOrderLink('deadline', $order, $dir) }}">Deadline</a></th>
 								<th><a href="{{ createOrderLink('stage_id', $order, $dir) }}">State</a></th>
 								<th>Action</th>
+								</tr>
 							</thead>
 							<tbody>
 								@foreach ($tasks as $task)

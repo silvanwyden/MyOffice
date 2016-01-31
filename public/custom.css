@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+@media only screen and (max-width: 800px) {
+	#unseen table td:nth-child(6), 
+	#unseen table th:nth-child(6) {display: none;}
+}
+ 
+@media only screen and (max-width: 640px) {
+	#unseen table td:nth-child(2),
+	#unseen table th:nth-child(2),
+	#unseen table td:nth-child(5),
+	#unseen table th:nth-child(5),
+	#unseen table td:nth-child(6),
+	#unseen table th:nth-child(6){display: none;}
+}
