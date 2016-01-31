@@ -18,7 +18,7 @@
     		return '';
     	
     	$datetime1 = new DateTime($date);
-    	$datetime2 = new DateTime('2016-01-29');
+    	$datetime2 = new DateTime('now');
     	$difference = $datetime2->diff($datetime1);
     	$difference = $difference->format('%R%a');
     	 
