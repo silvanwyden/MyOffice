@@ -56,10 +56,7 @@
 			<br /><br />
 			
 			
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Current Tasks
-					</div>
+				
 
 					<div class="panel-body" id="unseen">
 						<table class="table table-striped task-table" id="clickable">
@@ -110,7 +107,7 @@
 							</tbody>
 						</table>
 						{!! $tasks->appends(['sort' => 'name'])->render() !!}
-					</div>
+			
 	
 		</div>
 	</div>
