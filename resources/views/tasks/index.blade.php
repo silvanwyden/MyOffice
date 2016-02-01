@@ -16,8 +16,15 @@
 		
 			<!-- Current Tasks -->
 			<div class="col-xs-6 col-sm-4">
-			<a href="/task" class="btn btn-primary">Create New Task</a>
+				<a href="/task" class="btn btn-primary">Create New Task</a>
 			</div>
+			
+			<div class="col-xs-6 col-sm-4">
+				<div style="verticale-align:middle; padding: 6px;">
+					#Tasks: {{ count($tasks) }}
+				</div>
+			</div>
+			
 			<br><br>
 			
 			<div class="col-xs-6 col-sm-4">
@@ -47,6 +54,7 @@
 				  </ul>
 				</div>
 			</div>
+			
 
 			<br /><br />
 			

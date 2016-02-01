@@ -16,6 +16,16 @@
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<!-- include libraries(jQuery, bootstrap, fontawesome) -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" />
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+<!-- include summernote css/js-->
+<link href="/summernote.css" rel="stylesheet">
+<script src="/summernote.js"></script>
 
 	<style>
 		body {
@@ -76,7 +86,6 @@
 
 	@yield('content')
 	
-	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 		  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		  <script>
 		  $(function() {
@@ -92,12 +101,19 @@
 			  $('#clickable .table-text').click(function() {
 				  window.location.href = $(this).parent().find("a").attr("href");
 				});
+
 			  
-			   
+			  $('#summernote').summernote({
+				  height: 300,
+				  toolbar: [
+					['style', ['bold', 'italic', 'underline', 'strikethrough']],
+					['para', ['ul', 'ol',]],
+					['misc', ['fullscreen']],
+							  ],
+			  }); 			   
 
 			});
 
-		   
 
 	  </script>
 	

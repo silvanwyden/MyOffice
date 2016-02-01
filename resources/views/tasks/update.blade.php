@@ -23,7 +23,7 @@
 						<div class="form-group">
 							<label for="task-name" class="col-sm-3 control-label">Task</label>
 
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name or old('name') }}">
 							</div>
 						</div>
@@ -31,7 +31,7 @@
 						<!-- Category -->
 						<div class="form-group">
 							<label for="task-category" class="col-sm-3 control-label">Category</label>
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="dropdown-category">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">--not selected--</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -49,7 +49,7 @@
 						<!-- Priority -->
 						<div class="form-group">
 							<label for="task-priority" class="col-sm-3 control-label">Priority</label>
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="dropdown-priority">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">Normal</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -67,7 +67,7 @@
 						<!-- Stage -->
 						<div class="form-group">
 							<label for="task-priority" class="col-sm-3 control-label">Stage</label>
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="dropdown-stage">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">Open</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -134,7 +134,7 @@
 						<div class="form-group">
 							<label for="task-name" class="col-sm-3 control-label">Deadline</label>
 
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								@if ($task->deadline > 0)
 									<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ date('d.m.Y', strtotime($task->deadline)) }}">
 								@else
@@ -147,14 +147,14 @@
 						<div class="form-group">
 							<label for="task-description" class="col-sm-3 control-label">Description</label>
 
-							<div class="col-sm-6">
-								<textarea name="description" id="task-description" class="form-control" rows="10">{{ $task->description or old('description') }}</textarea>
+							<div class="col-sm-8">
+								<textarea name="description" id="summernote" class="form-control" >{{ $task->description or old('description') }}</textarea>
 							</div>
 						</div>
 
 						<!-- Add Task Button -->
 						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-6">
+							<div class="col-sm-offset-3 col-sm-8">
 								<button type="submit" class="btn btn-default">
 									<i class="fa fa-btn fa-plus"></i>Save Task
 								</button>
