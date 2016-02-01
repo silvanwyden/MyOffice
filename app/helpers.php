@@ -20,15 +20,17 @@
     	$datetime1 = new DateTime($date);
     	$datetime2 = new DateTime('now');
     	$difference = $datetime2->diff($datetime1);
-    	$difference = $difference->format('%R%a');
-    	 
+    	$difference = $difference->format('%r%a');
+   	
     	$color = '';
     	
     	if ($difference <= 7)
     		$color = "btn-info";
     	if ($difference <= 3)
     		$color = 'btn-warning';
-    	if ($difference <= 0)
+    	if ($difference < 0)
+    		$color = 'btn-danger';
+    	if ($difference === '-0')
     		$color = 'btn-danger';
     	
     	return " btn " . $color;

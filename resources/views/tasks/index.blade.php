@@ -15,49 +15,41 @@
 		  </div> <!-- end .flash-message -->
 		
 			<!-- Current Tasks -->
+			<div class="col-xs-6 col-sm-4">
+			<a href="/task" class="btn btn-primary">Create New Task</a>
+			</div>
+			<br><br>
 			
-			<a href="/task" class="btn btn-primary">Create New Task</a><br><br>
-			
-			<!-- Filters -->
-			<div class="form-group">
-
-				<div class="col-sm-3">
-					<div class="dropdown-category">
-					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					  	<li><a href="?category_id=-1">--all Categories--</a></li>
-					  	@foreach ($categories as $category)
-						    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
-					    @endforeach
-					  </ul>
-					</div>
+			<div class="col-xs-6 col-sm-4">
+				<div class="dropdown-category">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				  	<li><a href="?category_id=-1">--all Categories--</a></li>
+				  	@foreach ($categories as $category)
+					    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
+				    @endforeach
+				  </ul>
 				</div>
-				
-				<div class="col-sm-3">
-					<div class="dropdown-stage">
-					  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					     <span class="selection">{{ $stage or "--all Stages--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					  	<li><a href="?stage_id=-1">--all Stages--</a></li>
-					  	@foreach ($stages as $stage)
-						    <li><a href="?stage_id={{ $stage->id }}">{{ $stage->name }}</a></li>
-					    @endforeach
-					  </ul>
-					</div>
-				</div>
-				
-				
 			</div>
 			
-			
+			<div class="col-xs-6 col-sm-4">
+				<div class="dropdown-stage">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				     <span class="selection">{{ $stage or "--all Stages--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				  	<li><a href="?stage_id=-1">--all Stages--</a></li>
+				  	@foreach ($stages as $stage)
+					    <li><a href="?stage_id={{ $stage->id }}">{{ $stage->name }}</a></li>
+				    @endforeach
+				  </ul>
+				</div>
+			</div>
+
 			<br /><br />
 			
-			
-				
-
 					<div class="panel-body" id="unseen">
 						<table class="table table-striped task-table" id="clickable">
 							<thead>
