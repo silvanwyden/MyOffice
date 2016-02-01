@@ -103,7 +103,7 @@
 				  toolbar: [
 					['style', ['bold', 'italic', 'underline', 'strikethrough']],
 					['para', ['ul', 'ol',]],
-					['misc', ['link', 'picture', 'fullscreen']],
+					['misc1', ['link', 'picture', 'table', 'codeview', 'fullscreen']],
 							  ],
 			  }); 			   
 
