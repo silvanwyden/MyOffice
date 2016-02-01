@@ -4,9 +4,9 @@
 	function createOrderLink($class, $order, $dir_request)
     {
     	
-    	$dir = 'DESC';
-    	if ($class == $order && $dir_request == 'DESC')
-    		$dir = 'ASC';
+    	$dir = 'ASC';
+    	if ($class == $order && $dir_request == 'ASC')
+    		$dir = 'DESC';
     	
     	return "?order=" . $class . "&dir=" . $dir;
     	
