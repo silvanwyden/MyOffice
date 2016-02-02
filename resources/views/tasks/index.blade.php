@@ -92,10 +92,10 @@
 										
 										<!-- Task Action Button -->
 										<td>
-										
-											<a href="/task/{{ $task->id }}/done" class="btn btn-default glyphicon glyphicon-ok"></a>
-											<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-remove"></a>
-																
+											<nobr>
+												<a href="/task/{{ $task->id }}/done" class="btn btn-default glyphicon glyphicon-ok"></a>
+												<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-remove"></a>
+											</nobr>				
 										</td>
 									</tr>
 								@endforeach
