@@ -206,4 +206,17 @@ class TaskController extends Controller
 
         return redirect('/tasks');
     }
+    
+    
+    public function done(Request $request, Task $task)
+    {
+    	    
+    	$task->stage_id = 3;
+    	$task->save();
+    	
+    	$request->session()->flash('alert-success', 'Task was successful changed to stage done!');
+    
+    	return redirect('/tasks');
+    }
+    
 }

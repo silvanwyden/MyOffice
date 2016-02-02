@@ -20,7 +20,9 @@ Route::get('/tasks', 'TaskController@index');
 Route::get('/task', 'TaskController@create');
 Route::post('/task', 'TaskController@store');
 Route::get('/task/{task}/update', 'TaskController@update');
-Route::delete('/task/{task}', 'TaskController@destroy');
+Route::get('/task/{task}/delete', 'TaskController@destroy');
+Route::get('/task/{task}/done', 'TaskController@done');
+
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

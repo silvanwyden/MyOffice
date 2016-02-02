@@ -90,17 +90,12 @@
 										</td>
 										<td class="table-text"><div>{{ $task->stage['name'] }}</div></td>
 										
-										<!-- Task Delete Button -->
+										<!-- Task Action Button -->
 										<td>
-											<form class="delete" action="/task/{{ $task->id }}" method="POST">
-												{{ csrf_field() }}
-												{{ method_field('DELETE') }}
-
-												<button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
-													<i class="fa fa-btn fa-trash"></i>
-												</button>
-											</form>
-											
+										
+											<a href="/task/{{ $task->id }}/done" class="btn btn-default glyphicon glyphicon-ok"></a>
+											<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-remove"></a>
+																
 										</td>
 									</tr>
 								@endforeach
