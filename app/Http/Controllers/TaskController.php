@@ -91,14 +91,13 @@ class TaskController extends Controller
     	$ses_category_id = $user->category_id;
     	 
     	if ($ses_stage_id && $ses_category_id) 
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->paginate(200);
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
     	elseif ($ses_stage_id) 
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->orderBy($order, $dir)->paginate(200);
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
     	elseif ($ses_category_id)
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->paginate(200);
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
     	else 
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->paginate(200);
-    	
+    		$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
     	
         return view('tasks.index', [
         	'categories' => $categories,
@@ -113,7 +112,6 @@ class TaskController extends Controller
         
     }
 
-    
     
     public function create(Request $request) {
     
