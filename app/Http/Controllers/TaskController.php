@@ -116,10 +116,16 @@ class TaskController extends Controller
     		$tasks->where('category_id', '=', $ses_category_id);
     	
     	//handle search
-    	$search = $request->search;
-    	if (strlen($search)>0) {
-    		$tasks->where('tasks.name', 'like', "%" . $search . "%");
+    	if ($request->btn_search == "s") {
+    		if ($request->search) 
+    			$request->session()->put('search', $request->search);
+    		else
+    			$request->session()->forget('search');
     	}
+    		
+    	$search = $request->session()->get('search');
+    	if (strlen($search) > 0)
+    		$tasks->where('tasks.name', 'like', "%" . $search . "%");
     	
     	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->get();
     	
