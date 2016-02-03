@@ -120,4 +120,13 @@
 	
 		</div>
 	</div>
+	
+	<script>
+
+		  $(function () {
+				$('#search').focus();
+			});
+
+	</script>
+	
 @endsection

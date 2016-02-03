@@ -166,5 +166,12 @@
 		</div>
 	</div>
 	
+	<script>
+
+		  $(function () {
+				$('#task-name').focus();
+			});
+
+	</script>
 	
 @endsection

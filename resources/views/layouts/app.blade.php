@@ -37,11 +37,6 @@
 		}
 	</style>
 
-	<script>
-		$(function () {
-			$('#task-name').focus();
-		});
-	</script>
 </head>
 
 <body>
@@ -83,6 +78,7 @@
 	
 		  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		  <script>
+		  
 		  $(function() {
 			  $( "#datepicker" ).datepicker({ dateFormat: 'd.m.yy' });
 		  });
