@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\TaskRepository;
 use DateTime;
 use App\Session;
+use DB;
 
 class TaskController extends Controller
 {
@@ -89,8 +90,41 @@ class TaskController extends Controller
     	}
     	 
     	$ses_category_id = $user->category_id;
+    	
+    	
     	 
-    	if ($ses_stage_id && $ses_category_id) 
+    	
+    	/*$query = DB::table('myTable')->select(DB::raw($columnNames));
+    	
+    	foreach($columns as $column){
+    		$query->orWhereNotNull($column);
+    	}
+    	
+    	$result = $query->get(); */
+    	
+    	$tasks = DB::table('tasks')
+    		->join('categories', 'tasks.category_id', '=', 'categories.id')
+    		->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
+    		->join('stages', 'tasks.stage_id', '=', 'stages.id')
+    		->select('tasks.name', 'tasks.deadline', 'tasks.id', 'categories.name as cname', 'categories.css_class', 'priorities.name as pname', 'stages.name as sname')
+    		->where('user_id', '=', $request->user()->id);
+    	
+    	if ($ses_stage_id)
+    		$tasks->where('stage_id', '=', $ses_stage_id);
+    	
+    	if ($ses_category_id)
+    		$tasks->where('category_id', '=', $ses_category_id);
+    	
+    	//handle search
+    	$search = $request->search;
+    	if (strlen($search)>0) {
+    		$tasks->where('tasks.name', 'like', "%" . $search . "%");
+    	}
+    	
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->get();
+    	
+    
+    	/*if ($ses_stage_id && $ses_category_id) 
     		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
     	elseif ($ses_stage_id) 
     		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
@@ -98,7 +132,7 @@ class TaskController extends Controller
     		$tasks = Task::where('user_id', '=', $request->user()->id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
     	else 
     		$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
-    	
+    	*/
         return view('tasks.index', [
         	'categories' => $categories,
         	'priorities' => $priorities,
@@ -108,6 +142,7 @@ class TaskController extends Controller
         	'dir' => $dir,
         	'stage' => $user->stage,
         	'category' => $user->category,
+        	'search' => $search,
         ]);
         
     }

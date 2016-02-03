@@ -105,8 +105,10 @@
 					['para', ['ul', 'ol',]],
 					['misc1', ['link', 'picture', 'table', 'codeview', 'fullscreen']],
 							  ],
-			  }); 			   
+			  });
 
+		      $('#submitbutton').hide();
+			  
 			});
 
 

@@ -55,6 +55,20 @@
 				</div>
 			</div>
 			
+			<div class="col-xs-6 col-sm-4">
+				<form action="{{ url('tasks') }}" method="GET" class="form-horizontal">
+           			 {!! csrf_field() !!}
+           			 
+           			<nobr>
+					<input type="text" size="2" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
+					
+					<button type="submit" class="submitbutton" id="submitbutton">
+                    </button>
+                    </nobr>
+           		</form>
+					
+			</div>
+			
 
 			<br /><br />
 			
@@ -79,8 +93,8 @@
 												<div>{{ $task->name }}</div>
 											</a>
 										</td>
-										<td class="table-text"><div class="btn {{ $task->category['css_class'] }}">{{ $task->category['name'] }}</div></td>
-										<td class="table-text"><div>{{ $task->priority['name'] }}</div></td>
+										<td class="table-text"><div class="btn {{ $task->css_class }}">{{ $task->cname }}</div></td>
+										<td class="table-text"><div>{{ $task->pname }}</div></td>
 										<td class="table-text">
 											<div class=" {{ getColorDate($task->deadline) }}">
 												@if ($task->deadline != '0000-00-00')
@@ -88,7 +102,7 @@
 												@endif
 											</div>
 										</td>
-										<td class="table-text"><div>{{ $task->stage['name'] }}</div></td>
+										<td class="table-text"><div>{{ $task->sname }}</div></td>
 										
 										<!-- Task Action Button -->
 										<td>
@@ -101,7 +115,7 @@
 								@endforeach
 							</tbody>
 						</table>
-						{!! $tasks->appends(['sort' => 'name'])->render() !!}
+						{$tasks->appends(['sort' => 'name'])->render() }
 			
 	
 		</div>
