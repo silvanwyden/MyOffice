@@ -103,7 +103,10 @@
 								$('#stage').val($(this).attr('ref'));
 							});
 
-							$old_category="{{ $task->category_id or old('category') }}";
+							$old_category="{{ $category_id }}";
+							if (!$old_category) {
+								$old_category ="{{ $task->category_id or old('category') }}";
+							}
 							if ($old_category > 0) {
 								$('#category').val($old_category);
 								$old_category_name=$("li[js_id='category_"+$old_category+"']").text();

@@ -91,19 +91,8 @@ class TaskController extends Controller
     	 
     	$ses_category_id = $user->category_id;
     	
-    	
-    	 
-    	
-    	/*$query = DB::table('myTable')->select(DB::raw($columnNames));
-    	
-    	foreach($columns as $column){
-    		$query->orWhereNotNull($column);
-    	}
-    	
-    	$result = $query->get(); */
-    	
     	$tasks = DB::table('tasks')
-    		->join('categories', 'tasks.category_id', '=', 'categories.id')
+    		->leftjoin('categories', 'tasks.category_id', '=', 'categories.id')
     		->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
     		->join('stages', 'tasks.stage_id', '=', 'stages.id')
     		->select('tasks.name', 'tasks.deadline', 'tasks.id', 'categories.name as cname', 'categories.css_class', 'priorities.name as pname', 'stages.name as sname')
@@ -129,16 +118,6 @@ class TaskController extends Controller
     	
     	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->get();
     	
-    
-    	/*if ($ses_stage_id && $ses_category_id) 
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
-    	elseif ($ses_stage_id) 
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('stage_id', '=', $ses_stage_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
-    	elseif ($ses_category_id)
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->where('category_id', '=', $ses_category_id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
-    	else 
-    		$tasks = Task::where('user_id', '=', $request->user()->id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(200);
-    	*/
         return view('tasks.index', [
         	'categories' => $categories,
         	'priorities' => $priorities,
@@ -155,15 +134,19 @@ class TaskController extends Controller
 
     
     public function create(Request $request) {
-    
+    	
+    	$user = User::find($request->user()->id);
     	$categories = Category::All(['id', 'name']);
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
-    
+    	
+    	print $user->category_id;
+    	
     	return view('tasks.update', [
     			'categories' => $categories,
     			'priorities' => $priorities,
     			'stages' => $stages,
+    			'category_id' => $user->category_id,
     			])->withTask(new Task());
     	 
     }
@@ -180,6 +163,7 @@ class TaskController extends Controller
     			'priorities' => $priorities,
     			'stages' => $stages,
     			'task' => $task,
+    			'category_id' => False,
     			])->withTask($task);
     }
     
