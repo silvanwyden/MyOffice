@@ -62,7 +62,7 @@
            			<nobr>
 					<input type="text" size="2" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
 					
-					<button type="submit" name="btn_search" value="s" class="submitbutton" id="submitbutton">
+					<button type="submit" name="btn_search" value="s" class="submitbutton" id="submitbutton" style=" background: transparent; border: none !important;font-size:0;">
                     </button>
                     </nobr>
            		</form>
