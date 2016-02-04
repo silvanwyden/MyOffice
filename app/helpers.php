@@ -12,6 +12,20 @@
     	
     }
     
+    function createOrderLinkImage($class, $order, $dir_request)
+    {
+    	if ($class != $order)
+    		return "";
+    	
+    	if ($dir_request == 'ASC')
+    		return "glyphicon glyphicon-sort-by-alphabet";
+    	elseif ($dir_request == "DESC")
+    		return "glyphicon glyphicon-sort-by-alphabet-alt";
+    	else 
+    		return "";
+    
+    }
+    
     function getColorDate($date) {
     	
     	if ($date == '0000-00-00')

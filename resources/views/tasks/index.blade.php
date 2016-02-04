@@ -76,11 +76,11 @@
 						<table class="table table-striped task-table" id="clickable">
 							<thead>
 							<tr>
-								<th><a href="{{ createOrderLink('name', $order, $dir) }}">Task</a></th>
-								<th><a href="{{ createOrderLink('category_id', $order, $dir) }}">Category</a></th>
-								<th><a href="{{ createOrderLink('priority_id', $order, $dir) }}">Priority</a></th>
-								<th><a href="{{ createOrderLink('deadline', $order, $dir) }}">Deadline</a></th>
-								<th><a href="{{ createOrderLink('stage_id', $order, $dir) }}">State</a></th>
+								<th><a href="{{ createOrderLink('name', $order, $dir) }}">Task</a> <div class="{{ createOrderLinkImage('name', $order, $dir) }}"></div></th>
+								<th><a href="{{ createOrderLink('category_id', $order, $dir) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></th>
+								<th><a href="{{ createOrderLink('priority_id', $order, $dir) }}">Priority</a> <div class="{{ createOrderLinkImage('priority_id', $order, $dir) }}"></div></th>
+								<th><a href="{{ createOrderLink('deadline', $order, $dir) }}">Deadline</a> <div class="{{ createOrderLinkImage('deadline', $order, $dir) }}"></div></th>
+								<th><a href="{{ createOrderLink('stage_id', $order, $dir) }}">State</a> <div class="{{ createOrderLinkImage('stage_id', $order, $dir) }}"></div></th>
 								<th>Action</th>
 								</tr>
 							</thead>

@@ -108,14 +108,20 @@ class TaskController extends Controller
     		$tasks->where('tasks.name', 'like', "%" . $search . "%");
     	
     	//handle sort order
-    	$order = 'priority_id';
     	if ($request->order)
-    		$order = $request->order;
-    	$dir = 'ASC';
-    	if ($request->dir)
-    		$dir = $request->dir;
+    		$request->session()->put('order', $request->order);
+    	$order = $request->session()->get('order');
+    	if (!$order)
+    		$order = 'priority_id';
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(40);
+    	//handle sort direction
+    	if ($request->dir)
+    		$request->session()->put('dir', $request->dir);
+    	$dir = $request->session()->get('dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(50);
     	
         return view('tasks.index', [
         	'categories' => $categories,
