@@ -50,8 +50,9 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-
-					<a class="navbar-brand" href="/tasks">My Tasks</a>
+					@if (!Auth::guest())
+						<a class="navbar-brand" href="/tasks">My Tasks</a>
+					@endif
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
@@ -61,7 +62,7 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						@if (Auth::guest())
-							<li><a href="/auth/register"><i class="fa fa-btn fa-heart"></i>Register</a></li>
+							<!-- li><a href="/auth/register"><i class="fa fa-btn fa-heart"></i>Register</a></li-->
 							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
 						@else
 							<li class="navbar-text"><i class="fa fa-btn fa-user"></i>{{ Auth::user()->name }}</li>

@@ -9,7 +9,7 @@
 				</div>
 
 				<div class="panel-body">
-					You can store tasks here! Please register or login.
+					You can store tasks here! Please <a href="/auth/login">login</a>.
 				</div>
 			</div>
 		</div>

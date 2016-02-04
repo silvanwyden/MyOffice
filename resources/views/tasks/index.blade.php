@@ -21,7 +21,7 @@
 			
 			<div class="col-xs-6 col-sm-4">
 				<div style="verticale-align:middle; padding: 6px;">
-					#Tasks: {{ count($tasks) }}
+					#Tasks: {{ $tasks->total() }}
 				</div>
 			</div>
 			
@@ -115,7 +115,7 @@
 								@endforeach
 							</tbody>
 						</table>
-						{$tasks->appends(['sort' => 'name'])->render() }
+						{!! $tasks->appends(['sort' => 'name'])->render() !!}
 			
 	
 		</div>

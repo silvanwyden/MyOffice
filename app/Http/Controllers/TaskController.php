@@ -46,20 +46,12 @@ class TaskController extends Controller
     public function index(Request $request)
     {
     	
+    	//get basic objects
     	$user = User::find($request->user()->id);
-    	
     	$categories = Category::All(['id', 'name']);
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
 
-    	$order = 'priority_id';
-    	if ($request->order)
-    		$order = $request->order;
-    	
-    	$dir = 'ASC';
-    	if ($request->dir)
-    		$dir = $request->dir;
-    	
     	
     	//handle stages filter
     	if ($request->stage_id)
@@ -88,9 +80,9 @@ class TaskController extends Controller
 	    		$user->category = "--all Categories--";
 	    		$user->save();
     	}
-    	 
     	$ses_category_id = $user->category_id;
     	
+    	//base query
     	$tasks = DB::table('tasks')
     		->leftjoin('categories', 'tasks.category_id', '=', 'categories.id')
     		->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
@@ -111,12 +103,19 @@ class TaskController extends Controller
     		else
     			$request->session()->forget('search');
     	}
-    		
     	$search = $request->session()->get('search');
     	if (strlen($search) > 0)
     		$tasks->where('tasks.name', 'like', "%" . $search . "%");
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->get();
+    	//handle sort order
+    	$order = 'priority_id';
+    	if ($request->order)
+    		$order = $request->order;
+    	$dir = 'ASC';
+    	if ($request->dir)
+    		$dir = $request->dir;
+    	
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(40);
     	
         return view('tasks.index', [
         	'categories' => $categories,
@@ -139,8 +138,6 @@ class TaskController extends Controller
     	$categories = Category::All(['id', 'name']);
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
-    	
-    	print $user->category_id;
     	
     	return view('tasks.update', [
     			'categories' => $categories,

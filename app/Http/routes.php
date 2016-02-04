@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-	return view('welcome');
+	return redirect('/auth/login');
+	//return view('welcome');
 })->middleware('guest');
 
 // Task Routes
@@ -30,5 +31,5 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration Routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
+//Route::get('auth/register', 'Auth\AuthController@getRegister');
+//Route::post('auth/register', 'Auth\AuthController@postRegister');
