@@ -126,7 +126,7 @@ class TaskController extends Controller
     		$request->session()->put('page', $request->page);
     	$page = $request->session()->get('page');
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(3);
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(50);
     	
         return view('tasks.index', [
         	'categories' => $categories,
@@ -237,6 +237,8 @@ class TaskController extends Controller
         $this->authorize('destroy', $task);
 
         $task->delete();
+        
+        $request->session()->flash('alert-success', 'Task was successful deleted!');
 
         return redirect('/tasks');
     }

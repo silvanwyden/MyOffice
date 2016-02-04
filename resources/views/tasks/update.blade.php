@@ -158,9 +158,17 @@
 						<!-- Add Task Button -->
 						<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-8">
-								<button type="submit" class="btn btn-default">
-									<i class="fa fa-btn fa-plus"></i>Save Task
+								<button type="submit" class="btn btn-primary">
+									<i class="glyphicon glyphicon-floppy-save"></i> Save Task
 								</button>
+								
+								@if ($task->id)
+								<nobr>
+									<a href="/task/{{ $task->id }}/done" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i> Done</a>
+									<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+								</nobr>		
+								@endif
+								
 							</div>
 						</div>
 					</form>

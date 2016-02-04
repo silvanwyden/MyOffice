@@ -107,7 +107,7 @@
 										<!-- Task Action Button -->
 										<td>
 											<nobr>
-												<a href="/task/{{ $task->id }}/done" class="btn btn-default glyphicon glyphicon-ok"></a>
+												<a href="/task/{{ $task->id }}/done" class="btn btn-info glyphicon glyphicon-ok"></a>
 												<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-remove"></a>
 											</nobr>				
 										</td>
