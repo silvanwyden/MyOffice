@@ -121,7 +121,12 @@ class TaskController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(50);
+    	//handle pagination -> we don't want to lose the page
+    	if ($request->page)
+    		$request->session()->put('page', $request->page);
+    	$page = $request->session()->get('page');
+    	
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(3);
     	
         return view('tasks.index', [
         	'categories' => $categories,
@@ -133,6 +138,7 @@ class TaskController extends Controller
         	'stage' => $user->stage,
         	'category' => $user->category,
         	'search' => $search,
+        	'page' => $page,
         ]);
         
     }
@@ -212,9 +218,9 @@ class TaskController extends Controller
 	        
 	        }
 
+	    $page = $request->session()->get('page');
         	
-        	
-        return redirect('/tasks');
+        return redirect('/tasks?page=' . $page);
     }
     
     

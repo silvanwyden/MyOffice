@@ -1,14 +1,14 @@
 <?php
 
 
-	function createOrderLink($class, $order, $dir_request)
+	function createOrderLink($class, $order, $dir_request, $page)
     {
     	
     	$dir = 'ASC';
     	if ($class == $order && $dir_request == 'ASC')
     		$dir = 'DESC';
     	
-    	return "?order=" . $class . "&dir=" . $dir;
+    	return "?order=" . $class . "&dir=" . $dir . "&page=" . $page;
     	
     }
     
