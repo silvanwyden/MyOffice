@@ -51,25 +51,38 @@
 						<span class="icon-bar"></span>
 					</button>
 					@if (!Auth::guest())
-						<a class="navbar-brand" href="/tasks">My Tasks</a>
+						<a class="navbar-brand" href="/">My Tasks</a>
 					@endif
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						&nbsp;
-					</ul>
+					
 					
 					<ul class="nav navbar-nav navbar-right">
 						@if (Auth::guest())
 							<!-- li><a href="/auth/register"><i class="fa fa-btn fa-heart"></i>Register</a></li-->
 							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
 						@else
-							<li class="navbar-text"><i class="fa fa-btn fa-user"></i>{{ Auth::user()->name }}</li>
-							<li><a href="/auth/logout"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+						
+						        <li class="dropdown">
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Misc <span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+						            <li><a href="#">Categories</a></li>
+						            <li><a href="#">Stages</a></li>
+						            <li><a href="#">Users</a></li>
+						          </ul>
+						        </li>
+						        <li class="dropdown">
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+						          <ul class="dropdown-menu">
+						            <li><a href="#">Change Password</a></li>
+						            <li><a href="/auth/logout">Logout</a></li>
+						          </ul>
+						        </li>
+					  
 						@endif
 					</ul>
-					
+				
 				</div>
 			</div>
 		</nav>
