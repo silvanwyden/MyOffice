@@ -51,7 +51,11 @@
 						<span class="icon-bar"></span>
 					</button>
 					@if (!Auth::guest())
-						<a class="navbar-brand" href="/">My Tasks</a>
+						<a class="navbar-brand" href="/">My Tasks
+						@if(isset($tasks))
+							<span class="badge">{{ $tasks->total() }}</span>
+						@endif
+						</a>
 					@endif
 				</div>
 

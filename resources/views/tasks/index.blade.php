@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container">
-		<div class="col-sm-offset-2 col-sm-8">
+	
 		
 		
 			<div class="flash-message">
@@ -13,66 +13,62 @@
 		      @endif
 		    @endforeach
 		  </div> <!-- end .flash-message -->
-		
-			<!-- Current Tasks -->
-			<div class="col-xs-6 col-sm-4">
-				<a href="/task" class="btn btn-primary">Create New Task</a>
-			</div>
 			
-			<div class="col-xs-6 col-sm-4">
-				<div style="verticale-align:middle; padding: 6px;">
-					#Tasks: {{ $tasks->total() }}
-				</div>
-			</div>
+			<div class="row">
+				<div class="col-xs-12" style="padding-bottom: 6px;">
+				
+				  <div class="btn-group" role="group" aria-label="first">
+				  
+				  		<a href="/task" class="btn btn-primary">New</a>
+				
+						<div class="btn-group" role="group">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							  	<li><a href="?category_id=-1">--all Categories--</a></li>
+							  	@foreach ($categories as $category)
+								    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
+							    @endforeach
+							  </ul>
+						</div>
 			
-			<br><br>
-			
-			<div class="col-xs-6 col-sm-4">
-				<div class="dropdown-category">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				  	<li><a href="?category_id=-1">--all Categories--</a></li>
-				  	@foreach ($categories as $category)
-					    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
-				    @endforeach
-				  </ul>
-				</div>
-			</div>
-			
-			<div class="col-xs-6 col-sm-4">
-				<div class="dropdown-stage">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-				     <span class="selection">{{ $stage or "--all Stages--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				  	<li><a href="?stage_id=-1">--all Stages--</a></li>
-				  	@foreach ($stages as $stage)
-					    <li><a href="?stage_id={{ $stage->id }}">{{ $stage->name }}</a></li>
-				    @endforeach
-				  </ul>
-				</div>
-			</div>
-			
-			<div class="col-xs-6 col-sm-4">
-				<form action="{{ url('tasks') }}" method="GET" class="form-horizontal">
-           			 {!! csrf_field() !!}
-           			 
-           			<nobr>
-					<input type="text" size="2" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
+						<div class="btn-group" role="group">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							     <span class="selection">{{ $stage or "--all Stages--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+							  	<li><a href="?stage_id=-1">--all Stages--</a></li>
+							  	@foreach ($stages as $stage)
+								    <li><a href="?stage_id={{ $stage->id }}">{{ $stage->name }}</a></li>
+							    @endforeach
+							  </ul>
+						</div>
+				
+					</div>
 					
-					<button type="submit" name="btn_search" value="s" class="submitbutton" id="submitbutton" style=" background: transparent; border: none !important;font-size:0;">
-                    </button>
-                    </nobr>
-           		</form>
-					
+					<div class="btn-group" role="group" aria-label"second">
+			
+						<form action="{{ url('tasks') }}" method="GET" class="form-horizontal">
+		           			 {!! csrf_field() !!}
+		           			 
+		       				
+							<input type="text" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
+							<input type="hidden" name="btn_search" id="search" value="s">
+							
+							<!-- button type="submit" name="btn_search" value="s" class="submitbutton" id="submitbutton" style=" background: transparent; border: none !important;font-size:0;"></button-->
+				
+		           		</form>
+	           		
+	           		</div>
+				
+				</div>
+				
 			</div>
 			
 
-			<br /><br />
-			
-					<div class="panel-body" id="unseen">
+	
+					<div id="unseen">
 						<table class="table table-striped task-table" id="clickable">
 							<thead>
 							<tr>
@@ -117,8 +113,6 @@
 						</table>
 						{!! $tasks->appends([])->render() !!}
 			
-	
-		</div>
 	</div>
 	
 	<script>
