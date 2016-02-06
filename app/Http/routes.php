@@ -23,6 +23,10 @@ Route::get('/task/{task}/update', 'TaskController@update');
 Route::get('/task/{task}/delete', 'TaskController@destroy');
 Route::get('/task/{task}/done', 'TaskController@done');
 
+// Counters Routes
+Route::get('/counters', 'CounterController@index');
+Route::get('/counter', 'CounterController@create');
+Route::post('/counter', 'CounterController@store');
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

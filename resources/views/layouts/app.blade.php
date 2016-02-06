@@ -51,17 +51,30 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					@if (!Auth::guest())
-						<a class="navbar-brand" href="/tasks?page=1">My Tasks
-						@if(isset($tasks))
-							<span class="badge">{{ $tasks->total() }}</span>
-						@endif
-						</a>
-					@endif
-				</div>
-
+			
+		   	    	<a class="navbar-brand" href="#">
+				        <img height="20px" alt="MyPrivateOffice" src="/favicon.ico">
+				    </a>
+			
+			    </div>
+				
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
+				    @if (!Auth::guest())
+					    <ul class="nav navbar-nav">
+					    	<li class="{{ Request::is( 'task*') ? 'active' : '' }}">
+					    		<a href="/tasks?page=1">My Tasks
+									@if(isset($tasks))
+										<span class="badge">{{ $tasks->total() }}</span>
+									@endif
+								</a>
+							</li>
+				      		<li class=""><a href="#">Addresses</a></li>
+				      		<li class=""><a href="#">Birthdays</a></li>
+				        	<li class="{{ Request::is( 'counter*') ? 'active' : '' }}"><a href="/counters?page=1">Counters</a></li>
+		        		</ul>
+	        		@endif
+	        		
+	    			<ul class="nav navbar-nav navbar-right">
 						@if (Auth::guest())
 							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
 						@else
@@ -82,6 +95,7 @@
 					        </li>
 						@endif
 					</ul>
+					
 				</div>
 				
 			</div>
