@@ -22,7 +22,7 @@ class CreateCountercategories extends Migration
         
         DB::table('countercategories')->insert(array('name' => 'Fitness 16', 'seq' => '50', 'css_class' => 'btn-success', 'stage_id' => 1));
         DB::table('countercategories')->insert(array('name' => 'Bouldern 16', 'seq' => '10', 'css_class' => 'btn-warning', 'stage_id' => 1));
-        DB::table('countercategories')->insert(array('name' => 'Ski 15/16', 'seq' => '10', 'css_class' => 'btn-warning', 'stage_id' => 1));
+        DB::table('countercategories')->insert(array('name' => 'Ski 15/16', 'seq' => '10', 'css_class' => 'btn-info', 'stage_id' => 1));
         
     }
 

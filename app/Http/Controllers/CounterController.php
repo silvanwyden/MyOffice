@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Task;
-use App\Category;
+use App\Counter;
+use App\Countercategory;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
@@ -46,16 +46,18 @@ class CounterController extends Controller
     	
     	//base query
     	$counters = DB::table('counters')
-    	//->leftjoin('categories', 'tasks.category_id', '=', 'categories.id')
+    	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
     	//->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
     	->select(
+    			'counters.id',
     			'counters.date',
     			'counters.calories',
     			'counters.distance',
     			'counters.counter_category_id',
     			'counters.created_at',
-    			'counters.updated_at'
-    			 
+    			'counters.updated_at',
+    			'countercategories.name as cname',
+    			'countercategories.css_class'
     	);
     	
     	$counters = $counters->paginate(50);
@@ -67,6 +69,65 @@ class CounterController extends Controller
         	'page' => '',
         ]);
         
+    }
+    
+    
+    /**
+     * Create a new task: load date and forward to view
+     *
+     * @param  Request  $request
+     * @return view
+     */
+    public function create(Request $request) {
+    	 
+    	$countercategories = Countercategory::All(['id', 'name']);
+    	
+    	return view('counters.update', [
+    			'countercategories' => $countercategories,
+				'counter' => new Counter(),
+    			]);
+    
+    }
+    
+    
+    /**
+     * Validate AND Save/Crate a new task.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+    	
+    	$date = False;
+    	if ($request->date) {
+    		$date = DateTime::createFromFormat('d.m.Y', $request->date);
+    		$date = $date->format('Y-m-d');
+    	}
+    
+    	$input = array(
+    			'date' => $date,
+    			'counter_category_id' => $request->category,
+    	);
+    
+    	if ($request->counter_id) {
+    		 
+    		$counter = Counter::find($request->counter_id);
+    		$counter->fill($input)->save();
+    		$request->session()->flash('alert-success', 'Counter was successful updated!');
+    		 
+    	}
+    	else {
+    		 
+    		$counter = new Counter();
+    		$counter->create($input);
+    		$request->session()->flash('alert-success', 'Counter was successful added!');
+    		 
+    	}
+    
+    	$page = $request->session()->get('page');
+    	 
+    	return redirect('/counters?page=' . $page);
     }
 
     

@@ -70,7 +70,13 @@
 							</li>
 				      		<li class=""><a href="#">Addresses</a></li>
 				      		<li class=""><a href="#">Birthdays</a></li>
-				        	<li class="{{ Request::is( 'counter*') ? 'active' : '' }}"><a href="/counters?page=1">Counters</a></li>
+				        	<li class="{{ Request::is( 'counter*') ? 'active' : '' }}">
+				        		<a href="/counters?page=1">Counters
+				        			@if(isset($counters))
+										<span class="badge">{{ $counters->total() }}</span>
+									@endif
+				        		</a>
+			        		</li>
 		        		</ul>
 	        		@endif
 	        		
