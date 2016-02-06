@@ -69,7 +69,7 @@
 						@else
 						
 						        <li class="dropdown">
-						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Misc <span class="caret"></span></a>
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
 						          <ul class="dropdown-menu">
 						            <li><a href="#">Categories</a></li>
 						            <li><a href="#">Stages</a></li>
@@ -77,10 +77,10 @@
 						          </ul>
 						        </li>
 						        <li class="dropdown">
-						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
 						          <ul class="dropdown-menu">
 						            <li><a href="#">Change Password</a></li>
-						            <li><a href="/auth/logout">Logout</a></li>
+						            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
 						          </ul>
 						        </li>
 					  
@@ -113,7 +113,7 @@
 
 			  
 			  $('#summernote').summernote({
-				  height: 300,
+				  height: 350,
 				  toolbar: [
 					['style', ['bold', 'italic', 'underline', 'strikethrough']],
 					['para', ['ul', 'ol',]],

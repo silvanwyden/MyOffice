@@ -15,7 +15,7 @@
 		  </div> <!-- end .flash-message -->
 			
 			<div class="row">
-				<div class="col-xs-12" style="padding-bottom: 6px;">
+				<div class="col-sm-8" style="padding-bottom: 6px;">
 				
 				  <div class="btn-group" role="group" aria-label="first">
 				  
@@ -47,9 +47,13 @@
 				
 					</div>
 					
-					<div class="btn-group" role="group" aria-label"second">
 			
-						<form action="{{ url('tasks') }}" method="GET" class="form-horizontal">
+				
+				</div>
+				
+				<div class="col-sm-4" style="padding-bottom: 6px;">
+				
+					<form action="{{ url('tasks') }}" method="GET" class="form-horizontal">
 		           			 {!! csrf_field() !!}
 		           			 
 		       				
@@ -59,8 +63,6 @@
 							<!-- button type="submit" name="btn_search" value="s" class="submitbutton" id="submitbutton" style=" background: transparent; border: none !important;font-size:0;"></button-->
 				
 		           		</form>
-	           		
-	           		</div>
 				
 				</div>
 				
@@ -104,7 +106,7 @@
 										<td>
 											<nobr>
 												<a href="/task/{{ $task->id }}/done" class="btn btn-info glyphicon glyphicon-ok"></a>
-												<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-remove"></a>
+												<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 											</nobr>				
 										</td>
 									</tr>

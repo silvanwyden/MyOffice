@@ -2,7 +2,6 @@
 
 @section('content')
 	<div class="container">
-		<div class="col-sm-offset-2 col-sm-8">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					New Task
@@ -21,17 +20,17 @@
 
 						<!-- Task Name -->
 						<div class="form-group">
-							<label for="task-name" class="col-sm-3 control-label">Task</label>
+							<label for="task-name" class="col-sm-2 control-label">Task</label>
 
-							<div class="col-sm-8">
+							<div class="col-sm-10">
 								<input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name or old('name') }}">
 							</div>
 						</div>
 						
 						<!-- Category -->
 						<div class="form-group">
-							<label for="task-category" class="col-sm-3 control-label">Category</label>
-							<div class="col-sm-8">
+							<label for="task-category" class="col-sm-2 control-label">Category</label>
+							<div class="col-sm-10">
 								<div class="dropdown-category">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">--not selected--</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -48,8 +47,8 @@
 						
 						<!-- Priority -->
 						<div class="form-group">
-							<label for="task-priority" class="col-sm-3 control-label">Priority</label>
-							<div class="col-sm-8">
+							<label for="task-priority" class="col-sm-2 control-label">Priority</label>
+							<div class="col-sm-10">
 								<div class="dropdown-priority">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">Normal</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -66,8 +65,8 @@
 						
 						<!-- Stage -->
 						<div class="form-group">
-							<label for="task-priority" class="col-sm-3 control-label">Stage</label>
-							<div class="col-sm-8">
+							<label for="task-priority" class="col-sm-2 control-label">Stage</label>
+							<div class="col-sm-10">
 								<div class="dropdown-stage">
 								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								     <span class="selection">Open</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -135,9 +134,9 @@
 						
 						<!-- Deadline -->
 						<div class="form-group">
-							<label for="task-name" class="col-sm-3 control-label">Deadline</label>
+							<label for="task-name" class="col-sm-2 control-label">Deadline</label>
 
-							<div class="col-sm-8">
+							<div class="col-sm-10">
 								@if ($task->deadline > 0)
 									<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ date('d.m.Y', strtotime($task->deadline)) }}">
 								@else
@@ -148,19 +147,21 @@
 						
 						<!-- Description -->
 						<div class="form-group">
-							<label for="task-description" class="col-sm-3 control-label">Description</label>
+							<label for="task-description" class="col-sm-2 control-label">Description</label>
 
-							<div class="col-sm-8">
+							<div class="col-sm-10">
 								<textarea name="description" id="summernote" class="form-control" >{{ $task->description or old('description') }}</textarea>
 							</div>
 						</div>
 
 						<!-- Add Task Button -->
 						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-8">
+							<div class="col-sm-offset-2 col-sm-9">
 								<button type="submit" class="btn btn-primary">
 									<i class="glyphicon glyphicon-floppy-save"></i> Save Task
 								</button>
+								
+								<a href="/tasks" class="btn btn-warning"><i class="glyphicon glyphicon-ok"></i> Cancel</a>
 								
 								@if ($task->id)
 								<nobr>
@@ -174,7 +175,6 @@
 					</form>
 				</div>
 			</div>
-		</div>
 	</div>
 	
 	<script>
