@@ -27,6 +27,9 @@ Route::get('/task/{task}/done', 'TaskController@done');
 Route::get('/counters', 'CounterController@index');
 Route::get('/counter', 'CounterController@create');
 Route::post('/counter', 'CounterController@store');
+Route::get('/counter/{counter}/update', 'CounterController@update');
+Route::get('/counter/{counter}/delete', 'CounterController@destroy');
+Route::get('/counter/{counter}/done', 'CounterController@done');
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

@@ -91,6 +91,27 @@ class CounterController extends Controller
     
     
     /**
+     * Update a new task: load date and forward to view
+     *
+     * @param  Request  $request, Task $task
+     * @return view
+     */
+    public function update(Request $request, Counter $counter) {
+    
+    	$countercategories = Countercategory::All(['id', 'name']);
+    
+    	
+    	//current date: or date('d.m.Y', time())
+    	print "count_id" . $counter->id;
+    	
+    	return view('counters.update', [
+    			'countercategories' => $countercategories,
+				'counter' => $counter,
+    			]);
+    }
+    
+    
+    /**
      * Validate AND Save/Crate a new task.
      *
      * @param  Request  $request
