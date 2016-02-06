@@ -126,7 +126,7 @@ class TaskController extends Controller
     		$request->session()->put('page', $request->page);
     	$page = $request->session()->get('page');
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(50);
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(5);
     	
         return view('tasks.index', [
         	'categories' => $categories,

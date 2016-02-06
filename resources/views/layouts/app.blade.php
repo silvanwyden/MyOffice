@@ -51,7 +51,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					@if (!Auth::guest())
-						<a class="navbar-brand" href="/">My Tasks
+						<a class="navbar-brand" href="/tasks?page=1">My Tasks
 						@if(isset($tasks))
 							<span class="badge">{{ $tasks->total() }}</span>
 						@endif
@@ -64,26 +64,23 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						@if (Auth::guest())
-							<!-- li><a href="/auth/register"><i class="fa fa-btn fa-heart"></i>Register</a></li-->
 							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
 						@else
-						
-						        <li class="dropdown">
-						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
-						          <ul class="dropdown-menu">
-						            <li><a href="#">Categories</a></li>
-						            <li><a href="#">Stages</a></li>
-						            <li><a href="#">Users</a></li>
-						          </ul>
-						        </li>
-						        <li class="dropdown">
-						          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
-						          <ul class="dropdown-menu">
-						            <li><a href="#">Change Password</a></li>
-						            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
-						          </ul>
-						        </li>
-					  
+					        <li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
+					          <ul class="dropdown-menu">
+					            <li><a href="#">Categories</a></li>
+					            <li><a href="#">Stages</a></li>
+					            <li><a href="#">Users</a></li>
+					          </ul>
+					        </li>
+					        <li class="dropdown">
+					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
+					          <ul class="dropdown-menu">
+					            <li><a href="#">Change Password</a></li>
+					            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
+					          </ul>
+					        </li>
 						@endif
 					</ul>
 				
