@@ -13,7 +13,6 @@
 
 Route::get('/', function () {
 	return redirect('/auth/login');
-	//return view('welcome');
 })->middleware('guest');
 
 // Task Routes

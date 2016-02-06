@@ -43,6 +43,7 @@
 	<div class="container">
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
+			
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
@@ -60,68 +61,73 @@
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
-					
-					
 					<ul class="nav navbar-nav navbar-right">
 						@if (Auth::guest())
 							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
 						@else
-					        <li class="dropdown">
-					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
-					          <ul class="dropdown-menu">
-					            <li><a href="#">Categories</a></li>
-					            <li><a href="#">Stages</a></li>
-					            <li><a href="#">Users</a></li>
-					          </ul>
+			        		<li class="dropdown">
+						    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
+					        	<ul class="dropdown-menu">
+						            <li><a href="#">Categories</a></li>
+						            <li><a href="#">Stages</a></li>
+						            <li><a href="#">Users</a></li>
+						        </ul>
 					        </li>
 					        <li class="dropdown">
-					          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
-					          <ul class="dropdown-menu">
-					            <li><a href="#">Change Password</a></li>
-					            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
-					          </ul>
+						    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
+					          	<ul class="dropdown-menu">
+						            <li><a href="#">Change Password</a></li>
+						            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
+					          	</ul>
 					        </li>
 						@endif
 					</ul>
-				
 				</div>
+				
 			</div>
 		</nav>
 	</div>
 
 	@yield('content')
 	
-		  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		  <script>
-		  
-		  $(function() {
-			  $( "#datepicker" ).datepicker({ dateFormat: 'd.m.yy' });
-		  });
+  	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  	<script>
 
-		  $(".delete").click(function(){
-		        return confirm("Do you want to delete this item?");
-		    });
-		  
-		  $(document).ready(function() {
+	  	//loadi dateicker for date fields
+	  	$(function() {
+		  	$( "#datepicker" ).datepicker({ 
+			  							dateFormat: 'd.m.yy',
+			  							firstDay: 1
+			  							 });
+	  	});
 
-			  $('#clickable .table-text').click(function() {
-				  window.location.href = $(this).parent().find("a").attr("href");
-				});
+	  	//security question when deleting an item
+	 	$(".delete").click(function(){
+	        return confirm("Do you want to delete this item?");
+	    });
+	  
+	  	$(document).ready(function() {
 
-			  
-			  $('#summernote').summernote({
-				  height: 350,
-				  toolbar: [
+	  		//make table rows clickable
+		  	$('#clickable .table-text').click(function() {
+			  	window.location.href = $(this).parent().find("a").attr("href");
+			});
+
+
+			//load summernote editor
+		  	$('#summernote').summernote({
+			  	height: 350,
+			  	toolbar: [
 					['style', ['bold', 'italic', 'underline', 'strikethrough']],
 					['para', ['ul', 'ol',]],
 					['misc1', ['link', 'picture', 'table', 'codeview', 'fullscreen']],
 							  ],
-			  });
-			  
-			});
+		  	});
+		  
+		});
 
 
-	  </script>
+  	</script>
 	
 </body>
 </html>

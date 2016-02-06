@@ -100,9 +100,11 @@ class TaskController extends Controller
     				)
     		->where('user_id', '=', $request->user()->id);
     	
+    	//handle stages
     	if ($ses_stage_id)
     		$tasks->where('stage_id', '=', $ses_stage_id);
     	
+    	//handle categories
     	if ($ses_category_id)
     		$tasks->where('category_id', '=', $ses_category_id);
     	
@@ -154,6 +156,12 @@ class TaskController extends Controller
     }
 
     
+    /**
+     * Create a new task: load date and forward to view
+     *
+     * @param  Request  $request
+     * @return view
+     */
     public function create(Request $request) {
     	
     	$user = User::find($request->user()->id);
@@ -171,6 +179,12 @@ class TaskController extends Controller
     }
     
     
+    /**
+     * Update a new task: load date and forward to view
+     *
+     * @param  Request  $request, Task $task
+     * @return view
+     */
     public function update(Request $request, Task $task) {
     
     	$categories = Category::All(['id', 'name']);
@@ -188,7 +202,7 @@ class TaskController extends Controller
     
 
     /**
-     * Create a new task.
+     * Validate AND Save/Crate a new task.
      *
      * @param  Request  $request
      * @return Response
@@ -254,6 +268,13 @@ class TaskController extends Controller
     }
     
     
+    /**
+     * Set the given task to state 'done'.
+     *
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return Response
+     */
     public function done(Request $request, Task $task)
     {
     	    
