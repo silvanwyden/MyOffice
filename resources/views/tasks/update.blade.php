@@ -145,6 +145,16 @@
 							</div>
 						</div>
 						
+						<!-- Read/Write -->
+						@if ($task->id)
+						<div class="form-group">
+							<label for="task-created" class="col-sm-2 control-label">Read/Write</label>
+
+							<div class="col-sm-10" style="padding-top: 7px;">{{ date('d.m.Y G:i:s', strtotime($task->created_at)) }} | {{ date('d.m.Y G:i:s', strtotime($task->updated_at)) }}</div>
+
+						</div>
+						@endif
+						
 						<!-- Description -->
 						<div class="form-group">
 							<label for="task-description" class="col-sm-2 control-label">Description</label>
@@ -153,7 +163,7 @@
 								<textarea name="description" id="summernote" class="form-control" >{{ $task->description or old('description') }}</textarea>
 							</div>
 						</div>
-
+						
 						<!-- Add Task Button -->
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-9">

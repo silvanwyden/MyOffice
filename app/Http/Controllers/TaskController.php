@@ -87,7 +87,17 @@ class TaskController extends Controller
     		->leftjoin('categories', 'tasks.category_id', '=', 'categories.id')
     		->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
     		->join('stages', 'tasks.stage_id', '=', 'stages.id')
-    		->select('tasks.name', 'tasks.deadline', 'tasks.id', 'categories.name as cname', 'categories.css_class', 'priorities.name as pname', 'stages.name as sname')
+    		->select(
+    				'tasks.name', 
+    				'tasks.deadline', 
+    				'tasks.id',
+    				'tasks.created_at',
+    				'tasks.updated_at', 
+    				'categories.name as cname', 
+    				'categories.css_class', 
+    				'priorities.name as pname', 
+    				'stages.name as sname'
+    				)
     		->where('user_id', '=', $request->user()->id);
     	
     	if ($ses_stage_id)
@@ -126,7 +136,7 @@ class TaskController extends Controller
     		$request->session()->put('page', $request->page);
     	$page = $request->session()->get('page');
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(5);
+    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(50);
     	
         return view('tasks.index', [
         	'categories' => $categories,
