@@ -44,6 +44,24 @@ class CounterController extends Controller
     public function index(Request $request)
     {
     	
+    	//get basic objects 
+    	$user = User::find($request->user()->id);
+    	$categories = Countercategory::All(['id', 'name']);
+    	
+    	//handle categories filter
+    	if ($request->category_id)
+    		if ($request->category_id > 0) {
+    		$user->counter_category_id = $request->category_id;
+    		$user->counter_category = Countercategory::find($request->category_id)->name;
+    		$user->save();
+    	}
+    	else {
+    		$user->counter_category_id = False;
+    		$user->counter_category = "--all Categories--";
+    		$user->save();
+    	}
+    	$ses_category_id = $user->counter_category_id;
+    	
     	//base query
     	$counters = DB::table('counters')
     	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
@@ -60,13 +78,19 @@ class CounterController extends Controller
     			'countercategories.css_class'
     	);
     	
+    	//handle categories
+    	if ($ses_category_id)
+    		$counters->where('counter_category_id', '=', $ses_category_id);
+    	
     	$counters = $counters->paginate(50);
     	
         return view('counters.index', [
         	'counters' => $counters,
+        	'categories' => $categories,
         	'order' => '',
         	'dir' => '',
         	'page' => '',
+        	'category' => $user->counter_category,
         ]);
         
     }

@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('stage');
             $table->integer('priority_id')->index();
             $table->string('priority');
+            table->integer('counter_category_id')->index();
+            $table->string('counter_category');
             $table->rememberToken();
             $table->timestamps();
         });
