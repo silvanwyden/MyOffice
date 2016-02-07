@@ -101,7 +101,7 @@ class CounterController extends Controller
     		$request->session()->put('counter_page', $request->page);
     	$page = $request->session()->get('counter_page');
     	
-    	$counters = $counters->orderBy($order, $dir)->paginate(3);
+    	$counters = $counters->orderBy($order, $dir)->paginate(50);
     	
         return view('counters.index', [
         	'counters' => $counters,
