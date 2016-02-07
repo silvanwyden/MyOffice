@@ -84,8 +84,8 @@ class CounterController extends Controller
     	
     	return view('counters.update', [
     			'countercategories' => $countercategories,
-				'counter' => new Counter(),
-    			]);
+    			'counter_category_id' => False,
+    			])->withCounter(new Counter());
     
     }
     
@@ -97,17 +97,14 @@ class CounterController extends Controller
      * @return view
      */
     public function update(Request $request, Counter $counter) {
-    
+    	
     	$countercategories = Countercategory::All(['id', 'name']);
-    
-    	
-    	//current date: or date('d.m.Y', time())
-    	print "count_id" . $counter->id;
-    	
+
     	return view('counters.update', [
     			'countercategories' => $countercategories,
 				'counter' => $counter,
-    			]);
+    			'counter_category_id' => False,
+    			])->withCounter($counter);
     }
     
     
@@ -151,5 +148,27 @@ class CounterController extends Controller
     	return redirect('/counters?page=' . $page);
     }
 
+    
+    
+    
+    /**
+     * Destroy the given task.
+     *
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return Response
+     */
+    public function destroy(Request $request, Counter $counter)
+    {
+    	print "counter" . $counter->date;  
+    	alert("counter" . $counter->date);
+    
+    	//$task->delete();
+    
+    	$request->session()->flash('alert-success', 'Task was successful deleted!');
+    
+    	return redirect('/counters');
+    }
+    
     
 }

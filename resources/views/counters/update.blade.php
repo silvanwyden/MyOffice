@@ -23,7 +23,11 @@
 						<label for="task-name" class="col-sm-2 control-label">Date</label>
 
 						<div class="col-sm-10">
-							<input type="text" name="date" id="datepicker" class="form-control" value="{{ $counter->date or old('date')  }}">
+							@if ($counter->date > 0)
+								<input type="text" name="date" id="datepicker" class="form-control" value="{{ date('d.m.Y', strtotime($counter->date)) }}">
+							@else
+								<input type="text" name="date" id="datepicker" class="form-control" value="{{ old('date') }}">
+							@endif
 						</div>
 					</div>
 					
@@ -54,6 +58,21 @@
 							$('#category').val($(this).attr('ref'));
 							$('#category_name').val($(this).text());
 						});
+
+						//function to load the saved values
+						$old_category="{{ old('category') }}";
+						if (!$old_category) {
+							$old_category ="{{ $counter_category_id }}";
+								if (!$old_category) {
+									$old_category ="{{ $counter->counter_category_id }}";
+								}
+						}
+						if ($old_category > 0) {
+							$('#category').val($old_category);
+							$old_category_name=$("li[js_id='category_"+$old_category+"']").text();
+							$(".dropdown-category .dropdown-menu li a").parents(".dropdown-category").find('.selection').text($old_category_name);
+							$(".dropdown-category .dropdown-menu li a").parents(".dropdown-category").find('.selection').val($old_category_name);
+						};
 
 					</script>
 					
