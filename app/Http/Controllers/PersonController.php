@@ -52,7 +52,7 @@ class PersonController extends Controller
     	
     	//base query
     	$persons = DB::table('persons')
-    	//->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
+    	->leftjoin('categories', 'persons.category_id', '=', 'categories.id')
     	//->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
     	->select(
     			'persons.id',
@@ -61,8 +61,11 @@ class PersonController extends Controller
     			'persons.phone',
     			'persons.mobile',
     			'persons.mail',
+    			'persons.birthdate',
     			'persons.created_at',
-    			'persons.updated_at'
+    			'persons.updated_at',
+    			'categories.name as cname',
+    			'categories.css_class'
     	);
     	
     	
@@ -174,14 +177,14 @@ class PersonController extends Controller
      * @param  Task  $task
      * @return Response
      */
-    public function destroy(Request $request, Counter $counter)
+    public function destroy(Request $request, Person $person)
     {
 
-    	$counter->delete();
+    	$person->delete();
     
-    	$request->session()->flash('alert-success', 'Counter was successful deleted!');
+    	$request->session()->flash('alert-success', 'Person was successful deleted!');
     
-    	return redirect('/counters');
+    	return redirect('/persons');
     }
     
     

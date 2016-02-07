@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Task;
 use App\Counter;
+use App\Person;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -28,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $router->model('task', Task::class);
         $router->model('counter', Counter::class);
+        $router->model('person', Person::class);
 
         parent::boot($router);
     }

@@ -45,18 +45,20 @@
 					<th><nobr><a href="{{ createOrderLink('mobile', $order, $dir, $page) }}">Mobile</a> <div class="{{ createOrderLinkImage('mobile', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('mail', $order, $dir, $page) }}">E-Mail</a> <div class="{{ createOrderLinkImage('mail', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('birthdate', $order, $dir, $page) }}">Birthdate</a> <div class="{{ createOrderLinkImage('birthdate', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
 					<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($persons as $person)
 						<tr>
-							<td class="table-text">{{ $person->lastname }}</td>
+							<td class="table-text"><a href="/person/{{ $person->id }}/update">{{ $person->lastname }}</a></td>
 							<td class="table-text">{{ $person->surname }}</td>
 							<td class="table-text">{{ $person->phone }}</td>
 							<td class="table-text">{{ $person->mobile }}</td>
 							<td class="table-text">{{ $person->mail }}</td>
 							<td class="table-text">{{ $person->birthdate }}</td>
+							<td class="table-text"><div class="btn {{ $person->css_class }}">{{ $person->cname }}</div></td>
 							
 							<!-- Task Action Buttons -->
 							<td>
