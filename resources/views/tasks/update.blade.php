@@ -175,7 +175,7 @@
 								<i class="glyphicon glyphicon-floppy-save"></i> Save Task
 							</button>
 							
-							<a href="/tasks" class="btn btn-warning"><i class="glyphicon glyphicon-ok"></i> Cancel</a>
+							<a href="/tasks" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($task->id)
 							<nobr>

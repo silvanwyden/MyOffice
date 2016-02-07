@@ -83,7 +83,7 @@
 								<i class="glyphicon glyphicon-floppy-save"></i> Save Entry
 							</button>
 							
-							<a href="/counters" class="btn btn-warning"><i class="glyphicon glyphicon-ok"></i> Cancel</a>
+							<a href="/counters" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($counter->id)
 							<nobr>
