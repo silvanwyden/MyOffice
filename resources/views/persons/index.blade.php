@@ -1,0 +1,84 @@
+@extends('layouts.app')
+
+@section('content')
+	<div class="container">
+
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+		
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+		      @endif
+		    @endforeach
+	  	</div> <!-- end .flash-message -->
+		
+		<div class="row">
+			<div class="col-sm-8" style="padding-bottom: 6px;">
+			  <div class="btn-group" role="group" aria-label="first">
+			  
+			  		<a href="/person" class="btn btn-primary">New</a>
+			
+					<div class="btn-group" role="group">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						  	<li><a href="?category_id=-1">--all Categories--</a></li>
+						  	@foreach ($categories as $category)
+							    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
+						    @endforeach
+						  </ul>
+					</div>
+			
+				</div>
+			</div>
+			
+			
+		</div>
+		<div id="unseen">
+			<table class="table table-striped task-table" id="clickable">
+				<thead>
+				<tr>
+					<th><nobr><a href="{{ createOrderLink('lastname', $order, $dir, $page) }}">Lastname</a> <div class="{{ createOrderLinkImage('lastname', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('surname', $order, $dir, $page) }}">Surname</a> <div class="{{ createOrderLinkImage('surname', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('phone', $order, $dir, $page) }}">Phone</a> <div class="{{ createOrderLinkImage('phone', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('mobile', $order, $dir, $page) }}">Mobile</a> <div class="{{ createOrderLinkImage('mobile', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('mail', $order, $dir, $page) }}">E-Mail</a> <div class="{{ createOrderLinkImage('mail', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('birthdate', $order, $dir, $page) }}">Birthdate</a> <div class="{{ createOrderLinkImage('birthdate', $order, $dir) }}"></div></nobr></th>
+					<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach ($persons as $person)
+						<tr>
+							<td class="table-text">{{ $person->lastname }}</td>
+							<td class="table-text">{{ $person->surname }}</td>
+							<td class="table-text">{{ $person->phone }}</td>
+							<td class="table-text">{{ $person->mobile }}</td>
+							<td class="table-text">{{ $person->mail }}</td>
+							<td class="table-text">{{ $person->birthdate }}</td>
+							
+							<!-- Task Action Buttons -->
+							<td>
+								<nobr>
+									<a href="/person/{{ $person->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
+								</nobr>				
+							</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+			{!! $persons->appends([])->render() !!}
+	
+	</div>
+	
+	<script>
+
+		//set cursor to the search field
+		$(function () {
+				$('#search').focus();
+		});
+
+	</script>
+	
+@endsection

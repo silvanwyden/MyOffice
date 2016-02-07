@@ -29,7 +29,13 @@ Route::get('/counter', 'CounterController@create');
 Route::post('/counter', 'CounterController@store');
 Route::get('/counter/{counter}/update', 'CounterController@update');
 Route::get('/counter/{counter}/delete', 'CounterController@destroy');
-Route::get('/counter/{counter}/done', 'CounterController@done');
+
+// Persons Routes
+Route::get('/persons', 'PersonController@index');
+Route::get('/person', 'PersonController@create');
+Route::post('/person', 'PersonController@store');
+Route::get('/person/{person}/update', 'PersonController@update');
+Route::get('/person/{person}/delete', 'PersonController@destroy');
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

@@ -187,7 +187,7 @@ class CounterController extends Controller
     		 
     	}
     
-    	$page = $request->session()->get('page');
+    	$page = $request->session()->get('counter_page');
     	 
     	return redirect('/counters?page=' . $page);
     }

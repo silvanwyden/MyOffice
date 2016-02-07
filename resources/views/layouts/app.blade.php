@@ -68,7 +68,13 @@
 									@endif
 								</a>
 							</li>
-				      		<li class=""><a href="#">Addresses</a></li>
+				      		<li class="{{ Request::is( 'person*') ? 'active' : '' }}">
+				        		<a href="/persons?page=1">Persons
+				        			@if(isset($persons))
+										<span class="badge">{{ $persons->total() }}</span>
+									@endif
+				        		</a>
+			        		</li>
 				      		<li class=""><a href="#">Birthdays</a></li>
 				        	<li class="{{ Request::is( 'counter*') ? 'active' : '' }}">
 				        		<a href="/counters?page=1">Counters
