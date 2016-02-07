@@ -160,12 +160,10 @@ class CounterController extends Controller
      */
     public function destroy(Request $request, Counter $counter)
     {
-    	print "counter" . $counter->date;  
-    	alert("counter" . $counter->date);
+
+    	$counter->delete();
     
-    	//$task->delete();
-    
-    	$request->session()->flash('alert-success', 'Task was successful deleted!');
+    	$request->session()->flash('alert-success', 'Counter was successful deleted!');
     
     	return redirect('/counters');
     }

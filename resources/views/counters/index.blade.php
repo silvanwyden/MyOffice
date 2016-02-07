@@ -56,7 +56,6 @@
 							<!-- Task Action Buttons -->
 							<td>
 								<nobr>
-									<a href="/counter/{{ $counter->id }}/done" class="btn btn-info glyphicon glyphicon-ok"></a>
 									<a href="/counter/{{ $counter->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</nobr>				
 							</td>
