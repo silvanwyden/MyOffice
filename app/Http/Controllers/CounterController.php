@@ -123,11 +123,12 @@ class CounterController extends Controller
      */
     public function create(Request $request) {
     	 
+    	$user = User::find($request->user()->id);
     	$countercategories = Countercategory::All(['id', 'name']);
     	
     	return view('counters.update', [
     			'countercategories' => $countercategories,
-    			'counter_category_id' => False,
+    			'counter_category_id' => $user->counter_category_id,
     			])->withCounter(new Counter());
     
     }

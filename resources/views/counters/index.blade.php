@@ -33,13 +33,6 @@
 				</div>
 			</div>
 			
-			<div class="col-sm-4" style="padding-bottom: 6px;">
-				<form action="{{ url('tasks') }}" method="GET" class="form-horizontal">
-           			 {!! csrf_field() !!}
-					<input type="text" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
-					<input type="hidden" name="btn_search" id="search" value="s">
-           		</form>
-			</div>
 			
 		</div>
 		<div id="unseen">
