@@ -46,10 +46,10 @@
 			<table class="table table-striped task-table" id="clickable">
 				<thead>
 				<tr>
-					<th><nobr><a href="{{ createOrderLink('date', $order, $dir, $page) }}">Date</a> <div class="{{ createOrderLinkImage('name', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('priority_id', $order, $dir, $page) }}">Calories</a> <div class="{{ createOrderLinkImage('priority_id', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('deadline', $order, $dir, $page) }}">Distance</a> <div class="{{ createOrderLinkImage('deadline', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('date', $order, $dir, $page) }}">Date</a> <div class="{{ createOrderLinkImage('date', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('counter_category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('counter_category_id', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('calories', $order, $dir, $page) }}">Calories</a> <div class="{{ createOrderLinkImage('calories', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('distance', $order, $dir, $page) }}">Distance</a> <div class="{{ createOrderLinkImage('distance', $order, $dir) }}"></div></nobr></th>
 					<th>Action</th>
 					</tr>
 				</thead>

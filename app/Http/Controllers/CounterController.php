@@ -82,14 +82,33 @@ class CounterController extends Controller
     	if ($ses_category_id)
     		$counters->where('counter_category_id', '=', $ses_category_id);
     	
-    	$counters = $counters->paginate(50);
+    	//handle sort order
+    	if ($request->order)
+    		$request->session()->put('counter_order', $request->order);
+    	$order = $request->session()->get('counter_order');
+    	if (!$order)
+    		$order = 'date';
+    	
+    	//handle sort direction
+    	if ($request->dir)
+    		$request->session()->put('counter_dir', $request->dir);
+    	$dir = $request->session()->get('counter_dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	
+    	//handle pagination -> we don't want to lose the page
+    	if ($request->page)
+    		$request->session()->put('counter_page', $request->page);
+    	$page = $request->session()->get('counter_page');
+    	
+    	$counters = $counters->orderBy($order, $dir)->paginate(3);
     	
         return view('counters.index', [
         	'counters' => $counters,
         	'categories' => $categories,
-        	'order' => '',
-        	'dir' => '',
-        	'page' => '',
+        	'order' => $order,
+        	'dir' => $dir,
+        	'page' => $page,
         	'category' => $user->counter_category,
         ]);
         
