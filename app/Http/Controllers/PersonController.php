@@ -70,6 +70,7 @@ class PersonController extends Controller
     			'persons.id',
     			'persons.lastname',
     			'persons.surname',
+    			DB::raw('CONCAT(persons.lastname, " ", persons.surname) AS searchname'),
     			'persons.phone',
     			'persons.mobile',
     			'persons.mail',

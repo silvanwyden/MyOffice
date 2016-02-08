@@ -51,5 +51,29 @@
     	
     }
     
+    function getColorBirthdate($date) {
+
+    	$date = date('Y', time()) . "-" . $date;
+    	
+    	$datetime1 = new DateTime($date);
+    	$datetime2 = new DateTime('now');
+    	$difference = $datetime2->diff($datetime1);
+    	$difference = $difference->format('%r%a');
+    
+    	$color = '';
+    	 
+    	if ($difference <= 30)
+    		$color = "btn-info";
+    	if ($difference <= 6)
+    		$color = 'btn-warning';
+    	if ($difference === '-0')
+    		$color = 'btn-danger';
+    	if ($difference < 0)
+    		$color = '';
+    	 
+    	return " btn " . $color;
+    	 
+    }
+    
     
 ?>

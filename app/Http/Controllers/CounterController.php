@@ -250,7 +250,9 @@ class CounterController extends Controller
 //distinct CONCAT( YEAR( date ) , '-', MONTH( date ) ) AS thedate from counters
     	
     	print "<br>counte";
-    	print_r($counters);
+    	print "<pre>";
+		print_r($counters);
+		print "</pre>";
     	   
     	return view('counters.stats', [
     			'countercategories' => $countercategories,

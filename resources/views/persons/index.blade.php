@@ -64,7 +64,9 @@
 								@endif
 							<td class="table-text">
 								@if ($person->birthdate != '0000-00-00')
-									{{ date('d. F', strtotime('2000-' . $person->birthday)) }}</td>
+									<div class=" {{ getColorBirthdate($person->birthday) }}">
+										{{ date('d. F', strtotime('2000-' . $person->birthday)) }}</td>
+									</div>
 								@endif
 							<td class="table-text"><div class="btn {{ $person->css_class }}">{{ $person->cname }}</div></td>
 							

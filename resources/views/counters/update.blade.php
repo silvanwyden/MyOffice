@@ -26,7 +26,7 @@
 							@if ($counter->date > 0)
 								<input type="text" name="date" id="datepicker" class="form-control" value="{{ date('d.m.Y', strtotime($counter->date)) }}">
 							@else
-								<input type="text" name="date" id="datepicker" class="form-control" value="{{ old('date') }}">
+								<input type="text" name="date" id="datepicker" class="form-control" value="{{ date('d.m.Y', time()) }}">
 							@endif
 						</div>
 					</div>
