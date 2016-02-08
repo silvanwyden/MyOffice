@@ -221,16 +221,39 @@ class CounterController extends Controller
      */
     public function stats(Request $request) {
 
+    	$countercategories = Countercategory::All(['id', 'name']);
+    	
+    	$counters = DB::table('counters')
+    	-> select(DB::raw('distinct CONCAT(YEAR(date), "-", MONTH(date)) AS date'))->get();
+    	print "distinct:";
+    	print_r($counters) . "<br>";
+    	
     	$counters = DB::table('counters')
     	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
     	//->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
     	->select(
-    			'counters.id',
+    			'counters.id as cid',
     			'countercategories.name as cname',
-    			DB::raw('count(counters.id) as items')
-    	)->groupBy('counters.counter_category_id')->get();
+    			'countercategories.id as ccid',
+    			//DB::raw('CONCAT( YEAR( counters.date ) , '-', MONTH( counters.date ) ) AS dateg')
+    			DB::raw('count(counters.id) as items'),
+    			DB::raw('CONCAT(YEAR(date), "-", MONTH(date)) AS condate'),
+    			DB::raw('MONTH( counters.date) as month')
+    	)->groupBy('month')->groupBy('counters.counter_category_id')->get();
+    	
+    	//select 
+//CONCAT( YEAR( date ) , '-', MONTH( date ) ) AS thedate
+
+//, counter_category_id, count(id) from counters group by thedate, counter_category_id
+    	
+    	//select 
+//distinct CONCAT( YEAR( date ) , '-', MONTH( date ) ) AS thedate from counters
+    	
+    	print "<br>counte";
+    	print_r($counters);
     	   
     	return view('counters.stats', [
+    			'countercategories' => $countercategories,
     			'cats' => $counters
     			]);
     }
