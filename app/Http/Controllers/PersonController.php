@@ -49,6 +49,18 @@ class PersonController extends Controller
     	$categories = Category::All(['id', 'name']);
     	
     	//handle categories filter
+    	if ($request->category_id)
+    		if ($request->category_id > 0) {
+    		$user->person_category_id = $request->category_id;
+    		$user->person_category = Category::find($request->category_id)->name;
+    		$user->save();
+    	}
+    	else {
+    		$user->person_category_id = False;
+    		$user->person_category = "--all Categories--";
+    		$user->save();
+    	}
+    	$ses_category_id = $user->person_category_id;
     	
     	//base query
     	$persons = DB::table('persons')
@@ -62,23 +74,45 @@ class PersonController extends Controller
     			'persons.mobile',
     			'persons.mail',
     			'persons.birthdate',
+    			'persons.birthday',
     			'persons.created_at',
     			'persons.updated_at',
     			'categories.name as cname',
     			'categories.css_class'
     	);
     	
+    	//handle categories
+    	if ($ses_category_id)
+    		$persons->where('category_id', '=', $ses_category_id);
     	
+    	//handle sort order
+    	if ($request->order)
+    		$request->session()->put('person_order', $request->order);
+    	$order = $request->session()->get('person_order');
+    	if (!$order)
+    		$order = 'lastname';
     	
-    	$persons = $persons->paginate(50);
+    	//handle sort direction
+    	if ($request->dir)
+    		$request->session()->put('person_dir', $request->dir);
+    	$dir = $request->session()->get('person_dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	
+    	//handle pagination -> we don't want to lose the page
+    	if ($request->page)
+    		$request->session()->put('person_page', $request->page);
+    	$page = $request->session()->get('person_page');
+    	
+    	$persons = $persons->orderBy($order, $dir)->paginate(50);
     	
         return view('persons.index', [
         	'persons' => $persons,
         	'categories' => $categories,
-        	'order' => '',
-        	'dir' => '',
-        	'page' => '',
-        	'category' => '',
+        	'order' => $order,
+        	'dir' => $dir,
+        	'page' => $page,
+        	'category' => $user->person_category,
         ]);
         
     }
@@ -97,7 +131,7 @@ class PersonController extends Controller
     	
     	return view('persons.update', [
     			'categories' => $categories,
-    			'category_id' => '',
+    			'category_id' => $user->person_category_id,
     			])->withPerson(new Person());
     
     }
@@ -131,8 +165,10 @@ class PersonController extends Controller
     {
     	
     	$date = False;
+    	$birthday = False;
     	if ($request->birthdate) {
     		$date = DateTime::createFromFormat('d.m.Y', $request->birthdate);
+    		$birthday = $date->format('m-d');
     		$date = $date->format('Y-m-d');
     	}
     
@@ -143,6 +179,7 @@ class PersonController extends Controller
     			'mobile' => $request->mobile,
     			'mail' => $request->mail,
     			'birthdate' => $date,
+    			'birthday' => $birthday,
     			'category_id' => $request->category,
     	);
     
@@ -161,10 +198,9 @@ class PersonController extends Controller
     		 
     	}
     
-    	//$page = $request->session()->get('page');
+    	$page = $request->session()->get('person_page');
     	 
-    	//return redirect('/persons?page=' . $page);
-    	return redirect('/persons?page=');
+    	return redirect('/persons?page=' . $page);
     }
 
     

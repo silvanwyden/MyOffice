@@ -21,7 +21,8 @@ class Person extends Model
     		'phone', 
     		'mobile',
     		'mail',
-    		'birthdate', 
+    		'birthdate',
+    		'birthday', 
     		'category_id',
     	];
     

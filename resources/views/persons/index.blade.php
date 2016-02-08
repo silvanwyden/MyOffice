@@ -35,7 +35,7 @@
 			
 			
 		</div>
-		<div id="unseen">
+		<div id="unseen-persons">
 			<table class="table table-striped task-table" id="clickable">
 				<thead>
 				<tr>
@@ -45,6 +45,7 @@
 					<th><nobr><a href="{{ createOrderLink('mobile', $order, $dir, $page) }}">Mobile</a> <div class="{{ createOrderLinkImage('mobile', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('mail', $order, $dir, $page) }}">E-Mail</a> <div class="{{ createOrderLinkImage('mail', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('birthdate', $order, $dir, $page) }}">Birthdate</a> <div class="{{ createOrderLinkImage('birthdate', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('birthday', $order, $dir, $page) }}">Birthday</a> <div class="{{ createOrderLinkImage('birthday', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
 					<th>Action</th>
 					</tr>
@@ -57,7 +58,14 @@
 							<td class="table-text">{{ $person->phone }}</td>
 							<td class="table-text">{{ $person->mobile }}</td>
 							<td class="table-text">{{ $person->mail }}</td>
-							<td class="table-text">{{ $person->birthdate }}</td>
+							<td class="table-text">
+								@if ($person->birthdate != '0000-00-00')
+									{{ date('d.m.Y', strtotime($person->birthdate)) }}</td>
+								@endif
+							<td class="table-text">
+								@if ($person->birthdate != '0000-00-00')
+									{{ date('d. F', strtotime('2000-' . $person->birthday)) }}</td>
+								@endif
 							<td class="table-text"><div class="btn {{ $person->css_class }}">{{ $person->cname }}</div></td>
 							
 							<!-- Task Action Buttons -->

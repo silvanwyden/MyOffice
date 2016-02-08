@@ -21,6 +21,7 @@ class CreatePersons extends Migration
             $table->string('mobile');
             $table->string('mail');
             $table->date('birthdate');
+            $table->string('birthday');
             $table->integer('category_id')->index();
         });
     }

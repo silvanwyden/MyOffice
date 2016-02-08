@@ -16,6 +16,14 @@
 	#unseen-counters table th:nth-child(4){display: none;}
 }
 
+@media only screen and (max-width: 630px) {
+	#unseen-persons table td:nth-child(2),
+	#unseen-persons table th:nth-child(2),
+	#unseen-persons table td:nth-child(5),
+	#unseen-persons table th:nth-child(5),
+	#unseen-persons table td:nth-child(6),
+	#unseen-persons table th:nth-child(6){display: none;}
+
 .panel-body {
 	padding: 0px;
 }
