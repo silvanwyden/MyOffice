@@ -223,10 +223,9 @@ class CounterController extends Controller
 
     	$countercategories = Countercategory::All(['id', 'name']);
     	
-    	$counters = DB::table('counters')
-    	-> select(DB::raw('distinct CONCAT(YEAR(date), "-", MONTH(date)) AS date'))->get();
-    	print "distinct:";
-    	print_r($counters) . "<br>";
+    	$months = DB::table('counters')
+    	-> select(DB::raw('distinct CONCAT(YEAR(date), "-", MONTH(date)) AS date'))
+    	->orderby('date')->get();
     	
     	$counters = DB::table('counters')
     	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
@@ -237,9 +236,10 @@ class CounterController extends Controller
     			'countercategories.id as ccid',
     			//DB::raw('CONCAT( YEAR( counters.date ) , '-', MONTH( counters.date ) ) AS dateg')
     			DB::raw('count(counters.id) as items'),
-    			DB::raw('CONCAT(YEAR(date), "-", MONTH(date)) AS condate'),
-    			DB::raw('MONTH( counters.date) as month')
-    	)->groupBy('month')->groupBy('counters.counter_category_id')->get();
+    			DB::raw('CONCAT(YEAR(date), "-", MONTH(date)) AS condate')
+    	)
+    	//->groupBy('condate')
+    	->groupBy('counters.counter_category_id')->get();
     	
     	//select 
 //CONCAT( YEAR( date ) , '-', MONTH( date ) ) AS thedate
@@ -249,10 +249,34 @@ class CounterController extends Controller
     	//select 
 //distinct CONCAT( YEAR( date ) , '-', MONTH( date ) ) AS thedate from counters
     	
-    	print "<br>counte";
-    	print "<pre>";
-		print_r($counters);
-		print "</pre>";
+    	
+    	//month: 2016-01, cat1: 10, cat2: 20
+    	//month: 2016-02, cat1: 10, cat2: 20
+    	
+    	/*print "<pre>";
+    	$m2 = array();
+    	foreach ($months as $month) {
+    		$m['date'] = $month->date;
+    		foreach ($countercategories as $cat) {
+    			$items = 0;
+    			foreach ($counters as $c)
+    				{
+    					
+    		
+    				if ($c->condate == $month->date AND $c->ccid == $cat->id) {
+    					$items = $c->items;
+    					break;
+    					}
+    				}
+    			$m[$cat->id] = $items;
+    		}
+    		array_push($m2, $m);
+    	}
+    	
+    	foreach ($m2 as $m0) {
+    		print_r($m0);
+    	}*/
+
     	   
     	return view('counters.stats', [
     			'countercategories' => $countercategories,

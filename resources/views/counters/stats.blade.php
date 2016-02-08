@@ -24,26 +24,17 @@
 				  // the chart.
 				  data: [
 					@foreach($cats as $cat)
-						   { month: '{{ $cat->month }}', 
-						@foreach($countercategories as $cc)
-						   {{ $cc->id }}: {{ $cat->items }},
-					    @endforeach
-						    },			    
-						    
-				    @endforeach
+ 						   { cat: '{{ $cat->cname }}', value: {{ $cat->items }} },			    
+ 				    @endforeach
 
 
 //month: 2016-01, cat1: 10, cat2: 20
 				    
 				  ],
 				  // The name of the data record attribute that contains x-values.
-				  xkey: 'month',
+				  xkey: 'cat',
 				  // A list of names of data record attributes that contain y-values.
-				  ykeys: [
-							@foreach($countercategories as $cc)
-								'{{ $cc->id }}',
-							@endforeach
-						  ],
+				  ykeys: ['value'],
 				  // Labels for the ykeys -- will be displayed when you hover over the
 				  // chart.
 				  labels: ['Items']
