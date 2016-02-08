@@ -35,7 +35,7 @@
 			
 			
 		</div>
-		<div id="unseen">
+		<div id="unseen-counters">
 			<table class="table table-striped task-table" id="clickable">
 				<thead>
 				<tr>

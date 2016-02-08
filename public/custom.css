@@ -9,6 +9,13 @@
 	#unseen table th:nth-child(6){display: none;}
 }
 
+@media only screen and (max-width: 630px) {
+	#unseen-counters table td:nth-child(3),
+	#unseen-counters table th:nth-child(3),
+	#unseen-counters table td:nth-child(4),
+	#unseen-counters table th:nth-child(4){display: none;}
+}
+
 .panel-body {
 	padding: 0px;
 }
