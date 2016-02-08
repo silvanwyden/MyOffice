@@ -23,7 +23,7 @@
 						<label for="person-lastname" class="col-sm-2 control-label">Lastname</label>
 
 						<div class="col-sm-10">
-							<input type="text" name="lastname" id="task-lastname" class="form-control" value="{{ $person->lastname or old('lastname') }}">
+							<input type="text" name="lastname" id="person-lastname" class="form-control" value="{{ $person->lastname or old('lastname') }}">
 						</div>
 					</div>
 					
