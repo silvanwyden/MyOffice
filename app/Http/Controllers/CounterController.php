@@ -213,4 +213,27 @@ class CounterController extends Controller
     }
     
     
+    /**
+     * Update a new task: load date and forward to view
+     *
+     * @param  Request  $request, Task $task
+     * @return view
+     */
+    public function stats(Request $request) {
+
+    	$counters = DB::table('counters')
+    	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
+    	//->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
+    	->select(
+    			'counters.id',
+    			'countercategories.name as cname',
+    			DB::raw('count(counters.id) as items')
+    	)->groupBy('counters.counter_category_id')->get();
+    	   
+    	return view('counters.stats', [
+    			'cats' => $counters
+    			]);
+    }
+    
+    
 }

@@ -29,7 +29,9 @@
 						    @endforeach
 						  </ul>
 					</div>
-			
+					
+					<a href="/counter/stats" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span></a>
+					
 				</div>
 			</div>
 			

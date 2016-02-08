@@ -29,6 +29,7 @@ Route::get('/counter', 'CounterController@create');
 Route::post('/counter', 'CounterController@store');
 Route::get('/counter/{counter}/update', 'CounterController@update');
 Route::get('/counter/{counter}/delete', 'CounterController@destroy');
+Route::get('/counter/stats', 'CounterController@stats');
 
 // Persons Routes
 Route::get('/persons', 'PersonController@index');
