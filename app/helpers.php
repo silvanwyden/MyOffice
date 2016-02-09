@@ -1,6 +1,7 @@
 <?php
 
 use App\Tag;
+use App\Person;
 
 	function createOrderLink($class, $order, $dir_request, $page)
     {
@@ -81,6 +82,17 @@ use App\Tag;
     	$tags_sel = Tag::find(explode(",", $tag_ids));
     	return $tags_sel;
     	
+    }
+    
+    function getParentPerson($parent_id) {
+    
+    	if ($parent_id > 0) {
+    		$person = Person::find($parent_id);
+    		return $person->lastname . " " . $person->surname;
+    	}
+    	else 
+    		return "";
+    	 
     }
     
     

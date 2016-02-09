@@ -25,6 +25,8 @@ class Person extends Model
     		'birthday', 
     		'category_id',
     		'tag_ids',
+    		'main_person',
+    		'parent_id',
     	];
     
     

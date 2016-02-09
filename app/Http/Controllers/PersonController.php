@@ -81,6 +81,7 @@ class PersonController extends Controller
     			'persons.created_at',
     			'persons.tag_ids',
     			'persons.updated_at',
+    			'persons.parent_id',
     			'categories.name as cname',
     			'categories.css_class'
     	);
@@ -138,7 +139,8 @@ class PersonController extends Controller
     	return view('persons.update', [
     			'categories' => $categories,
     			'category_id' => $user->person_category_id,
-    			'tags' => $tags
+    			'tags' => $tags,
+    			'tags_sel' => array()
     			])->withPerson(new Person());
     
     }
@@ -155,13 +157,15 @@ class PersonController extends Controller
     	$categories = Category::All(['id', 'name']);
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	$tags_sel = Tag::find(explode(",", $person->tag_ids));
+    	$parents = Person::All(['id', 'lastname', 'surname']);
 
     	return view('persons.update', [
     			'categories' => $categories,
 				'person' => $person,
     			'category_id' => False,
     			'tags' => $tags,
-    			'tags_sel' => $tags_sel
+    			'tags_sel' => $tags_sel,
+    			'parents' => $parents
     			])->withPerson($person);
     }
     
@@ -193,6 +197,7 @@ class PersonController extends Controller
     			'birthday' => $birthday,
     			'category_id' => $request->category,
     			'tag_ids' => $request->tags,
+    			'parent_id' => $request->parent_id,
     	);
     
     	if ($request->person_id) {

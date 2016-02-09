@@ -48,6 +48,7 @@
 					<th><nobr><a href="{{ createOrderLink('birthday', $order, $dir, $page) }}">Birthday</a> <div class="{{ createOrderLinkImage('birthday', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
 					<th>Tags</th>
+					<th>Parent</th>
 					<th>Action</th>
 					</tr>
 				</thead>
@@ -76,6 +77,7 @@
 									
 								@endforeach
 							</td>
+							<td class="table-text">{{ getParentPerson($person->parent_id) }}</td>
 							
 							<!-- Task Action Buttons -->
 							<td>

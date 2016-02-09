@@ -170,6 +170,52 @@
 					  
 					</script>
 					
+					<!-- Parent ID -->
+					<div class="form-group">
+						<label for="person-mail" class="col-sm-2 control-label">Parent Person</label>
+
+						<script>
+						
+						  $(function() {
+						  	var availableTags = [
+											  	@foreach ($parents as $p)
+											  		{key: {{ $p->id }} ,value: '{{ $p->lastname . " " . $p->surname }}'},
+											  	@endforeach
+							 					];
+							
+						    $( "#parent_name" ).autocomplete({
+						      minLength: 0,
+						      source: availableTags,
+						      mustMatch: true,
+						      focus: function( event, ui ) {
+						        $( "#parent_name" ).val( ui.item.value );
+						        return false;
+						      },
+						      select: function( event, ui ) {
+						    	  
+						        $( "#parent_name" ).val( ui.item.value );
+						        $( "#parent_id" ).val( ui.item.key );
+						 
+						        return false;
+						      } 
+							  });
+						 
+						  });
+					 
+						</script>
+						
+						<div class="col-sm-10">
+							<input type="text" name="parent_name" id="parent_name" class="form-control" value="{{ getParentPerson($person->parent_id) }}" style="width: 100%;">
+							<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $person->parent_id }}" style="width: 100%;">
+						</div>
+					</div>
+
+					
+
+
+
+					
+					
 					<!-- Action Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
