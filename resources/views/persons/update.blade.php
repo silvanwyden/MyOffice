@@ -121,6 +121,48 @@
 
 					</script>
 					
+					
+					<!-- Tags -->
+					<div class="form-group">
+						<label for="person-mail" class="col-sm-2 control-label">Tags</label>
+
+						<div class="col-sm-10">
+							<input type="text" name="tags" id="tags" class="form-control" value="" style="width: 100%;">
+						</div>
+					</div>
+					
+					
+					<script>
+					var cities = new Bloodhound({
+					  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
+					  queryTokenizer: Bloodhound.tokenizers.whitespace,
+					  prefetch: '/cities.json'
+					});
+					cities.initialize();
+					
+					var elt = $('#tags');
+					elt.tagsinput({
+					  tagClass: function(item) {
+					    switch (item.continent) {
+					      case 'Europe'   : return 'label label-primary';
+					      case 'America'  : return 'label label-danger label-important';
+					      case 'Australia': return 'label label-success';
+					      case 'Africa'   : return 'label label-default';
+					      case 'Asia'     : return 'label label-warning';
+					    }
+					  },
+					  itemValue: 'value',
+					  itemText: 'text',
+					  typeaheadjs: {
+					    name: 'cities',
+					    displayKey: 'text',
+					    source: cities.ttAdapter()
+					  }
+					});
+					elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
+					elt.tagsinput('add', { "value": 4 , "text": "Washington"  , "continent": "America"   });
+					</script>
+					
 					<!-- Action Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">

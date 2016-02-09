@@ -24,6 +24,13 @@
 	<link href="/summernote.css" rel="stylesheet">
 	<script src="/summernote.js"></script>
 	
+    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+	<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js "></script>
+	<script src="/bootstrap-tagsinput-angular.js"></script>
+	<script src="/bootstrap-tagsinput.min.js"></script>
+	<link rel="stylesheet" href="/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="app.css">
 	
 
 	<style>
@@ -157,6 +164,10 @@
 
 
   	</script>
+  	
+  	
+	
+
 	
 </body>
 </html>

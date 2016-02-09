@@ -164,7 +164,7 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-    	
+    	print "tags:" . $request->tags;
     	$date = False;
     	$birthday = False;
     	if ($request->birthdate) {
