@@ -23,17 +23,25 @@
 	#unseen-persons table th:nth-child(5),
 	#unseen-persons table td:nth-child(6),
 	#unseen-persons table th:nth-child(6){display: none;}
+}
 
 .panel-body {
 	padding: 0px;
 }
 
-
 @media print {
+	
   a[href]:after {
     content: none !important;
   }
+  
   abbr[title]:after {
     content: !important;
   }
+
+  table th:last-child {display:none}
+  table td:last-child {display:none}
+  
+  .btn-group {display:none}
+  
 }
