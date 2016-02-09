@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use App\Category;
+use App\Tag;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
@@ -129,10 +130,12 @@ class PersonController extends Controller
     	 
     	$user = User::find($request->user()->id);
     	$categories = Category::All(['id', 'name']);
+    	$tags = Tag::All(['id', 'name', 'css_class']);
     	
     	return view('persons.update', [
     			'categories' => $categories,
     			'category_id' => $user->person_category_id,
+    			'tags' => $tags
     			])->withPerson(new Person());
     
     }
@@ -147,11 +150,18 @@ class PersonController extends Controller
     public function update(Request $request, Person $person) {
     	
     	$categories = Category::All(['id', 'name']);
+    	$tags = Tag::All(['id', 'name', 'css_class']);
+    	$ids = $person->tag_ids;
+    	$tags_sel = Tag::whereIn('id', [$ids])->get();
+    	
+    	print $person->tag_ids;
 
     	return view('persons.update', [
     			'categories' => $categories,
 				'person' => $person,
     			'category_id' => False,
+    			'tags' => $tags,
+    			'tags_sel' => $tags_sel
     			])->withPerson($person);
     }
     
@@ -164,7 +174,7 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-    	print "tags:" . $request->tags;
+    	//print "tags:" . $request->tags; //-> tags:1,4,6
     	$date = False;
     	$birthday = False;
     	if ($request->birthdate) {
@@ -182,6 +192,7 @@ class PersonController extends Controller
     			'birthdate' => $date,
     			'birthday' => $birthday,
     			'category_id' => $request->category,
+    			'tag_ids' => $request->tags,
     	);
     
     	if ($request->person_id) {

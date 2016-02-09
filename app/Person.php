@@ -24,6 +24,7 @@ class Person extends Model
     		'birthdate',
     		'birthday', 
     		'category_id',
+    		'tag_ids',
     	];
     
 }

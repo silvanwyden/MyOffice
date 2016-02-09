@@ -30,7 +30,7 @@
 	<script src="/bootstrap-tagsinput-angular.js"></script>
 	<script src="/bootstrap-tagsinput.min.js"></script>
 	<link rel="stylesheet" href="/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="/app.css">
 	
 
 	<style>

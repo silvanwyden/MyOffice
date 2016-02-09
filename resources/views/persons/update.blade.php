@@ -136,19 +136,23 @@
 					var cities = new Bloodhound({
 					  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
 					  queryTokenizer: Bloodhound.tokenizers.whitespace,
-					  prefetch: '/cities.json'
+					  local: [ 
+							  @foreach ($tags as $tag)
+							  	 { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    },
+							  @endforeach
+					         ]
 					});
 					cities.initialize();
 					
 					var elt = $('#tags');
 					elt.tagsinput({
 					  tagClass: function(item) {
-					    switch (item.continent) {
-					      case 'Europe'   : return 'label label-primary';
-					      case 'America'  : return 'label label-danger label-important';
-					      case 'Australia': return 'label label-success';
-					      case 'Africa'   : return 'label label-default';
-					      case 'Asia'     : return 'label label-warning';
+					    switch (item.label) {
+					      case 'btn-primary'   : return 'label label-primary';
+					      case 'btn-danger'  : return 'label label-danger label-important';
+					      case 'btn-success': return 'label label-success';
+					      case 'btn-default'   : return 'label label-default';
+					      case 'btn-warning'     : return 'label label-warning';
 					    }
 					  },
 					  itemValue: 'value',
@@ -159,8 +163,11 @@
 					    source: cities.ttAdapter()
 					  }
 					});
-					elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
-					elt.tagsinput('add', { "value": 4 , "text": "Washington"  , "continent": "America"   });
+					
+					 @foreach ($tags_sel as $tag)
+					  	 elt.tagsinput('add', { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    });
+					  @endforeach
+					  
 					</script>
 					
 					<!-- Action Button -->
