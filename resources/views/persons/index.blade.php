@@ -72,7 +72,7 @@
 							<td class="table-text"><div class="btn {{ $person->css_class }}">{{ $person->cname }}</div></td>
 							<td class="table-text">
 								@foreach(getTags($person->tag_ids) as $tag)
-									<div class="tag label {{ $tag->css_class }}">{{ $tag->name }}</div>
+									<div style="padding: 3px;" class="tag label {{ $tag->css_class }}">{{ $tag->name }}</div>
 									
 								@endforeach
 							</td>

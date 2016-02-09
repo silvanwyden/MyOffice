@@ -148,11 +148,11 @@
 					elt.tagsinput({
 					  tagClass: function(item) {
 					    switch (item.label) {
-					      case 'btn-primary'   : return 'label label-primary';
-					      case 'btn-danger'  : return 'label label-danger label-important';
-					      case 'btn-success': return 'label label-success';
-					      case 'btn-default'   : return 'label label-default';
-					      case 'btn-warning'     : return 'label label-warning';
+					      case 'label-primary'   : return 'label label-primary';
+					      case 'label-danger'  : return 'label label-danger label-important';
+					      case 'label-success': return 'label label-success';
+					      case 'label-default'   : return 'label label-default';
+					      case 'label-warning'     : return 'label label-warning';
 					    }
 					  },
 					  itemValue: 'value',
