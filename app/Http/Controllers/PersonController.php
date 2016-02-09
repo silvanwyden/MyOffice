@@ -67,6 +67,9 @@ class PersonController extends Controller
     	$persons = DB::table('persons')
     	->leftjoin('categories', 'persons.category_id', '=', 'categories.id')
     	//->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
+    	->join('tags', function ($join) {
+    		$join->on('persons.tag_ids', '=', 'tags.id');
+    	})
     	->select(
     			'persons.id',
     			'persons.lastname',
