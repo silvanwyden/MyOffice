@@ -27,3 +27,13 @@
 .panel-body {
 	padding: 0px;
 }
+
+
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+  abbr[title]:after {
+    content: !important;
+  }
+}

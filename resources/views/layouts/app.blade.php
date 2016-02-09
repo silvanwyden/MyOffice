@@ -8,7 +8,7 @@
 	<title>MyPrivateOffice</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
-	<link href="/custom.css" rel="stylesheet" type="text/css">
+
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
@@ -21,6 +21,8 @@
 	<!-- include summernote css/js-->
 	<link href="/summernote.css" rel="stylesheet">
 	<script src="/summernote.js"></script>
+	
+	<link href="/custom.css" rel="stylesheet" type="text/css">
 
 	<style>
 		body {
