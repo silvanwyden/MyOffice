@@ -151,10 +151,7 @@ class PersonController extends Controller
     	
     	$categories = Category::All(['id', 'name']);
     	$tags = Tag::All(['id', 'name', 'css_class']);
-    	$ids = $person->tag_ids;
-    	$tags_sel = Tag::whereIn('id', [$ids])->get();
-    	
-    	print $person->tag_ids;
+    	$tags_sel = Tag::find(explode(",", $person->tag_ids));
 
     	return view('persons.update', [
     			'categories' => $categories,
