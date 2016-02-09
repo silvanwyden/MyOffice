@@ -47,6 +47,7 @@
 					<th><nobr><a href="{{ createOrderLink('birthdate', $order, $dir, $page) }}">Birthdate</a> <div class="{{ createOrderLinkImage('birthdate', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('birthday', $order, $dir, $page) }}">Birthday</a> <div class="{{ createOrderLinkImage('birthday', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
+					<th>Tags</th>
 					<th>Action</th>
 					</tr>
 				</thead>
@@ -69,6 +70,12 @@
 									</div>
 								@endif
 							<td class="table-text"><div class="btn {{ $person->css_class }}">{{ $person->cname }}</div></td>
+							<td class="table-text">
+								@foreach(getTags($person->tag_ids) as $tag)
+									<div class="tag label {{ $tag->css_class }}">{{ $tag->name }}</div>
+									
+								@endforeach
+							</td>
 							
 							<!-- Task Action Buttons -->
 							<td>

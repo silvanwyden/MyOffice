@@ -1,5 +1,6 @@
 <?php
 
+use App\Tag;
 
 	function createOrderLink($class, $order, $dir_request, $page)
     {
@@ -73,6 +74,13 @@
     	 
     	return " btn " . $color;
     	 
+    }
+    
+    function getTags($tag_ids) {
+
+    	$tags_sel = Tag::find(explode(",", $tag_ids));
+    	return $tags_sel;
+    	
     }
     
     

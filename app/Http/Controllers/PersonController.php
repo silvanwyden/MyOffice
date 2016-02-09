@@ -48,6 +48,7 @@ class PersonController extends Controller
     	//get basic objects 
     	$user = User::find($request->user()->id);
     	$categories = Category::All(['id', 'name']);
+    	$tags = Tag::All(['id', 'name', 'css_class']);
     	
     	//handle categories filter
     	if ($request->category_id)
@@ -67,9 +68,6 @@ class PersonController extends Controller
     	$persons = DB::table('persons')
     	->leftjoin('categories', 'persons.category_id', '=', 'categories.id')
     	//->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
-    	->join('tags', function ($join) {
-    		$join->on('persons.tag_ids', '=', 'tags.id');
-    	})
     	->select(
     			'persons.id',
     			'persons.lastname',
@@ -81,6 +79,7 @@ class PersonController extends Controller
     			'persons.birthdate',
     			'persons.birthday',
     			'persons.created_at',
+    			'persons.tag_ids',
     			'persons.updated_at',
     			'categories.name as cname',
     			'categories.css_class'
@@ -118,6 +117,7 @@ class PersonController extends Controller
         	'dir' => $dir,
         	'page' => $page,
         	'category' => $user->person_category,
+        	'tags' => $tags
         ]);
         
     }

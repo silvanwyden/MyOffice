@@ -27,4 +27,16 @@ class Person extends Model
     		'tag_ids',
     	];
     
+    
+    /**
+     * Get the category that belongs to the task.
+     */
+    public function tags()
+    {
+    	
+    	$tags_sel = Tag::find(explode(",", $tag_ids));
+
+    	return $tags_sel;
+    }
+    
 }
