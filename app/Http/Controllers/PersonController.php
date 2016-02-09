@@ -135,12 +135,14 @@ class PersonController extends Controller
     	$user = User::find($request->user()->id);
     	$categories = Category::All(['id', 'name']);
     	$tags = Tag::All(['id', 'name', 'css_class']);
+    	$parents = Person::All(['id', 'lastname', 'surname']);
     	
     	return view('persons.update', [
     			'categories' => $categories,
     			'category_id' => $user->person_category_id,
     			'tags' => $tags,
-    			'tags_sel' => array()
+    			'tags_sel' => array(),
+    			'parents' => $parents
     			])->withPerson(new Person());
     
     }
