@@ -29,10 +29,10 @@
 	<script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js "></script>
 	<script src="/bootstrap-tagsinput-angular.js"></script>
 	<script src="/bootstrap-tagsinput.min.js"></script>
+	<script scr="/assets/app.js"></script>
 	<link rel="stylesheet" href="/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="/app.css">
-	
-
+    
 	<style>
 		body {
 			font-family: 'Raleway';
