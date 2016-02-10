@@ -88,7 +88,10 @@ use App\Person;
     
     	if ($parent_id > 0) {
     		$person = Person::find($parent_id);
-    		return $person->lastname . " " . $person->surname;
+    		if (count($person)>0)
+    			return $person->lastname . " " . $person->surname;
+    		else
+    			return "";
     	}
     	else 
     		return "";
