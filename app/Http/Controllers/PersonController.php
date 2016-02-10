@@ -104,6 +104,23 @@ class PersonController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	
+    	//handle filters
+    	if ($request->filter_parent == 1)
+    		$request->session()->put('filter_parent', 1);
+    	elseif ($request->filter_parent == -1)
+    	$request->session()->put('filter_parent', 0);
+    	$filter_parent = $request->session()->get('filter_parent');
+    	if ($filter_parent == 1)
+    		$persons->where('parent_id', '>', 0);
+    	
+    	if ($request->filter_child == 1)
+    		$request->session()->put('filter_child', 1);
+    	elseif ($request->filter_child == -1)
+    	$request->session()->put('filter_child', 0);
+    	$filter_child = $request->session()->get('filter_child');
+    	if ($filter_child == 1)
+    		$persons->where('parent_id', '=', 0);
+    	
     	//handle pagination -> we don't want to lose the page
     	if ($request->page)
     		$request->session()->put('person_page', $request->page);
@@ -118,7 +135,9 @@ class PersonController extends Controller
         	'dir' => $dir,
         	'page' => $page,
         	'category' => $user->person_category,
-        	'tags' => $tags
+        	'tags' => $tags,
+        	'filter_parent' => $filter_parent,
+        	'filter_child' => $filter_child,
         ]);
         
     }

@@ -64,7 +64,7 @@
 					</button>
 			
 		   	    	<a class="navbar-brand" href="#">
-				        <img height="20px" alt="MyPrivateOffice" src="/favicon.ico">
+				        <div class="glyphicon glyphicon-cloud"></div>
 				    </a>
 			
 			    </div>

@@ -29,6 +29,18 @@
 						    @endforeach
 						  </ul>
 					</div>
+					
+					@if ($filter_parent == 1)
+						<a href="/persons?filter_parent=-1" class="btn btn-default active">Parent</a>
+					@else
+						<a href="/persons?filter_parent=1" class="btn btn-default">Parent</a>
+					@endif
+					
+					@if ($filter_child == 1)
+						<a href="/persons?filter_child=-1" class="btn btn-default active">Child</a>
+					@else
+						<a href="/persons?filter_child=1" class="btn btn-default">Child</a>
+					@endif
 			
 				</div>
 			</div>
