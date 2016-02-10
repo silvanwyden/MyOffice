@@ -13,7 +13,7 @@
 	  	</div> <!-- end .flash-message -->
 		
 		<div class="row">
-			<div class="col-sm-8" style="padding-bottom: 6px;">
+			<div class="col-sm-6" style="padding-bottom: 6px;">
 			  <div class="btn-group" role="group" aria-label="first">
 			  
 			  		<a href="/person" class="btn btn-primary">New</a>
@@ -45,13 +45,20 @@
 				</div>
 			</div>
 			
-			<div class="col-sm-4" style="padding-bottom: 6px;">
-				<form action="{{ url('persons') }}" method="GET" class="form-horizontal" id="form-search">
+			<form action="{{ url('persons') }}" method="GET" class="form-horizontal" id="form-search">
            			 {!! csrf_field() !!}
-					<input type="text" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
-					<input type="hidden" name="btn_search" id="search" value="s">
-           		</form>
-			</div>
+				
+				<div class="col-sm-3" style="padding-bottom: 6px;">
+	           		<input type="text" name="search" id="search" class="form-control" placeholder="Tags">
+           		</div>
+				
+				<div class="col-sm-3" style="padding-bottom: 6px;">
+					<input type="text" name="search_text" id="search-text" class="form-control" placeholder="Search" value="{{ $search_text or '' }}">
+           		</div>
+        		
+        		<input type="hidden" name="btn_search" id="search" value="s">
+           		
+			</form>
 			
 			<script>
 					var cities = new Bloodhound({
@@ -90,6 +97,10 @@
 					 @endforeach
 
 					 $('#search').change(function() {
+				          $('#form-search').submit();
+				       });
+
+					 $('#search-text').change(function() {
 				          $('#form-search').submit();
 				       });
 					  
@@ -158,7 +169,7 @@
 
 		//set cursor to the search field
 		$(function () {
-				$('#search').focus();
+				$('#search-text').focus();
 		});
 
 	</script>

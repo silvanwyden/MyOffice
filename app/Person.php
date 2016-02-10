@@ -32,7 +32,8 @@ class Person extends Model
     		'street',
     		'plz',
     		'city',
-    		'country'
+    		'country',
+    		'searchname',
     	];
     
     

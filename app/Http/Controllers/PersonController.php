@@ -72,7 +72,7 @@ class PersonController extends Controller
     			'persons.id',
     			'persons.lastname',
     			'persons.surname',
-    			DB::raw('CONCAT(persons.lastname, " ", persons.surname) AS searchname'),
+    			'persons.searchname',
     			'persons.phone',
     			'persons.mobile',
     			'persons.mail',
@@ -90,7 +90,7 @@ class PersonController extends Controller
     	if ($ses_category_id)
     		$persons->where('category_id', '=', $ses_category_id);
     	
-    	//handle search
+    	//handle search tags
     	$tags_sel = array();
     	if ($request->btn_search == "s") {
     		if ($request->search)
@@ -105,6 +105,17 @@ class PersonController extends Controller
     		foreach(explode(",", $search) as $s)
     			$persons->where('tag_ids', 'like', "%" . $s . "%");
     	}
+    	
+    	//handle search text
+    	if ($request->btn_search == "s") {
+    		if ($request->search_text)
+    			$request->session()->put('person_search_text', $request->search_text);
+    		else
+    			$request->session()->forget('person_search_text');
+    	}
+    	$search_text = $request->session()->get('person_search_text');
+    	if (strlen($search_text) > 0)
+    		$persons->where('persons.searchname', 'like', "%" . $search_text . "%");
     	
     	//handle sort order
     	if ($request->order)
@@ -158,6 +169,7 @@ class PersonController extends Controller
         	'filter_child' => $filter_child,
         	'tags' => $tags,
         	'tags_sel' => $tags_sel,
+        	'search_text' => $search_text,
         ]);
         
     }
@@ -231,6 +243,7 @@ class PersonController extends Controller
     	$input = array(
     			'lastname' => $request->lastname,
     			'surname' => $request->surname,
+    			'searchname' => $request->lastname . ' ' . $request->surname,
     			'phone' => $request->phone,
     			'mobile' => $request->mobile,
     			'mail' => $request->mail,
