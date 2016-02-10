@@ -90,6 +90,22 @@ class PersonController extends Controller
     	if ($ses_category_id)
     		$persons->where('category_id', '=', $ses_category_id);
     	
+    	//handle search
+    	$tags_sel = array();
+    	if ($request->btn_search == "s") {
+    		if ($request->search)
+    			$request->session()->put('person_search', $request->search);
+    		else
+    			$request->session()->forget('person_search');
+    	}
+    	$search = $request->session()->get('person_search');
+    	if (strlen($search) > 0) {
+    		$search_array = explode(",", $search);
+    		$tags_sel = Tag::find($search_array);
+    		foreach(explode(",", $search) as $s)
+    			$persons->where('tag_ids', 'like', "%" . $s . "%");
+    	}
+    	
     	//handle sort order
     	if ($request->order)
     		$request->session()->put('person_order', $request->order);
@@ -128,6 +144,8 @@ class PersonController extends Controller
     	
     	$persons = $persons->orderBy($order, $dir)->paginate(50);
     	
+    	$tags = Tag::All(['id', 'name', 'css_class']);
+    	
         return view('persons.index', [
         	'persons' => $persons,
         	'categories' => $categories,
@@ -138,6 +156,8 @@ class PersonController extends Controller
         	'tags' => $tags,
         	'filter_parent' => $filter_parent,
         	'filter_child' => $filter_child,
+        	'tags' => $tags,
+        	'tags_sel' => $tags_sel,
         ]);
         
     }

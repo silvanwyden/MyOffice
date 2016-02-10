@@ -45,6 +45,55 @@
 				</div>
 			</div>
 			
+			<div class="col-sm-4" style="padding-bottom: 6px;">
+				<form action="{{ url('persons') }}" method="GET" class="form-horizontal" id="form-search">
+           			 {!! csrf_field() !!}
+					<input type="text" name="search" id="search" class="form-control" placeholder="Search" value="{{ $search or '' }}">
+					<input type="hidden" name="btn_search" id="search" value="s">
+           		</form>
+			</div>
+			
+			<script>
+					var cities = new Bloodhound({
+					  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
+					  queryTokenizer: Bloodhound.tokenizers.whitespace,
+					  local: [ 
+							  @foreach ($tags as $tag)
+							  	 { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    },
+							  @endforeach
+					         ]
+					});
+					cities.initialize();
+					
+					var elt = $('#search');
+					elt.tagsinput({
+					  tagClass: function(item) {
+					    switch (item.label) {
+					      case 'label-primary'   : return 'label label-primary';
+					      case 'label-danger'  : return 'label label-danger label-important';
+					      case 'label-success': return 'label label-success';
+					      case 'label-default'   : return 'label label-default';
+					      case 'label-warning'     : return 'label label-warning';
+					    }
+					  },
+					  itemValue: 'value',
+					  itemText: 'text',
+					  typeaheadjs: {
+					    name: 'cities',
+					    displayKey: 'text',
+					    source: cities.ttAdapter()
+					  }
+					});
+					
+					 @foreach ($tags_sel as $tag)
+					  	 elt.tagsinput('add', { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    });
+					 @endforeach
+
+					 $('#search').change(function() {
+				          $('#form-search').submit();
+				       });
+					  
+					</script>
 			
 		</div>
 		<div id="unseen-persons">
