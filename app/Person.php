@@ -27,6 +27,12 @@ class Person extends Model
     		'tag_ids',
     		'main_person',
     		'parent_id',
+    		'gender',
+    		'salutation',
+    		'street',
+    		'plz',
+    		'city',
+    		'country'
     	];
     
     

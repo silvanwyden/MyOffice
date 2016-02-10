@@ -219,6 +219,11 @@ class PersonController extends Controller
     			'category_id' => $request->category,
     			'tag_ids' => $request->tags,
     			'parent_id' => $request->parent_id,
+    			'salutation' => $request->salutation,
+    			'street' => $request->street,
+    			'plz' => $request->plz,
+    			'city' => $request->city,
+    			'country' => $request->country
     	);
     
     	if ($request->person_id) {

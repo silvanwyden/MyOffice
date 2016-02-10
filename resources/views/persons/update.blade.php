@@ -36,6 +36,15 @@
 						</div>
 					</div>
 					
+					<!-- Person gender -->
+					<div class="form-group">
+						<label for="person-gender" class="col-sm-2 control-label">Gender</label>
+
+						<div class="col-sm-10">
+							<input type="text" name="gender" id="person-gender" class="form-control" value="{{ $person->gender or old('gender') }}">
+						</div>
+					</div>
+					
 					<!-- Person Phone -->
 					<div class="form-group">
 						<label for="person-phone" class="col-sm-2 control-label">Phone</label>
@@ -199,21 +208,66 @@
 						        return false;
 						      } 
 							  });
+
+						    $("#parent_name").change(function(){
+						  		$( "#parent_id" ).val('');
+							});
 						 
 						  });
-					 
+
 						</script>
 						
 						<div class="col-sm-10">
-							<input type="text" name="parent_name" id="parent_name" class="form-control" value="{{ getParentPerson($person->parent_id) }}" style="width: 100%;">
 							<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $person->parent_id }}" style="width: 100%;">
+							<input type="text" name="parent_name" id="parent_name" class="form-control" value="{{ getParentPerson($person->parent_id) }}" style="width: 100%;">
 						</div>
 					</div>
 
 					
+					<!-- Person salutation -->
+					<div class="form-group">
+						<label for="person-salutation" class="col-sm-2 control-label">Salutation</label>
 
+						<div class="col-sm-10">
+							<input type="text" name="salutation" id="person-salutation" class="form-control" value="{{ $person->salutation or old('salutation') }}">
+						</div>
+					</div>
 
+					<!-- Person street -->
+					<div class="form-group">
+						<label for="person-street" class="col-sm-2 control-label">Street</label>
 
+						<div class="col-sm-10">
+							<input type="text" name="street" id="person-street" class="form-control" value="{{ $person->street or old('street') }}">
+						</div>
+					</div>
+					
+					<!-- Person plz -->
+					<div class="form-group">
+						<label for="person-plz" class="col-sm-2 control-label">PLZ</label>
+
+						<div class="col-sm-10">
+							<input type="text" name="plz" id="person-plz" class="form-control" value="{{ $person->plz or old('plz') }}">
+						</div>
+					</div>
+					
+					<!-- Person city -->
+					<div class="form-group">
+						<label for="person-city" class="col-sm-2 control-label">City</label>
+
+						<div class="col-sm-10">
+							<input type="text" name="city" id="person-city" class="form-control" value="{{ $person->city or old('city') }}">
+						</div>
+					</div>
+					
+					<!-- Person country -->
+					<div class="form-group">
+						<label for="person-country" class="col-sm-2 control-label">Country</label>
+
+						<div class="col-sm-10">
+							<input type="text" name="country" id="person-country" class="form-control" value="{{ $person->country or old('country') }}">
+						</div>
+					</div>
 					
 					
 					<!-- Action Button -->
