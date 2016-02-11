@@ -13,6 +13,7 @@ use App\Repositories\PersonRepository;
 use DateTime;
 use App\Session;
 use DB;
+use Excel;
 
 class PersonController extends Controller
 {
@@ -22,6 +23,7 @@ class PersonController extends Controller
      * @var TaskRepository
      */
     protected $persons;
+    public $temp_request;
 
     /**
      * Create a new controller instance.
@@ -153,7 +155,7 @@ class PersonController extends Controller
     		$request->session()->put('person_page', $request->page);
     	$page = $request->session()->get('person_page');
     	
-    	$persons = $persons->orderBy($order, $dir)->paginate(50);
+    	$persons = $persons->orderBy($order, $dir)->paginate(100);
     	
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	
@@ -297,6 +299,88 @@ class PersonController extends Controller
     	$request->session()->flash('alert-success', 'Person was successful deleted!');
     
     	return redirect('/persons');
+    }
+    
+    
+    
+    public function excel(Request $request) {
+    	
+    	$this->temp_request = $request;
+    	
+    	Excel::create('Laravel Excel', function($excel) {
+
+		    $excel->sheet('Sheetname', function($sheet) {
+
+		    	$user = User::find($this->temp_request->user()->id);
+		    	
+		    	//base query
+		    	$persons = DB::table('persons')
+		    	->leftjoin('categories', 'persons.category_id', '=', 'categories.id')
+		    	->select(
+		    			'persons.salutation',
+		    			'persons.lastname',
+		    			'persons.surname',
+		    			'persons.street',
+		    			'persons.plz',
+		    			'persons.city',
+		    			'persons.country',
+		    			'persons.phone',
+		    			'persons.mobile',
+		    			'persons.mail',
+		    			'persons.birthdate',
+		    			'persons.tag_ids',
+		    			'persons.parent_id',
+		    			'categories.name as cname'
+		    	);
+		    	
+		    	//handle categories
+		    	$ses_category_id = $user->person_category_id;
+		    	if ($ses_category_id)
+		    		$persons->where('category_id', '=', $ses_category_id);
+		    	 
+		    	//handle search tags
+		    	$search = $this->temp_request->session()->get('person_search');
+		    	if (strlen($search) > 0) {
+		    		$search_array = explode(",", $search);
+		    		$tags_sel = Tag::find($search_array);
+		    		foreach(explode(",", $search) as $s)
+		    			$persons->where('tag_ids', 'like', "%" . $s . "%");
+		    	}
+		    	 
+		    	//handle search text
+		    	$search_text = $this->temp_request->session()->get('person_search_text');
+		    	if (strlen($search_text) > 0)
+		    		$persons->where('persons.searchname', 'like', "%" . $search_text . "%");
+		    	 
+		    	//handle sort order
+		    	$order = $this->temp_request->session()->get('person_order');
+		    	if (!$order)
+		    		$order = 'lastname';
+		    	 
+		    	//handle sort direction
+		    	$dir = $this->temp_request->session()->get('person_dir');
+		    	if (!$dir)
+		    		$dir = 'ASC';
+		    	 
+		    	//handle filters
+		    	$filter_parent = $this->temp_request->session()->get('filter_parent');
+		    	if ($filter_parent == 1)
+		    		$persons->where('parent_id', '=', 0);
+		    	
+		    	$filter_child = $this->temp_request->session()->get('filter_child');
+		    	if ($filter_child == 1)
+		    		$persons->where('parent_id', '>', 0);
+		    	 
+		    	$persons = $persons->orderBy($order, $dir)->get();
+		    	
+		    	$data = json_decode(json_encode((array) $persons), true);
+		    	
+		        $sheet->with($data);
+		        
+		    });
+		
+		})->export('xlsx');
+
     }
     
     

@@ -37,6 +37,8 @@ Route::get('/person', 'PersonController@create');
 Route::post('/person', 'PersonController@store');
 Route::get('/person/{person}/update', 'PersonController@update');
 Route::get('/person/{person}/delete', 'PersonController@destroy');
+Route::get('/persons/excel', 'PersonController@excel');
+
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

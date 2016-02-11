@@ -41,6 +41,8 @@
 					@else
 						<a href="/persons?filter_child=1" class="btn btn-default">Child</a>
 					@endif
+					
+					<a href="/persons/excel" class="btn btn-default"><span class="glyphicon glyphicon-export"></span></a>	
 			
 				</div>
 			</div>
@@ -111,12 +113,9 @@
 			<table class="table table-striped task-table" id="clickable">
 				<thead>
 				<tr>
-					<th><nobr><a href="{{ createOrderLink('lastname', $order, $dir, $page) }}">Lastname</a> <div class="{{ createOrderLinkImage('lastname', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('surname', $order, $dir, $page) }}">Surname</a> <div class="{{ createOrderLinkImage('surname', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('phone', $order, $dir, $page) }}">Phone</a> <div class="{{ createOrderLinkImage('phone', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('lastname', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('lastname', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('mobile', $order, $dir, $page) }}">Mobile</a> <div class="{{ createOrderLinkImage('mobile', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('mail', $order, $dir, $page) }}">E-Mail</a> <div class="{{ createOrderLinkImage('mail', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('birthdate', $order, $dir, $page) }}">Birthdate</a> <div class="{{ createOrderLinkImage('birthdate', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('birthday', $order, $dir, $page) }}">Birthday</a> <div class="{{ createOrderLinkImage('birthday', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
 					<th>Tags</th>
@@ -127,21 +126,16 @@
 				<tbody>
 					@foreach ($persons as $person)
 						<tr>
-							<td class="table-text"><a href="/person/{{ $person->id }}/update">{{ $person->lastname }}</a></td>
-							<td class="table-text">{{ $person->surname }}</td>
-							<td class="table-text">{{ $person->phone }}</td>
+							<td class="table-text"><a href="/person/{{ $person->id }}/update">{{ $person->searchname }}</a></td>
 							<td class="table-text">{{ $person->mobile }}</td>
 							<td class="table-text">{{ $person->mail }}</td>
 							<td class="table-text">
 								@if ($person->birthdate != '0000-00-00')
-									{{ date('d.m.Y', strtotime($person->birthdate)) }}</td>
-								@endif
-							<td class="table-text">
-								@if ($person->birthdate != '0000-00-00')
 									<div class=" {{ getColorBirthdate($person->birthday) }}">
-										{{ date('d. F', strtotime('2000-' . $person->birthday)) }}</td>
+										{{ date('d. F', strtotime('2000-' . $person->birthday)) }}
 									</div>
 								@endif
+							</td>
 							<td class="table-text"><div class="btn {{ $person->css_class }}">{{ $person->cname }}</div></td>
 							<td class="table-text">
 								@foreach(getTags($person->tag_ids) as $tag)
