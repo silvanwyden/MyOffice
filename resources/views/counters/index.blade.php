@@ -20,10 +20,11 @@
 			
 					<div class="btn-group" role="group">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+						     <span class="selection">{{ $category or "All Categories" }}</span>&nbsp;&nbsp;<span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						  	<li><a href="?category_id=-1">--all Categories--</a></li>
+						  	<li><a href="?category_id=-1"><b>All Categories</b></a></li>
+						  	<li role="separator" class="divider"></li>
 						  	@foreach ($categories as $category)
 							    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
 						    @endforeach

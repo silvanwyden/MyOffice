@@ -20,10 +20,11 @@
 			
 					<div class="btn-group" role="group">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						     <span class="selection">{{ $category or "--all Categories--" }}</span>&nbsp;&nbsp;<span class="caret"></span>
+						     <span class="selection">{{ $category or "All Categories" }}</span>&nbsp;&nbsp;<span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-						  	<li><a href="?category_id=-1">--all Categories--</a></li>
+						  	<li><a href="?category_id=-1"><b>All Categories</b></a></li>
+						  	<li role="separator" class="divider"></li>
 						  	@foreach ($categories as $category)
 							    <li><a href="?category_id={{ $category->id }}">{{ $category->name }}</a></li>
 						    @endforeach
@@ -51,7 +52,13 @@
            			 {!! csrf_field() !!}
 				
 				<div class="col-sm-3" style="padding-bottom: 6px;">
-	           		<input type="text" name="search" id="search" class="form-control" placeholder="Tags">
+	           		
+	           		@if (count($tags_sel) > 0)
+	           			<input type="text" name="search" id="search" class="form-control">
+           			@else
+           				<input type="text" name="search" id="search" class="form-control" placeholder="Tags">
+           			@endif
+
            		</div>
 				
 				<div class="col-sm-3" style="padding-bottom: 6px;">

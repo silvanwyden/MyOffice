@@ -42,6 +42,42 @@
   table th:last-child {display:none}
   table td:last-child {display:none}
   
-  .btn-group {display:none}
+  .btn-group {
+  		display:none;
+  		}
+  		
+  #search, #search-text, .tags, .bootstrap-tagsinput {
+  		display: none !important;
+  } 	
+ 		
   
+  .btn, .label {
+  		padding: 0px !important;
+  		border: none !important;
+  		font-weight: normal;
+  		font-size: 12px !important;
+  }
+  
+  .container {
+  		margin: 0px;
+  		width: 100%;
+  }
+  
+  body {
+  		font-size: 12px !important;
+  }
+  
+  .table > tbody > tr > td {
+  	padding: 2px !important;
+  }
+  
+}
+
+body {
+	overflow-y: scroll;
+	margin-top: 0px !important;
+}
+
+.bootstrap-tagsinput {
+	height: 32px;
 }

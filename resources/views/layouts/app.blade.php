@@ -159,6 +159,12 @@
 					['misc1', ['link', 'picture', 'table', 'codeview', 'fullscreen']],
 							  ],
 		  	});
+
+			//remove info boxes after 5 seconds
+		  	setTimeout(function() {
+		  	  $(".flash-message").slideUp( 300 );
+		  	}, 3000);
+		  			  	
 		  
 		});
 

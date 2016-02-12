@@ -61,7 +61,7 @@ class PersonController extends Controller
     	}
     	else {
     		$user->person_category_id = False;
-    		$user->person_category = "--all Categories--";
+    		$user->person_category = "All Categories";
     		$user->save();
     	}
     	$ses_category_id = $user->person_category_id;

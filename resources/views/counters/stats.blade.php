@@ -8,6 +8,17 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
 	<div class="container">
+	
+		<div class="row" style="padding-bottom: 15px;">
+			<div class="col-sm-8">
+			  <div class="btn-group" role="group" aria-label="first">
+			  
+			  		<a href="/counters" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+			  		
+				</div>
+			</div>
+		</div>
+	
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Counter Statistics

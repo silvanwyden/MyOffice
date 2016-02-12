@@ -2,19 +2,30 @@
 
 @section('content')
 	<div class="container">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				New Entry
+	
+		<form action="/person" method="POST" class="form-horizontal">
+			{{ csrf_field() }}
+	
+			<div class="row" style="padding-bottom: 15px;">
+				<div class="col-sm-8">
+				  <div class="btn-group" role="group" aria-label="first">
+				  
+				  		<a href="/persons" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+				  		
+					</div>
+				</div>
 			</div>
-
-			<div class="panel-body">
-				<!-- Display Validation Errors -->
-				@include('common.errors')
-
-				<!-- New Task Form -->
-				<form action="/person" method="POST" class="form-horizontal">
-					{{ csrf_field() }}
-					
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					New Person
+				</div>
+	
+				<div class="panel-body">
+					<!-- Display Validation Errors -->
+					@include('common.errors')
+		
 					<!-- if we are updating a task we need to know the task ID -->
 					<input type="hidden" name="person_id" value="{{ $person->id or '' }}" />
 
@@ -273,25 +284,26 @@
 					<!-- Action Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" class="btn btn-primary">
-								<i class="glyphicon glyphicon-floppy-save"></i> Save Entry
+							<button type="submit" class="btn btn-primary" style="margin-bottom: 5px;">
+								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;
 							</button>
 							
-							<a href="/persons" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
+							<a href="/persons" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($person->id)
 							<nobr>
-								<a href="/person/{{ $person->id }}/done" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i> Done</a>
-								<a href="/person/{{ $person->id }}/delete" class="delete btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+								<a href="/person/{{ $person->id }}/done" class="btn btn-info" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-ok"></i> Done</a>
+								<a href="/person/{{ $person->id }}/delete" class="delete btn btn-danger" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-remove"></i> Delete</a>
 							</nobr>		
 							@endif
 							
 						</div>
 					</div>
+						
 					
-				</form>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	
 	<script>

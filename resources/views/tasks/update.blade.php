@@ -2,26 +2,37 @@
 
 @section('content')
 	<div class="container">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				New Task
+	
+		<form action="/task" method="POST" class="form-horizontal">
+			{{ csrf_field() }}
+	
+			<div class="row" style="padding-bottom: 15px;">
+				<div class="col-sm-8">
+				  <div class="btn-group" role="group" aria-label="first">
+				  
+				  		<a href="/tasks" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+				  		
+					</div>
+				</div>
 			</div>
-
-			<div class="panel-body">
-				<!-- Display Validation Errors -->
-				@include('common.errors')
-
-				<!-- New Task Form -->
-				<form action="/task" method="POST" class="form-horizontal">
-					{{ csrf_field() }}
-					
+		
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					New Task
+				</div>
+	
+				<div class="panel-body">
+					<!-- Display Validation Errors -->
+					@include('common.errors')
+	
 					<!-- if we are updating a task we need to know the task ID -->
 					<input type="hidden" name="task_id" value="{{ $task->id or '' }}" />
-
+	
 					<!-- Task Name -->
 					<div class="form-group">
 						<label for="task-name" class="col-sm-2 control-label">Task</label>
-
+	
 						<div class="col-sm-10">
 							<input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name or old('name') }}">
 						</div>
@@ -82,7 +93,7 @@
 					</div>
 					
 					<script>
-
+	
 						//function to show the selected item in the dropdown
 						$(".dropdown-category .dropdown-menu li a").click(function(){
 							$(this).parents(".dropdown-category").find('.selection').text($(this).text());
@@ -90,19 +101,19 @@
 							$('#category').val($(this).attr('ref'));
 							$('#category_name').val($(this).text());
 						});
-
+	
 						$(".dropdown-priority .dropdown-menu li a").click(function(){
 							$(this).parents(".dropdown-priority").find('.selection').text($(this).text());
 							$(this).parents(".dropdown-priority").find('.selection').val($(this).text());
 							$('#priority').val($(this).attr('ref'));
 						});
-
+	
 						$(".dropdown-stage .dropdown-menu li a").click(function(){
 							$(this).parents(".dropdown-stage").find('.selection').text($(this).text());
 							$(this).parents(".dropdown-stage").find('.selection').val($(this).text());
 							$('#stage').val($(this).attr('ref'));
 						});
-
+	
 						//function to load the saved values
 						$old_category="{{ old('category') }}";
 						if (!$old_category) {
@@ -117,7 +128,7 @@
 							$(".dropdown-category .dropdown-menu li a").parents(".dropdown-category").find('.selection').text($old_category_name);
 							$(".dropdown-category .dropdown-menu li a").parents(".dropdown-category").find('.selection').val($old_category_name);
 						};
-
+	
 						$old_priority="{{ $task->priority_id or old('priority') }}";
 						if ($old_priority > 0) {
 							$('#priority').val($old_priority);
@@ -125,7 +136,7 @@
 							$(".dropdown-priority .dropdown-menu li a").parents(".dropdown-priority").find('.selection').text($old_priority_name);
 							$(".dropdown-priority .dropdown-menu li a").parents(".dropdown-priority").find('.selection').val($old_priority_name);
 						};
-
+	
 						$old_stage="{{ $task->stage_id or old('stage') }}";
 						if ($old_stage > 0) {
 							$('#stage').val($old_stage);
@@ -139,7 +150,7 @@
 					<!-- Deadline -->
 					<div class="form-group">
 						<label for="task-name" class="col-sm-2 control-label">Deadline</label>
-
+	
 						<div class="col-sm-10">
 							@if ($task->deadline > 0)
 								<input type="text" name="deadline" id="datepicker" class="form-control" value="{{ date('d.m.Y', strtotime($task->deadline)) }}">
@@ -153,16 +164,16 @@
 					@if ($task->id)
 					<div class="form-group">
 						<label for="task-created" class="col-sm-2 control-label">Read/Write</label>
-
+	
 						<div class="col-sm-10" style="padding-top: 7px;">{{ date('d.m.Y G:i:s', strtotime($task->created_at)) }} | {{ date('d.m.Y G:i:s', strtotime($task->updated_at)) }}</div>
-
+	
 					</div>
 					@endif
 					
 					<!-- Description -->
 					<div class="form-group">
 						<label for="task-description" class="col-sm-2 control-label">Description</label>
-
+	
 						<div class="col-sm-10">
 							<textarea name="description" id="summernote" class="form-control" >{{ $task->description or old('description') }}</textarea>
 						</div>
@@ -171,25 +182,25 @@
 					<!-- Action Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" class="btn btn-primary">
-								<i class="glyphicon glyphicon-floppy-save"></i> Save Task
+							<button type="submit" class="btn btn-primary" style="margin-bottom: 5px;">
+								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;
 							</button>
 							
-							<a href="/tasks" class="btn btn-warning"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
+							<a href="/tasks" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($task->id)
 							<nobr>
-								<a href="/task/{{ $task->id }}/done" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i> Done</a>
-								<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+								<a href="/task/{{ $task->id }}/done" class="btn btn-info" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-ok"></i> Done</a>
+								<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-remove"></i> Delete</a>
 							</nobr>		
 							@endif
 							
 						</div>
 					</div>
-					
-				</form>
+						
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	
 	<script>

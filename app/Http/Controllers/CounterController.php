@@ -57,7 +57,7 @@ class CounterController extends Controller
     	}
     	else {
     		$user->counter_category_id = False;
-    		$user->counter_category = "--all Categories--";
+    		$user->counter_category = "All Categories";
     		$user->save();
     	}
     	$ses_category_id = $user->counter_category_id;

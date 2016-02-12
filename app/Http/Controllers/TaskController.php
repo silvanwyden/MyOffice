@@ -62,7 +62,7 @@ class TaskController extends Controller
     		}
     		else {
     			$user->stage_id = False;
-    			$user->stage = "--all Stages--";
+    			$user->stage = "All Stages";
     			$user->save();
     		}
     	
@@ -77,7 +77,7 @@ class TaskController extends Controller
 	    	}
 	    	else {
 	    		$user->category_id = False;
-	    		$user->category = "--all Categories--";
+	    		$user->category = "All Categories";
 	    		$user->save();
     	}
     	$ses_category_id = $user->category_id;
