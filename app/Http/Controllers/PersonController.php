@@ -209,10 +209,63 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person) {
     	
+    	$user = User::find($request->user()->id);
     	$categories = Category::All(['id', 'name']);
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	$tags_sel = Tag::find(explode(",", $person->tag_ids));
     	$parents = Person::All(['id', 'lastname', 'surname']);
+    	
+    	
+    	/*
+    	//base query
+    	$persons = DB::table('persons')
+    	->leftjoin('categories', 'persons.category_id', '=', 'categories.id');
+    	
+    	//handle categories
+    	$ses_category_id = $user->person_category_id;
+    	if ($ses_category_id)
+    		$persons->where('category_id', '=', $ses_category_id);
+    	 
+    	//handle search tags
+    	$search = $request->session()->get('person_search');
+    	if (strlen($search) > 0) {
+    		$search_array = explode(",", $search);
+    		$tags_sel = Tag::find($search_array);
+    		foreach(explode(",", $search) as $s)
+    			$persons->where('tag_ids', 'like', "%" . $s . "%");
+    	}
+    	 
+    	//handle search text
+    	$search_text = $request->session()->get('person_search_text');
+    	if (strlen($search_text) > 0)
+    		$persons->where('persons.searchname', 'like', "%" . $search_text . "%");
+    	 
+    	//handle sort order
+    	$order = $request->session()->get('person_order');
+    	if (!$order)
+    		$order = 'lastname';
+    	 
+    	//handle sort direction
+    	$dir = $request->session()->get('person_dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	 
+    	//handle filters
+    	$filter_parent = $request->session()->get('filter_parent');
+    	if ($filter_parent == 1)
+    		$persons->where('parent_id', '=', 0);
+    	
+    	$filter_child = $request->session()->get('filter_child');
+    	if ($filter_child == 1)
+    		$persons->where('parent_id', '>', 0);
+    	 
+    	print $order;
+    	
+    	$persons = $persons->where('persons.id', '>', $person->id)->orderBy($order, $dir)->min('persons.id');
+    	
+
+    	
+    	print "next:" . $persons;*/
 
     	return view('persons.update', [
     			'categories' => $categories,
