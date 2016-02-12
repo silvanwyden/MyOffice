@@ -43,6 +43,12 @@
 						    @endforeach
 						  </ul>
 					</div>
+					
+					@if ($filter_deadline == 1)
+						<a href="/tasks?filter_deadline=-1" class="btn btn-default active" style="height: 34px;"><span class="glyphicon glyphicon-eye-open"></span></a>	
+					@else
+						<a href="/tasks?filter_deadline=1" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"></span></a>	
+					@endif
 			
 				</div>
 			</div>

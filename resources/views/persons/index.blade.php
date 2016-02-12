@@ -42,7 +42,7 @@
 					@else
 						<a href="/persons?filter_child=1" class="btn btn-default">Child</a>
 					@endif
-					
+									
 					<a href="/persons/excel" class="btn btn-default"><span class="glyphicon glyphicon-export"></span></a>	
 			
 				</div>

@@ -119,6 +119,15 @@ class TaskController extends Controller
     	if (strlen($search) > 0)
     		$tasks->where('tasks.name', 'like', "%" . $search . "%");
     	
+    	//handle filters
+    	if ($request->filter_deadline == 1)
+    		$request->session()->put('filter_deadline', 1);
+    	elseif ($request->filter_deadline == -1)
+    	$request->session()->put('filter_deadline', 0);
+    	$filter_deadline = $request->session()->get('filter_deadline');
+    	if ($filter_deadline == 1) 
+    		$tasks->where('deadline', '!=', '0000-00-00')->where('deadline', '<=', date('Y-m-d', time()));
+    	
     	//handle sort order
     	if ($request->order)
     		$request->session()->put('order', $request->order);
@@ -151,6 +160,7 @@ class TaskController extends Controller
         	'category' => $user->category,
         	'search' => $search,
         	'page' => $page,
+        	'filter_deadline' => $filter_deadline,
         ]);
         
     }
