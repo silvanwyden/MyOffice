@@ -14,6 +14,8 @@ use DateTime;
 use App\Session;
 use DB;
 use Excel;
+use Log;
+use Mail;
 
 class PersonController extends Controller
 {
@@ -37,7 +39,8 @@ class PersonController extends Controller
 
         $this->persons = $persons;
     }
-
+    
+    
     /**
      * Display a list of all of the user's task.
      *
@@ -435,6 +438,43 @@ class PersonController extends Controller
 		})->export('xlsx');
 
     }
+    
+    
+    //scheduler for cron job mail
+    public function sendBirthdaysMail() {
+    	Log::info('Calculation who is having birthday today and sending mail!');
+    	
+    	$birthdays = Person::where('birthday', '=', date('m-d', time()))->get();
+    	
+    	if (count($birthdays) > 0)
+    		{
+    		
+    		$message = '';
+    		$names = '';
+    			
+    		foreach ($birthdays as $birthday) {
+    		
+    			Log::info($birthday->searchname);
+    			
+    			$names .= $birthday->searchname . ", ";
+    			
+    			}
+    			
+    			
+    		Mail::send('emails.welcome', [ 'birthdays' => $names ], function ($message) {
+    			$message->from('it@wyden.com', 'Laravel');
+    					
+    			$message->to('info@wyden.com');
+    			//->cc('silvan@wyden.com');
+    			});
+    			 
+    			
+    		
+    		}
+    
+    }
+    
+    
     
     
 }
