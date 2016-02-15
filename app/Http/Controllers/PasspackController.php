@@ -180,8 +180,8 @@ class PasspackController extends Controller
 
         $input = array(
 	            'url' => $request->url,
-	        	'user' => $request->user,
-	        	'password' => Crypt::encrypt($request->password),
+	        	'user' => $request->passpack_user,
+	        	'password' => Crypt::encrypt($request->passpack_password),
 	        	'category_id' => $request->category,
 	        );
         
