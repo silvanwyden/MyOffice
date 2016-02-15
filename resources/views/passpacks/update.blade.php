@@ -103,7 +103,7 @@
 						<label for="task-name" class="col-sm-2 control-label">User</label>
 	
 						<div class="col-sm-10">
-							<input type="text" name="passpack_user" id="passpack-user" class="form-control" value="{{ $passpack->user or old('passpack_user') }}">
+							<input type="text" name="passpack_user" autocomplete="off" id="passpack-user" class="form-control" value="{{ $passpack->user or old('passpack_user') }}">
 						</div>
 					</div>
 					
@@ -112,7 +112,7 @@
 						<label for="task-name" class="col-sm-2 control-label">Password</label>
 	
 						<div class="col-sm-9">
-								<input type="password" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
+								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
 						</div>
 						
 						<div class="col-sm-1">
