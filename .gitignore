@@ -1,9 +1,10 @@
 /vendor
+/config/app.php
 /node_modules
 Homestead.yaml
 Homestead.json
 .project
-.env
+/.env
 buildpath
 composer.phar
 /composer.json
