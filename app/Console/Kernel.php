@@ -28,10 +28,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('inspire')
                  ->hourly();
         
-        $schedule->call(join('@', [ PersonController::class, 'sendBirthdaysMail' ]))->cron('* * * * * *');
-        
-        //$schedule->command('PersonController::sendBirthdaysMail')->cron('* * * * * *');
-        
+        $schedule->call(join('@', [ PersonController::class, 'sendBirthdaysMail' ]))->daily();        
         
     }
 }

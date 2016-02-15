@@ -462,7 +462,7 @@ class PersonController extends Controller
     			
     			
     		Mail::send('emails.welcome', [ 'birthdays' => $names ], function ($message) {
-    			$message->from('it@wyden.com', 'Laravel');
+    			$message->from('it@wyden.com', 'Today birthdays');
     					
     			$message->to('info@wyden.com');
     			//->cc('silvan@wyden.com');
