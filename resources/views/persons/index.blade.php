@@ -121,8 +121,8 @@
 				<thead>
 				<tr>
 					<th><nobr><a href="{{ createOrderLink('lastname', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('lastname', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('phone', $order, $dir, $page) }}">Phone</a> <div class="{{ createOrderLinkImage('phone', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('mobile', $order, $dir, $page) }}">Mobile</a> <div class="{{ createOrderLinkImage('mobile', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('mail', $order, $dir, $page) }}">E-Mail</a> <div class="{{ createOrderLinkImage('mail', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('birthday', $order, $dir, $page) }}">Birthday</a> <div class="{{ createOrderLinkImage('birthday', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
 					<th>Tags</th>
@@ -134,8 +134,8 @@
 					@foreach ($persons as $person)
 						<tr>
 							<td class="table-text"><a href="/person/{{ $person->id }}/update">{{ $person->searchname }}</a></td>
+							<td class="table-text">{{ $person->phone }}</td>
 							<td class="table-text">{{ $person->mobile }}</td>
-							<td class="table-text">{{ $person->mail }}</td>
 							<td class="table-text">
 								@if ($person->birthdate != '0000-00-00')
 									<div class=" {{ getColorBirthdate($person->birthday) }}">

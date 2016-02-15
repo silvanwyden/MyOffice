@@ -292,7 +292,6 @@
 							
 							@if ($person->id)
 							<nobr>
-								<a href="/person/{{ $person->id }}/done" class="btn btn-info" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-ok"></i> Done</a>
 								<a href="/person/{{ $person->id }}/delete" class="delete btn btn-danger" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-remove"></i> Delete</a>
 							</nobr>		
 							@endif
