@@ -39,6 +39,12 @@ Route::get('/person/{person}/update', 'PersonController@update');
 Route::get('/person/{person}/delete', 'PersonController@destroy');
 Route::get('/persons/excel', 'PersonController@excel');
 
+// Task Passpack
+Route::get('/passpacks', 'PasspackController@index');
+Route::get('/passpack', 'PasspackController@create');
+Route::post('/passpack', 'PasspackController@store');
+Route::get('/passpack/{passpack}/update', 'PasspackController@update');
+Route::get('/passpack/{passpack}/delete', 'PasspackController@destroy');
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

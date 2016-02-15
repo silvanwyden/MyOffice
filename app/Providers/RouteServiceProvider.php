@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Task;
 use App\Counter;
 use App\Person;
+use App\Passpack;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -30,6 +31,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('task', Task::class);
         $router->model('counter', Counter::class);
         $router->model('person', Person::class);
+        $router->model('passpack', Passpack::class);
 
         parent::boot($router);
     }

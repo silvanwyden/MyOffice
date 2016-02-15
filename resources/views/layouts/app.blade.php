@@ -93,6 +93,13 @@
 									@endif
 				        		</a>
 			        		</li>
+			        		<li class="{{ Request::is( 'passpack*') ? 'active' : '' }}">
+				        		<a href="/passpacks?page=1">PassPacks
+				        			@if(isset($passpacks))
+										<span class="badge">{{ $passpacks->total() }}</span>
+									@endif
+				        		</a>
+			        		</li>
 		        		</ul>
 	        		@endif
 	        		
