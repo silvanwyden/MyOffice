@@ -53,15 +53,15 @@ class PasspackController extends Controller
     	if ($request->category_id)
     		if ($request->category_id > 0) {
 	    		$user->passpack_category_id = $request->category_id;
-	    		$user->category = Category::find($request->category_id)->name;
+	    		$user->passpack_category = Category::find($request->category_id)->name;
 	    		$user->save();
 	    	}
 	    	else {
-	    		$user->category_id = False;
-	    		$user->category = "All Categories";
+	    		$user->passpack_category_id = False;
+	    		$user->passpack_category = "All Categories";
 	    		$user->save();
     	}
-    	$ses_category_id = $user->category_id;
+    	$ses_category_id = $user->passpack_category_id;
     	
     	//base query
     	$passpacks = DB::table('passpacks')
@@ -118,7 +118,7 @@ class PasspackController extends Controller
             'passpacks' => $passpacks,
         	'order' => $order,
         	'dir' => $dir,
-        	'category' => $user->category,
+        	'category' => $user->passpack_category,
         	'search' => $search,
         	'page' => $page,
         ]);
