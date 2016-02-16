@@ -3,6 +3,15 @@
 @section('content')
 	<div class="container">
 	
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+		
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+		      @endif
+		    @endforeach
+	  	</div> <!-- end .flash-message -->
+	
 		<form action="/passpack" method="POST" class="form-horizontal">
 			{{ csrf_field() }}
 	
@@ -12,6 +21,7 @@
 				  
 				  		<a href="/passpacks" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 				  		
 					</div>
 				</div>
@@ -19,9 +29,9 @@
 		
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					New PassPack
+					PassPack
 				</div>
-	<a href="/passpack/{{ $passpack->id + 1 }}/update">next</a>
+				
 				<div class="panel-body">
 					<!-- Display Validation Errors -->
 					@include('common.errors')
@@ -111,12 +121,14 @@
 					<div class="form-group">
 						<label for="task-name" class="col-sm-2 control-label">Password</label>
 	
-						<div class="col-sm-9">
+						<div class="col-sm-10">
+
+							<div class="input-group">
+								<span class="input-group-addon">
+									<a href="#" id="togglePasswordField" value="Toggle Password"><i class="glyphicon glyphicon-eye-open"></i></a>
+								</span>
 								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
-						</div>
-						
-						<div class="col-sm-1">
-							<a href="#" id="togglePasswordField" value="Toggle Password"><i class="glyphicon glyphicon-eye-open"></i></a>
+							</div>
 						</div>
 						
 					</div>
@@ -128,9 +140,11 @@
 								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;
 							</button>
 							
-							<button type="submit" name="save_edit" class="btn btn-primary" value="save_edit" style="margin-bottom: 5px;">
-								<i class="glyphicon glyphicon-floppy-save"></i> Save&Edit&nbsp;
+							@if ($passpack->id)
+							<button type="submit" name="save_edit" class="btn btn-info" value="save_edit" style="margin-bottom: 5px;">
+								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
 							</button>
+							@endif
 							
 							<a href="/passpacks" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							

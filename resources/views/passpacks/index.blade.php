@@ -63,7 +63,7 @@
 								</a>
 							</td>
 							<td class="table-text"><div class="btn {{ $passpack->css_class }}">{{ $passpack->cname }}</div></td>
-							<td class="table-text"><div>{{ getPW($passpack->password) }}</div></td>
+							<td class="table-text"><div>{{ $passpack->user }}</div></td>
 							
 							<!-- Task Action Buttons -->
 							<td>

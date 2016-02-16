@@ -189,7 +189,10 @@ class CounterController extends Controller
     
     	$page = $request->session()->get('counter_page');
     	 
-    	return redirect('/counters?page=' . $page);
+    	if ($request->save_edit)
+    		return redirect('/counter/' . $counter->id . '/update');
+    	else
+    		return redirect('/counters?page=' . $page);
     }
 
     

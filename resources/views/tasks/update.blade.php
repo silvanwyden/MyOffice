@@ -3,6 +3,15 @@
 @section('content')
 	<div class="container">
 	
+		<div class="flash-message">
+		    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+		      @if(Session::has('alert-' . $msg))
+		
+		      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+		      @endif
+		    @endforeach
+	  	</div> <!-- end .flash-message -->
+	
 		<form action="/task" method="POST" class="form-horizontal">
 			{{ csrf_field() }}
 	
@@ -12,6 +21,7 @@
 				  
 				  		<a href="/tasks" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
+				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 				  		
 					</div>
 				</div>
@@ -186,11 +196,17 @@
 								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;
 							</button>
 							
+							@if ($task->id)
+							<button type="submit" name="save_edit" class="btn btn-info" value="save_edit" style="margin-bottom: 5px;">
+								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
+							</button>
+							@endif
+							
 							<a href="/tasks" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($task->id)
 							<nobr>
-								<a href="/task/{{ $task->id }}/done" class="btn btn-info" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-ok"></i> Done</a>
+								<a href="/task/{{ $task->id }}/done" class="btn btn-success" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-ok"></i> Done</a>
 								<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-remove"></i> Delete</a>
 							</nobr>		
 							@endif
