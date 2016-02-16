@@ -29,7 +29,7 @@
 		
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					New Task
+					Task
 				</div>
 	
 				<div class="panel-body">
