@@ -200,13 +200,67 @@ class TaskController extends Controller
     	$categories = Category::All(['id', 'name']);
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
-    
+    	$user = User::find($request->user()->id);
+    	
+    	//get next id
+    	$tasks = DB::table('tasks')
+    	->leftjoin('categories', 'tasks.category_id', '=', 'categories.id')
+    	->join('priorities', 'tasks.priority_id', '=', 'priorities.id')
+    	->join('stages', 'tasks.stage_id', '=', 'stages.id')
+    	->select('tasks.id as id')
+    	->where('user_id', '=', $request->user()->id);
+    	 
+    	//handle stages
+    	$ses_stage_id = $user->stage_id;
+    	if ($ses_stage_id)
+    		$tasks->where('stage_id', '=', $ses_stage_id);
+    	 
+    	//handle categories
+    	$ses_category_id = $user->category_id;
+    	if ($ses_category_id)
+    		$tasks->where('category_id', '=', $ses_category_id);
+    	 
+    	//handle search
+    	$search = $request->session()->get('search');
+    	if (strlen($search) > 0)
+    		$tasks->where('tasks.name', 'like', "%" . $search . "%");
+    	 
+    	//handle filters
+    	$filter_deadline = $request->session()->get('filter_deadline');
+    	if ($filter_deadline == 1)
+    		$tasks->where('deadline', '!=', '0000-00-00')->where('deadline', '<=', date('Y-m-d', time()));
+    	 
+    	//handle sort order
+    	$order = $request->session()->get('order');
+    	if (!$order)
+    		$order = 'priority_id';
+    	 
+    	//handle sort direction
+    	$dir = $request->session()->get('dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	
+    	$dir_where = '<';
+    	if ($dir == 'ASC')
+    		$dir_where = '>';
+    	
+    	 print "task:" . $order;
+    	 
+    	//$tasks = $tasks->where($order, $dir_where, $task[$order])->orderBy($order, $dir)->orderBy('deadline', 'ASC')->limit(1)->first();
+    	 $tasks = $tasks->where('tasks.id', $dir_where, $task->id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->limit(1)->first();
+    	print_r($tasks);
+    	$next_id = 0;
+    	if (count($tasks)==1)
+    		$next_id = $tasks->id;
+    	 
+
     	return view('tasks.update', [
     			'categories' => $categories,
     			'priorities' => $priorities,
     			'stages' => $stages,
     			'task' => $task,
     			'category_id' => False,
+    			'next_id' => $next_id,
     			])->withTask($task);
     }
     

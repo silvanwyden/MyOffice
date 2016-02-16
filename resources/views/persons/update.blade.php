@@ -31,6 +31,13 @@
 				<div class="panel-heading">
 					Person
 				</div>
+				
+				@if ($previous_id > 0)
+					<a href="/person/{{ $previous_id }}/update">Previous</a>&nbsp;
+				@endif
+				@if ($next_id > 0)
+					<a href="/person/{{ $next_id }}/update">Next</a>
+				@endif
 	
 				<div class="panel-body">
 					<!-- Display Validation Errors -->

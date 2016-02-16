@@ -31,6 +31,10 @@
 				<div class="panel-heading">
 					Task
 				</div>
+				
+				@if ($next_id > 0)
+					<a href="/task/{{ $next_id }}/update">Next</a>
+				@endif
 	
 				<div class="panel-body">
 					<!-- Display Validation Errors -->
