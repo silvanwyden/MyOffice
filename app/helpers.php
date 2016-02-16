@@ -98,5 +98,9 @@ use App\Person;
     	 
     }
     
+    function getPW($pw) {
+    
+    	return Crypt::decrypt($pw);
+    }
     
 ?>

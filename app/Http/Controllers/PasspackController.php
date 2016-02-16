@@ -177,7 +177,7 @@ class PasspackController extends Controller
         $this->validate($request, [
             'url' => 'required|max:255',
         ]);
-
+        
         $input = array(
 	            'url' => $request->url,
 	        	'user' => $request->passpack_user,
@@ -201,7 +201,11 @@ class PasspackController extends Controller
 
 	    $page = $request->session()->get('page');
         	
-        return redirect('/passpacks?page=' . $page);
+	    if ($request->save_edit)
+	    	return redirect('/passpack/' . $passpack->id . '/update');
+    	else
+    		return redirect('/passpacks?page=' . $page);
+    		
     }
     
     
