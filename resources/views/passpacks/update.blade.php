@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>
+
 @section('content')
 	<div class="container">
 	
@@ -127,7 +129,15 @@
 								<span class="input-group-addon">
 									<a href="#" id="togglePasswordField" value="Toggle Password"><i class="glyphicon glyphicon-eye-open"></i></a>
 								</span>
+								
 								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
+								
+								  <span class="input-group-btn">
+									<button class="btn" data-clipboard-target="#password">
+								    		<span class="glyphicon glyphicon-copy"></span>
+									</button>
+								</span>
+								
 							</div>
 						</div>
 						
