@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>
+<script>
+	new Clipboard('.btn-copy');
+</script>
 
 @section('content')
 	<div class="container">
@@ -132,10 +135,10 @@
 								
 								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
 								
-								  <span class="input-group-btn">
-									<button class="btn" data-clipboard-target="#password">
+								<span class="input-group-addon">
+									<a href="#" class="btn-copy" data-clipboard-target="#password">
 								    		<span class="glyphicon glyphicon-copy"></span>
-									</button>
+									</a>
 								</span>
 								
 							</div>
