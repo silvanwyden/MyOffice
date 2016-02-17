@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>
-<script>
-	new Clipboard('.btn-copy');
-</script>
-
 @section('content')
 	<div class="container">
 	
@@ -222,6 +217,11 @@
 
 		} 
 
+	</script>
+	
+	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>
+	<script>
+		new Clipboard('.btn-copy');
 	</script>
 	
 @endsection
