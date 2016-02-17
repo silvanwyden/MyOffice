@@ -68,6 +68,9 @@
 							<!-- Task Action Buttons -->
 							<td>
 								<nobr>
+									<a href="#" class="btn-copy" data-clipboard-text="{{ decriptString($passpack->password) }}">
+								    		<span class="glyphicon glyphicon-copy"></span>
+									</a>
 									<a href="/passpack/{{ $passpack->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</nobr>				
 							</td>
@@ -86,6 +89,11 @@
 				$('#search').focus();
 		});
 
+	</script>
+	
+	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>
+	<script>
+		new Clipboard('.btn-copy');
 	</script>
 	
 @endsection
