@@ -129,12 +129,13 @@
 								</span>
 								
 								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
-								
+								@if ($pwd)
 								<span class="input-group-addon">
 									<a href="#" class="btn-copy" data-clipboard-text="{{ $pwd }}">
 								    		<span class="glyphicon glyphicon-copy"></span>
 									</a>
 								</span>
+								@endif
 								
 							</div>
 						</div>
