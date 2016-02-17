@@ -128,10 +128,11 @@
 									<a href="#" id="togglePasswordField" value="Toggle Password"><i class="glyphicon glyphicon-eye-open"></i></a>
 								</span>
 								
+								<input type="hidden" id="password-copy" value="{{ $pwd or old('passpack_password') }}">
 								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
 								
 								<span class="input-group-addon">
-									<a href="#" class="btn-copy" data-clipboard-target="#password">
+									<a href="#" class="btn-copy" data-clipboard-target="#password-copy">
 								    		<span class="glyphicon glyphicon-copy"></span>
 									</a>
 								</span>
