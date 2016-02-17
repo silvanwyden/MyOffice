@@ -68,7 +68,7 @@
 							<!-- Task Action Buttons -->
 							<td>
 								<nobr>
-									<a href="#" class="btn-copy" data-clipboard-text="{{ decriptString($passpack->password) }}">
+									<a href="#" class="btn btn-copy btn-info" data-clipboard-text="{{ decriptString($passpack->password) }}">
 								    		<span class="glyphicon glyphicon-copy"></span>
 									</a>
 									<a href="/passpack/{{ $passpack->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
