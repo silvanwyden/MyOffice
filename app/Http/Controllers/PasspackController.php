@@ -140,6 +140,7 @@ class PasspackController extends Controller
     	return view('passpacks.update', [
     			'categories' => $categories,
     			'category_id' => $user->passpack_category_id,
+    			'pwd' = '',
     			])->withPasspack(new Passpack());
     	 
     }
