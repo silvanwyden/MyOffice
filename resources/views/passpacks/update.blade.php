@@ -127,7 +127,16 @@
 								<span class="input-group-addon">
 									<a href="#" id="togglePasswordField" value="Toggle Password"><i class="glyphicon glyphicon-eye-open"></i></a>
 								</span>
+								
 								<input type="password" autocomplete="off" name="passpack_password" id="password" class="form-control" value="{{ $pwd or old('passpack_password') }}">
+								@if ($pwd)
+								<span class="input-group-addon">
+									<a href="#" class="btn-copy" data-clipboard-text="{{ $pwd }}">
+								    		<span class="glyphicon glyphicon-copy"></span>
+									</a>
+								</span>
+								@endif
+								
 							</div>
 						</div>
 						
@@ -209,6 +218,11 @@
 
 		} 
 
+	</script>
+	
+	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>
+	<script>
+		new Clipboard('.btn-copy');
 	</script>
 	
 @endsection

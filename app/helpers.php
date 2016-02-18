@@ -98,5 +98,9 @@ use App\Person;
     	 
     }
     
+    function decriptString($string) {
+    	return Crypt::decrypt($string);
+    	}
+    
     
 ?>
