@@ -147,7 +147,7 @@ class TaskController extends Controller
     		$request->session()->put('page', $request->page);
     	$page = $request->session()->get('page');
     	
-    	$tasks = $tasks->orderBy($order, $dir)->orderBy('deadline', 'ASC')->paginate(50);
+    	$tasks = $tasks->orderBy('tasks.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('tasks.name', 'ASC')->paginate(50);
     	
         return view('tasks.index', [
         	'categories' => $categories,
@@ -184,6 +184,7 @@ class TaskController extends Controller
     			'priorities' => $priorities,
     			'stages' => $stages,
     			'category_id' => $user->category_id,
+    			'counter' => 0,
     			])->withTask(new Task());
     	 
     }
@@ -240,19 +241,28 @@ class TaskController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	
-    	$dir_where = '<';
-    	if ($dir == 'ASC')
-    		$dir_where = '>';
+    	$tasks = $tasks->orderBy('tasks.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('tasks.name', 'ASC')->paginate(50);
     	
-    	 print "task:" . $order;
-    	 
-    	//$tasks = $tasks->where($order, $dir_where, $task[$order])->orderBy($order, $dir)->orderBy('deadline', 'ASC')->limit(1)->first();
-    	 $tasks = $tasks->where('tasks.id', $dir_where, $task->id)->orderBy($order, $dir)->orderBy('deadline', 'ASC')->limit(1)->first();
-    	print_r($tasks);
+    	$previous_id = 0;
     	$next_id = 0;
-    	if (count($tasks)==1)
-    		$next_id = $tasks->id;
-    	 
+    	$counter = 0;
+    	$found = false;
+    	foreach ($tasks as $temp) {
+    		
+    		if ($found) {
+    			$next_id = $temp->id;
+    			break;
+    		}
+    		
+    		if ($temp->id == $task->id) {
+    			$found = true;
+    		}
+    		
+    		$counter++;
+    		if (!$found)
+    			$previous_id = $temp->id;
+    		
+    	}
 
     	return view('tasks.update', [
     			'categories' => $categories,
@@ -260,7 +270,10 @@ class TaskController extends Controller
     			'stages' => $stages,
     			'task' => $task,
     			'category_id' => False,
+    			'previous_id' => $previous_id,
     			'next_id' => $next_id,
+    			'counter' => $counter,
+    			'total' => count($tasks),
     			])->withTask($task);
     }
     
