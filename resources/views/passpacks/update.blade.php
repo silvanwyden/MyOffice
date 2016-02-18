@@ -21,8 +21,10 @@
 				  
 				  		<a href="/passpacks" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
-				  		
+				  		@if ($passpack->id)
+				  			<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
+			  			@endif
+			  			
 					</div>
 				</div>
 			</div>

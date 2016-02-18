@@ -158,7 +158,7 @@ class PersonController extends Controller
     		$request->session()->put('person_page', $request->page);
     	$page = $request->session()->get('person_page');
     	
-    	$persons = $persons->orderBy($order, $dir)->paginate(100);
+    	$persons = $persons->orderBy($order, $dir)->orderBy('searchname')->paginate(100);
     	
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	
@@ -198,7 +198,8 @@ class PersonController extends Controller
     			'category_id' => $user->person_category_id,
     			'tags' => $tags,
     			'tags_sel' => array(),
-    			'parents' => $parents
+    			'parents' => $parents,
+    			'counter' => 0,
     			])->withPerson(new Person());
     
     }
@@ -261,62 +262,29 @@ class PersonController extends Controller
     	$filter_child = $request->session()->get('filter_child');
     	if ($filter_child == 1)
     		$persons->where('parent_id', '>', 0);
-    	
-    	$dir_where = '<';
-    	if ($dir == 'ASC')
-    		$dir_where = '>';
     	    		
-    	$persons = $persons->where($order, $dir_where, $person[$order])->orderBy($order, $dir)->limit(1)->first();
-    	$next_id = 0;
-    	if (count($persons)==1)
-    		$next_id = $persons->id;
-    	
-
-    	//get previous id
-    	$persons = DB::table('persons')
-    	->leftjoin('categories', 'persons.category_id', '=', 'categories.id')
-    	->select('persons.id as id');
-    	 
-    	//handle categories
-    	if ($ses_category_id)
-    		$persons->where('category_id', '=', $ses_category_id);
-    	
-    	//handle search tags
-    	if (strlen($search) > 0) {
-    		$search_array = explode(",", $search);
-    		$tags_sel = Tag::find($search_array);
-    		foreach(explode(",", $search) as $s)
-    			$persons->where('tag_ids', 'like', "%" . $s . "%");
-    	}
-    	
-    	//handle search text
-    	if (strlen($search_text) > 0)
-    		$persons->where('persons.searchname', 'like', "%" . $search_text . "%");
-    	
-    	//handle sort order
-    	if (!$order)
-    		$order = 'lastname';
-    	    	
-    	//handle filters
-    	if ($filter_parent == 1)
-    		$persons->where('parent_id', '=', 0);
-    	 
-    	if ($filter_child == 1)
-    		$persons->where('parent_id', '>', 0);
-    	 
-    	$dir_where = '>';
-    	if ($dir == 'ASC') {
-    		$dir_where = '<';
-    		$dir = 'DESC';
-    	}
-    	else 
-    		$dir = 'ASC';
-    	 
-    	$persons = $persons->where($order, $dir_where, $person[$order])->orderBy($order, $dir)->limit(1)->first();
+    	$persons = $persons->orderBy($order, $dir)->orderBy('searchname')->paginate(100);
+   
     	$previous_id = 0;
-    	if (count($persons)==1)
-    		$previous_id = $persons->id;
+    	$next_id = 0;
+    	$counter = 0;
+    	$found = false;
+    	foreach ($persons as $temp) {
     	
+    		if ($found) {
+    			$next_id = $temp->id;
+    			break;
+    		}
+    	
+    		if ($temp->id == $person->id) {
+    			$found = true;
+    		}
+    	
+    		$counter++;
+    		if (!$found)
+    			$previous_id = $temp->id;
+    	
+    	}
     	
     	return view('persons.update', [
     			'categories' => $categories,
@@ -326,7 +294,9 @@ class PersonController extends Controller
     			'tags_sel' => $tags_sel,
     			'parents' => $parents,
     			'next_id' => $next_id,
-    			'previous_id' => $previous_id
+    			'previous_id' => $previous_id,
+    			'counter' => $counter,
+    			'total' => count($persons),
     			])->withPerson($person);
     }
     

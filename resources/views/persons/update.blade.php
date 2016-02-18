@@ -21,23 +21,39 @@
 				  
 				  		<a href="/persons" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
-				  		
+				  		@if ($person->id)
+				  			<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
+			  			@endif
+			  			
 					</div>
 				</div>
 			</div>
 		
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Person
+					<div class="row">
+					
+						<div class="col-sm-10">
+							Person
+						</div>
+					
+						<div class="col-sm-2" style="text-align: right;">
+					
+							@if ($counter > 0)
+								{{ $counter }}/{{ $total }} &nbsp;
+						
+								@if ($previous_id > 0)
+									<a href="/person/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
+								@endif
+								@if ($next_id > 0)
+									<a href="/person/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
+								@endif
+							@endif
+							
+						</div>
+						
+					</div>
 				</div>
-				
-				@if ($previous_id > 0)
-					<a href="/person/{{ $previous_id }}/update">Previous</a>&nbsp;
-				@endif
-				@if ($next_id > 0)
-					<a href="/person/{{ $next_id }}/update">Next</a>
-				@endif
 	
 				<div class="panel-body">
 					<!-- Display Validation Errors -->
