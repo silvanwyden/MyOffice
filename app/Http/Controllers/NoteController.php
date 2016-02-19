@@ -152,49 +152,34 @@ class NoteController extends Controller
     public function update(Request $request, Note $note) {
     
     	$categories = Category::All(['id', 'name']);
-    	$priorities = Priority::All(['id', 'name']);
-    	$stages = Stage::All(['id', 'name']);
     	$user = User::find($request->user()->id);
     	
     	//get next id
-    	$notes = DB::table('Notes')
-    	->leftjoin('categories', 'Notes.category_id', '=', 'categories.id')
-    	->join('priorities', 'Notes.priority_id', '=', 'priorities.id')
-    	->join('stages', 'Notes.stage_id', '=', 'stages.id')
-    	->select('Notes.id as id')
-    	->where('user_id', '=', $request->user()->id);
-    	 
-    	//handle stages
-    	$ses_stage_id = $user->stage_id;
-    	if ($ses_stage_id)
-    		$notes->where('stage_id', '=', $ses_stage_id);
-    	 
+    	$notes = DB::table('notes')
+    	->leftjoin('categories', 'notes.category_id', '=', 'categories.id')
+    	->select('notes.id as id');
+    	    	 
     	//handle categories
-    	$ses_category_id = $user->category_id;
+    	$ses_category_id = $user->note_category_id;
     	if ($ses_category_id)
     		$notes->where('category_id', '=', $ses_category_id);
     	 
     	//handle search
-    	$search = $request->session()->get('search');
+    	$search = $request->session()->get('note_search');
     	if (strlen($search) > 0)
-    		$notes->where('notes.name', 'like', "%" . $search . "%");
-    	 
-    	//handle filters
-    	$filter_deadline = $request->session()->get('filter_deadline');
-    	if ($filter_deadline == 1)
-    		$notes->where('deadline', '!=', '0000-00-00')->where('deadline', '<=', date('Y-m-d', time()));
-    	 
+    		$notes->where('notes.title', 'like', "%" . $search . "%");
+
     	//handle sort order
-    	$order = $request->session()->get('order');
+    	$order = $request->session()->get('note_order');
     	if (!$order)
-    		$order = 'priority_id';
+    		$order = 'title';
     	 
     	//handle sort direction
-    	$dir = $request->session()->get('dir');
+    	$dir = $request->session()->get('note_dir');
     	if (!$dir)
     		$dir = 'ASC';
     	
-    	$notes = $notes->orderBy('notes.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('Notes.name', 'ASC')->paginate(50);
+    	$notes = $notes->orderBy('notes.'. $order, $dir)->orderBy('notes.title', 'ASC')->paginate(50);
     	
     	$previous_id = 0;
     	$next_id = 0;
@@ -217,11 +202,9 @@ class NoteController extends Controller
     		
     	}
 
-    	return view('Notes.update', [
+    	return view('notes.update', [
     			'categories' => $categories,
-    			'priorities' => $priorities,
-    			'stages' => $stages,
-    			'Note' => $note,
+    			'note' => $note,
     			'category_id' => False,
     			'previous_id' => $previous_id,
     			'next_id' => $next_id,
