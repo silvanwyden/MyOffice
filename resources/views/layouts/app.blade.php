@@ -79,6 +79,13 @@
 									@endif
 								</a>
 							</li>
+							<li class="{{ Request::is( 'note*') ? 'active' : '' }}">
+					    		<a href="/notes?page=1">Notes
+									@if(isset($notes))
+										<span class="badge">{{ $notes->total() }}</span>
+									@endif
+								</a>
+							</li>
 				      		<li class="{{ Request::is( 'person*') ? 'active' : '' }}">
 				        		<a href="/persons?page=1">Persons
 				        			@if(isset($persons))

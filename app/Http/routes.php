@@ -39,12 +39,19 @@ Route::get('/person/{person}/update', 'PersonController@update');
 Route::get('/person/{person}/delete', 'PersonController@destroy');
 Route::get('/persons/excel', 'PersonController@excel');
 
-// Task Passpack
+// Passpack Routes
 Route::get('/passpacks', 'PasspackController@index');
 Route::get('/passpack', 'PasspackController@create');
 Route::post('/passpack', 'PasspackController@store');
 Route::get('/passpack/{passpack}/update', 'PasspackController@update');
 Route::get('/passpack/{passpack}/delete', 'PasspackController@destroy');
+
+// Notes Routes
+Route::get('/notes', 'NoteController@index');
+Route::get('/note', 'NoteController@create');
+Route::post('/note', 'NoteController@store');
+Route::get('/note/{note}/update', 'NoteController@update');
+Route::get('/note/{note}/delete', 'NoteController@destroy');
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
