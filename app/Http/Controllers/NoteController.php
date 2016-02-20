@@ -159,11 +159,14 @@ class NoteController extends Controller
     	
     	$user = User::find($request->user()->id);
     	$categories = Category::All(['id', 'name']);
+    	$tags = Tag::All(['id', 'name', 'css_class']);
     	
     	return view('notes.update', [
     			'categories' => $categories,
-    			'category_id' => $user->category_id,
+    			'category_id' => $user->note_category_id,
     			'counter' => 0,
+    			'tags' => $tags,
+    			'tags_sel' => array(),
     			])->withNote(new Note());
     	 
     }
