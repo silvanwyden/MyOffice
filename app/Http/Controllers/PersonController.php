@@ -52,7 +52,7 @@ class PersonController extends Controller
     	
     	//get basic objects 
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	
     	//handle categories filter
@@ -169,7 +169,6 @@ class PersonController extends Controller
         	'dir' => $dir,
         	'page' => $page,
         	'category' => $user->person_category,
-        	'tags' => $tags,
         	'filter_parent' => $filter_parent,
         	'filter_child' => $filter_child,
         	'tags' => $tags,
@@ -189,7 +188,7 @@ class PersonController extends Controller
     public function create(Request $request) {
     	 
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	$parents = Person::All(['id', 'lastname', 'surname']);
     	
@@ -214,7 +213,7 @@ class PersonController extends Controller
     public function update(Request $request, Person $person) {
     	
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	$tags_sel = Tag::find(explode(",", $person->tag_ids));
     	$parents = Person::All(['id', 'lastname', 'surname']);

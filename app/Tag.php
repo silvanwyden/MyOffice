@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Note;
 
 class Tag extends Model
 {
@@ -20,6 +21,12 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = ['name',];
+    
+    public function getNumberNotes() {
+    	
+    	return Note::where('tag_ids', 'like', "%" . $this->id . "%")->count();
+    	
+    }
     
 
 

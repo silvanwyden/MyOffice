@@ -113,7 +113,7 @@
 				          $('#form-search').submit();
 				       });
 					  
-					</script>
+			</script>
 			
 		</div>
 		<div id="unseen-persons">

@@ -46,7 +46,7 @@ class PasspackController extends Controller
     	
     	//get basic objects
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
 
     	
     	//handle categories filter
@@ -135,7 +135,7 @@ class PasspackController extends Controller
     public function create(Request $request) {
     	
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	    	
     	return view('passpacks.update', [
     			'categories' => $categories,
@@ -154,7 +154,7 @@ class PasspackController extends Controller
      */
     public function update(Request $request, Passpack $passpack) {
     
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	
     	$password = Crypt::decrypt($passpack->password);
     

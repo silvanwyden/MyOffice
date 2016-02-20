@@ -48,7 +48,7 @@ class TaskController extends Controller
     	
     	//get basic objects
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
 
@@ -175,7 +175,7 @@ class TaskController extends Controller
     public function create(Request $request) {
     	
     	$user = User::find($request->user()->id);
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
     	
@@ -198,7 +198,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task) {
     
-    	$categories = Category::All(['id', 'name']);
+    	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$priorities = Priority::All(['id', 'name']);
     	$stages = Stage::All(['id', 'name']);
     	$user = User::find($request->user()->id);
