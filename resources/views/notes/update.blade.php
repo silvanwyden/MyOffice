@@ -19,7 +19,7 @@
 				<div class="col-sm-8">
 				  <div class="btn-group" role="group" aria-label="first">
 				  
-				  		<a href="/tasks" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<a href="/notes" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 				  		@if ($note->id)
 				  			<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
@@ -60,7 +60,7 @@
 					@include('common.errors')
 	
 					<!-- if we are updating a task we need to know the task ID -->
-					<input type="hidden" name="task_id" value="{{ $note->id or '' }}" />
+					<input type="hidden" name="note_id" value="{{ $note->id or '' }}" />
 	
 					<!-- Note Name -->
 					<div class="form-group">
