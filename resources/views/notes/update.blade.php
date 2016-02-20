@@ -43,10 +43,10 @@
 								{{ $counter }}/{{ $total }} &nbsp;
 						
 								@if ($previous_id > 0)
-									<a href="/task/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
+									<a href="/note/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
 								@endif
 								@if ($next_id > 0)
-									<a href="/task/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
+									<a href="/note/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
 								@endif
 							@endif
 							
