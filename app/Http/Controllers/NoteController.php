@@ -6,6 +6,7 @@ use App\Note;
 use App\Category;
 use App\Http\Requests;
 use App\User;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\NoteRepository;
@@ -70,6 +71,7 @@ class NoteController extends Controller
     				'notes.id',
     				'notes.created_at',
     				'notes.updated_at', 
+    				'notes.tag_ids',
     				'categories.name as cname', 
     				'categories.css_class'
     				);
@@ -152,6 +154,8 @@ class NoteController extends Controller
     public function update(Request $request, Note $note) {
     
     	$categories = Category::All(['id', 'name']);
+    	$tags = Tag::All(['id', 'name', 'css_class']);
+    	$tags_sel = Tag::find(explode(",", $note->tag_ids));
     	$user = User::find($request->user()->id);
     	
     	//get next id
@@ -206,6 +210,8 @@ class NoteController extends Controller
     			'categories' => $categories,
     			'note' => $note,
     			'category_id' => False,
+    			'tags' => $tags,
+    			'tags_sel' => $tags_sel,
     			'previous_id' => $previous_id,
     			'next_id' => $next_id,
     			'counter' => $counter,
@@ -230,6 +236,7 @@ class NoteController extends Controller
 	            'title' => $request->title,
 	        	'description' => $request->description,
 	        	'category_id' => $request->category,
+        		'tag_ids' => $request->tags,
 	        );
         
         if ($request->note_id) {

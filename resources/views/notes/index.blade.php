@@ -63,7 +63,12 @@
 								</a>
 							</td>
 							<td class="table-text"><div class="btn {{ $note->css_class }}">{{ $note->cname }}</div></td>
-							<td class="table-text"><div></div></td>
+							<td class="table-text">
+								@foreach(getTags($note->tag_ids) as $tag)
+									<div style="padding: 3px;" class="tag label {{ $tag->css_class }}">{{ $tag->name }}</div>
+									
+								@endforeach
+							</td>
 														
 							<!-- Note Action Buttons -->
 							<td>
