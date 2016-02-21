@@ -110,7 +110,7 @@ class NoteController extends Controller
     	}
     	$search_text = $request->session()->get('note_search_text');
     	if (strlen($search_text) > 0)
-    		$notes->where('notes.title', 'like', "%" . $search_text . "%");
+    		$notes->where('notes.title', 'like', "%" . $search_text . "%")->orWhere('notes.description', 'like', "%" . $search_text . "%");
     	
     	//handle sort order
     	if ($request->order)
@@ -194,11 +194,26 @@ class NoteController extends Controller
     	$ses_category_id = $user->note_category_id;
     	if ($ses_category_id)
     		$notes->where('category_id', '=', $ses_category_id);
+
+    	//handle search tags
+    	$search = $request->session()->get('note_search');
+    	if (strlen($search) > 0) {
+    		$search_array = explode(",", $search);
+    		$tags_sel = Tag::find($search_array);
+    		foreach(explode(",", $search) as $s)
+    			$notes->where('tag_ids', 'like', "%," . $s . ",%");
+    	}
     	 
     	//handle search
-    	$search = $request->session()->get('note_search_text');
-    	if (strlen($search) > 0)
-    		$notes->where('notes.title', 'like', "%" . $search . "%");
+    	if ($request->btn_search == "s") {
+    		if ($request->search_text)
+    			$request->session()->put('note_search_text', $request->search_text);
+    		else
+    			$request->session()->forget('note_search_text');
+    	}
+    	$search_text = $request->session()->get('note_search_text');
+    	if (strlen($search_text) > 0)
+    		$notes->where('notes.title', 'like', "%" . $search_text . "%")->orWhere('notes.description', 'like', "%" . $search_text . "%");
 
     	//handle sort order
     	$order = $request->session()->get('note_order');
