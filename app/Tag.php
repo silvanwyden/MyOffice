@@ -24,7 +24,7 @@ class Tag extends Model
     
     public function getNumberNotes() {
     	
-    	return Note::where('tag_ids', 'like', "%" . $this->id . "%")->count();
+    	return Note::where('tag_ids', 'like', "%," . $this->id . ",%")->count();
     	
     }
     

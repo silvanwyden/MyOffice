@@ -98,7 +98,7 @@ class NoteController extends Controller
     		$search_array = explode(",", $search);
     		$tags_sel = Tag::find($search_array);
     		foreach(explode(",", $search) as $s)
-    			$notes->where('tag_ids', 'like', "%" . $s . "%");
+    			$notes->where('tag_ids', 'like', "%," . $s . ",%");
     	}
     	
     	//handle search
@@ -263,7 +263,7 @@ class NoteController extends Controller
 	            'title' => $request->title,
 	        	'description' => $request->description,
 	        	'category_id' => $request->category,
-        		'tag_ids' => $request->tags,
+        		'tag_ids' => ',' . $request->tags . ',',
 	        );
         
         if ($request->note_id) {
