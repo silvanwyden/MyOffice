@@ -314,7 +314,7 @@ class TaskController extends Controller
         	}
         else {
         	
-	        $request->user()->tasks()->create($input);
+	        $task = $request->user()->tasks()->create($input);
 	        $request->session()->flash('alert-success', 'Task was successful added!');
 	        
 	        }

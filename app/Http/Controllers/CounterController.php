@@ -182,7 +182,7 @@ class CounterController extends Controller
     	else {
     		 
     		$counter = new Counter();
-    		$counter->create($input);
+    		$counter = $counter->create($input);
     		$request->session()->flash('alert-success', 'Counter was successful added!');
     		 
     	}

@@ -21,9 +21,7 @@
 				  
 				  		<a href="/persons" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
-				  		@if ($person->id)
-				  			<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
-			  			@endif
+				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 			  			
 					</div>
 				</div>
@@ -321,11 +319,9 @@
 								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;
 							</button>
 							
-							@if ($person->id)
 							<button type="submit" name="save_edit" class="btn btn-info" value="save_edit" style="margin-bottom: 5px;">
 								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
 							</button>
-							@endif
 							
 							<a href="/persons" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							

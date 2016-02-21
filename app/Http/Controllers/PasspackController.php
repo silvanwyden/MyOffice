@@ -195,7 +195,7 @@ class PasspackController extends Controller
         	}
         else {
         	$passpack = new Passpack();
-	       	$passpack->create($input);
+	       	$passpack = $passpack->create($input);
 	        $request->session()->flash('alert-success', 'Passpack was successful added!');
 	        
 	        }

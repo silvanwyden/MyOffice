@@ -346,7 +346,7 @@ class PersonController extends Controller
     	else {
     		 
     		$person = new Person();
-    		$person->create($input);
+    		$person = $person->create($input);
     		$request->session()->flash('alert-success', 'Person was successful added!');
     		 
     	}

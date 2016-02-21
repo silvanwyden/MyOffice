@@ -291,13 +291,13 @@ class NoteController extends Controller
         else {
         	
 	        $note = new Note();
-    		$note->create($input);
+    		$note = $note->create($input);
 	        $request->session()->flash('alert-success', 'Note was successful added!');
 	        
 	        }
 
 	    $page = $request->session()->get('page');
-        
+
 	    if ($request->save_edit)
         	return redirect('/note/' . $note->id . '/update');
 	    else
