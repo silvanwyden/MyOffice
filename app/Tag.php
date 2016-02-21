@@ -20,7 +20,7 @@ class Tag extends Model
      *
      * @var array
      */
-    protected $fillable = ['name',];
+    protected $fillable = ['name', 'seq', 'css_class', 'category_id'];
     
     public function getNumberNotes() {
     	

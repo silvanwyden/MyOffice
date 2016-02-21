@@ -53,6 +53,13 @@ Route::post('/note', 'NoteController@store');
 Route::get('/note/{note}/update', 'NoteController@update');
 Route::get('/note/{note}/delete', 'NoteController@destroy');
 
+// Tag Routes
+Route::get('/tags', 'TagController@index');
+Route::get('/tag', 'TagController@create');
+Route::post('/tag', 'TagController@store');
+Route::get('/tag/{tag}/update', 'TagController@update');
+Route::get('/tag/{tag}/delete', 'TagController@destroy');
+
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
