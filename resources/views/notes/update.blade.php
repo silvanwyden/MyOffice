@@ -116,6 +116,10 @@
 						
 					</script>
 					
+
+					
+					
+					
 					<!-- Tags -->
 					<div class="form-group">
 						<label for="person-mail" class="col-sm-2 control-label">Tags</label>
@@ -126,7 +130,7 @@
 					</div>
 					
 					
-					<script>
+				<script>
 
 					var elt = $('#tags');
 					var tags = new Bloodhound({
@@ -137,11 +141,12 @@
 					    
 	
 					        remote: {
-					            url: '/notes/search/?term=%QUERY',
-					            wildcard: '%QUERY',
+					            url: '/notes/search/?',
 								cache:false,
 					            replace: function(url, query) {
-					                return url + "&" + 'category_id=' + $('#category').val();
+						            
+					                return url + 'q=' + query + '&category_id=' + $('#category').val();
+					                
 					            },
 					            ajax : {
 					                beforeSend: function(jqXhr, settings){
@@ -159,17 +164,14 @@
 					tags.clearPrefetchCache();
 
 					elt.tagsinput({
-					  tagClass: 'label label-default',
+					  tagClass: 'label label-success',
 					  itemValue: 'value',
 					  itemText: 'text',
 					  typeaheadjs: {
-					    name: 'tags',
+					    name: 'cities',
 					    displayKey: 'text',
-					    source: function (query, process) {
-				            return $.get('/notes/search/?category_id=' + $('#category').val(), function (data) {
-					            alert(data);
-				                return process(data.search_results);
-				            });}
+					    source: tags,
+					    limit: 1000,
 					  }
 					});
 					

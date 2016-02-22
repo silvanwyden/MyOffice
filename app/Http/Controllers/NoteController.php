@@ -331,9 +331,12 @@ class NoteController extends Controller
     	
     	$result = '';
     	$category_id = $request->category_id;
+    	$q = $request->q;
     	
     	if ($category_id > 0) {
-    		$tags = Tag::where('category_id', '=', $category_id)->orderBy('name')->get();
+    		$tags = Tag::where('category_id', '=', $category_id)
+    					->where('name', 'like', '%' . $q . '%')
+    					->orderBy('name')->limit(3)->get();
     	
     		if (count($tags) > 0) {
     			foreach ($tags as $tag)
