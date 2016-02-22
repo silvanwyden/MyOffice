@@ -164,7 +164,7 @@
 					tags.clearPrefetchCache();
 
 					elt.tagsinput({
-					  tagClass: 'label label-success',
+					  tagClass: 'label label-default',
 					  itemValue: 'value',
 					  itemText: 'text',
 					  typeaheadjs: {
@@ -177,7 +177,7 @@
 					
 					 @foreach ($tags_sel as $tag)
 					  	 elt.tagsinput('add', { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    });
-					  @endforeach
+					 @endforeach
 					  
 					</script>
 								
