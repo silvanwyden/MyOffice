@@ -14,6 +14,7 @@ use DateTime;
 use App\Session;
 use DB;
 use Log;
+use Redirect;
 
 class NoteController extends Controller
 {
@@ -183,7 +184,6 @@ class NoteController extends Controller
     
     	$categories = Category::All(['id', 'name']);
     	$tags = Tag::All(['id', 'name', 'css_class']);
-    	$tags_sel = Tag::find(explode(",", $note->tag_ids));
     	$user = User::find($request->user()->id);
     	
     	//get next id
@@ -254,14 +254,13 @@ class NoteController extends Controller
     			'note' => $note,
     			'category_id' => False,
     			'tags' => $tags,
-    			'tags_sel' => $tags_sel,
+    			'tags_sel' => $tags_sel = Tag::find(explode(",", $note->tag_ids)),
     			'previous_id' => $previous_id,
     			'next_id' => $next_id,
     			'counter' => $counter,
     			'total' => count($notes),
     			])->withNote($note);
     }
-    
 
     /**
      * Validate AND Save/Crate a new Note.
@@ -273,7 +272,19 @@ class NoteController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:255',
+        	//'tag_ids' => 'check_tags($request->tag_ids, $request->category_id)',
         ]);
+        
+        //check if tags belong all to the category_id
+        foreach(explode(",", $request->tags) as $temp) {
+        	$t = Tag::find($temp);
+        	if ($t) {
+        		if ($t->category_id != $request->category)
+        			return Redirect::back()->withErrors('Tag ' . $t->name . ' is from the wrong category!')->withInput();
+        	}
+        }
+        	
+        
         
         $input = array(
 	            'title' => $request->title,
