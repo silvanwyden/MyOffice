@@ -48,6 +48,9 @@ Route::get('/passpack/{passpack}/delete', 'PasspackController@destroy');
 
 // Notes Routes
 Route::get('/notes', 'NoteController@index');
+Route::get('/notes/search', 'NoteController@search');
+Route::post('/notes/search', 'NoteController@search');
+
 Route::get('/note', 'NoteController@create');
 Route::post('/note', 'NoteController@store');
 Route::get('/note/{note}/update', 'NoteController@update');

@@ -13,6 +13,7 @@ use App\Repositories\NoteRepository;
 use DateTime;
 use App\Session;
 use DB;
+use Log;
 
 class NoteController extends Controller
 {
@@ -321,6 +322,30 @@ class NoteController extends Controller
         $request->session()->flash('alert-success', 'Note was successful deleted!');
 
         return redirect('/notes');
+    }
+    
+    
+    public function search(Request $request) {
+
+    	Log::info("search request for tags:" . $request->category_id);
+    	
+    	$result = '';
+    	$category_id = $request->category_id;
+    	
+    	if ($category_id > 0) {
+    		$tags = Tag::where('category_id', '=', $category_id)->orderBy('name')->get();
+    	
+    		if (count($tags) > 0) {
+    			foreach ($tags as $tag)
+    				$result .= '{"value": ' . $tag->id . ',"text": "' . $tag->name . '"},';
+    			
+    			$result = rtrim($result, ",");
+    		}
+    			
+    	}
+    	
+    	return '[' . $result . ']';
+    	
     }
     
 

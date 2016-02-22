@@ -127,34 +127,49 @@
 					
 					
 					<script>
-					var cities = new Bloodhound({
-					  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
-					  queryTokenizer: Bloodhound.tokenizers.whitespace,
-					  local: [ 
-							  @foreach ($tags as $tag)
-							  	 { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    },
-							  @endforeach
-					         ]
-					});
-					cities.initialize();
-					
+
 					var elt = $('#tags');
+					var tags = new Bloodhound({
+					    datumTokenizer: function (d) {
+					            return Bloodhound.tokenizers.whitespace(d.isim);
+					        },
+					    queryTokenizer: Bloodhound.tokenizers.whitespace,
+					    
+	
+					        remote: {
+					            url: '/notes/search/?term=%QUERY',
+					            wildcard: '%QUERY',
+								cache:false,
+					            replace: function(url, query) {
+					                return url + "&" + 'category_id=' + $('#category').val();
+					            },
+					            ajax : {
+					                beforeSend: function(jqXhr, settings){
+					                   settings.type = 'GET';
+					                   settings.hasContent = true;
+					                },
+					                type: "GET"
+
+					            }
+					        }
+					    	
+					
+					});
+					tags.initialize();
+					tags.clearPrefetchCache();
+
 					elt.tagsinput({
-					  tagClass: function(item) {
-					    switch (item.label) {
-					      case 'label-primary'   : return 'label label-primary';
-					      case 'label-danger'  : return 'label label-danger label-important';
-					      case 'label-success': return 'label label-success';
-					      case 'label-default'   : return 'label label-default';
-					      case 'label-warning'     : return 'label label-warning';
-					    }
-					  },
+					  tagClass: 'label label-default',
 					  itemValue: 'value',
 					  itemText: 'text',
 					  typeaheadjs: {
-					    name: 'cities',
+					    name: 'tags',
 					    displayKey: 'text',
-					    source: cities.ttAdapter()
+					    source: function (query, process) {
+				            return $.get('/notes/search/?category_id=' + $('#category').val(), function (data) {
+					            alert(data);
+				                return process(data.search_results);
+				            });}
 					  }
 					});
 					
