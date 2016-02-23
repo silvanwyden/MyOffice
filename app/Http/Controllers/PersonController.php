@@ -201,6 +201,7 @@ class PersonController extends Controller
     			'tags_sel' => array(),
     			'parents' => $parents,
     			'counter' => 0,
+    			'children' => array(),
     			])->withPerson(new Person());
     
     }
@@ -331,12 +332,16 @@ class PersonController extends Controller
     		$birthday = $date->format('m-d');
     		$date = $date->format('Y-m-d');
     	}
+    	
+    	$gender = '';
+    	if ($request->gender)
+    		$gender = $request->gender;
     
     	$input = array(
     			'lastname' => $request->lastname,
     			'surname' => $request->surname,
     			'searchname' => $request->lastname . ' ' . $request->surname,
-    			'gender' => $request->gender,
+    			'gender' => $gender,
     			'phone' => $request->phone,
     			'mobile' => $request->mobile,
     			'mail' => $request->mail,
