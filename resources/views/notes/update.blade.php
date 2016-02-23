@@ -141,7 +141,7 @@
 					    
 	
 					        remote: {
-					            url: '/notes/search/?',
+					            url: '/tags/search/?',
 								cache:false,
 					            replace: function(url, query) {
 						            

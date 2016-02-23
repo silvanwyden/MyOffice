@@ -48,9 +48,6 @@ Route::get('/passpack/{passpack}/delete', 'PasspackController@destroy');
 
 // Notes Routes
 Route::get('/notes', 'NoteController@index');
-Route::get('/notes/search', 'NoteController@search');
-Route::post('/notes/search', 'NoteController@search');
-
 Route::get('/note', 'NoteController@create');
 Route::post('/note', 'NoteController@store');
 Route::get('/note/{note}/update', 'NoteController@update');
@@ -62,6 +59,9 @@ Route::get('/tag', 'TagController@create');
 Route::post('/tag', 'TagController@store');
 Route::get('/tag/{tag}/update', 'TagController@update');
 Route::get('/tag/{tag}/delete', 'TagController@destroy');
+Route::post('/tags/search', 'TagController@search');
+Route::get('/tags/search', 'TagController@search');
+
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

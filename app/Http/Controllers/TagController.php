@@ -12,6 +12,7 @@ use App\Repositories\TagRepository;
 use DateTime;
 use App\Session;
 use DB;
+use Log;
 
 class TagController extends Controller
 {
@@ -206,6 +207,32 @@ class TagController extends Controller
     	return redirect('/tags');
     }
     
+    
+    public function search(Request $request) {
+    
+    	Log::info("search request for tags:" . $request->category_id);
+    	 
+    	$result = '';
+    	$category_id = $request->category_id;
+    	$q = $request->q;
+    	 
+    	if ($category_id > 0) {
+    		$tags = Tag::where('category_id', '=', $category_id)
+    		->where('name', 'like', '%' . $q . '%')
+    		->orderBy('name')->limit(5)->get();
+    		 
+    		if (count($tags) > 0) {
+    			foreach ($tags as $tag)
+    				$result .= '{"value": ' . $tag->id . ',"text": "' . $tag->name . '"},';
+    			 
+    			$result = rtrim($result, ",");
+    		}
+    		 
+    	}
+    	 
+    	return '[' . $result . ']';
+    	 
+    }
 
     
     
