@@ -83,7 +83,24 @@
 						<label for="person-gender" class="col-sm-2 control-label">Gender</label>
 
 						<div class="col-sm-10">
-							<input type="text" name="gender" id="person-gender" class="form-control" value="{{ $person->gender or old('gender') }}">
+							<div class="radio">
+	  							<label>
+									@if ($person->gender == 'f')
+										<input type="radio" name="gender" id="person-gender"  value="f" checked>
+									@else
+										<input type="radio" name="gender" id="person-gender"  value="f">
+									@endif
+									female
+								</label>
+								<label>
+									@if ($person->gender == 'm')
+										<input type="radio" name="gender" id="person-gender"  value="m" checked>
+									@else
+										<input type="radio" name="gender" id="person-gender"  value="m">
+									@endif
+									male
+								</label>
+							</div>
 						</div>
 					</div>
 					

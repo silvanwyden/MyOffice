@@ -333,6 +333,7 @@ class PersonController extends Controller
     			'lastname' => $request->lastname,
     			'surname' => $request->surname,
     			'searchname' => $request->lastname . ' ' . $request->surname,
+    			'gender' => $request->gender,
     			'phone' => $request->phone,
     			'mobile' => $request->mobile,
     			'mail' => $request->mail,
