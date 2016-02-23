@@ -42,8 +42,6 @@
 				<tr>
 					<th><nobr><a href="{{ createOrderLink('name', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('name', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('css_class', $order, $dir, $page) }}">CSS</a> <div class="{{ createOrderLinkImage('css_class', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('seq', $order, $dir, $page) }}">Sequence</a> <div class="{{ createOrderLinkImage('seq', $order, $dir) }}"></div></nobr></th>
 					<th>Action</th>
 					</tr>
 				</thead>
@@ -56,8 +54,6 @@
 								</a>
 							</td>
 							<td class="table-text"><div class="btn {{ $tag->ccss_class }}">{{ $tag->cname }}</div></td>
-							<td class="table-text">{{ $tag->css_class }}</td>
-							<td class="table-text">{{ $tag->seq }}</td>
 							
 							<!-- Task Action Buttons -->
 							<td>

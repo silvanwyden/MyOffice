@@ -67,8 +67,6 @@ class TagController extends Controller
     	->select(
     			'tags.id',
     			'tags.name',
-    			'tags.css_class',
-    			'tags.seq',
     			'tags.category_id',
     			'categories.name as cname',
     			'categories.css_class as ccss_class'
@@ -160,8 +158,6 @@ class TagController extends Controller
     	$input = array(
     			'name' => $request->name,
     			'category_id' => $request->category,
-    			'css_class' => $request->css_class,
-    			'seq' => $request->seq,
     	);
     
     	if ($request->tag_id) {

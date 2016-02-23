@@ -66,27 +66,7 @@
 						</div>
 						<input type="hidden" id="category" name="category" value="0">
 					</div>
-					
-					<!-- Tag CSS -->
-					<div class="form-group">
-						<label for="tag-css" class="col-sm-2 control-label">CSS Class</label>
-	
-						<div class="col-sm-10">
-							<input type="text" name="css_class" id="tag-css" class="form-control" value="{{ $tag->css_class or old('css_class') }}">
-						</div>
-					
-					</div>
-					
-					<!-- Tag Sequence -->
-					<div class="form-group">
-						<label for="tag-name" class="col-sm-2 control-label">Sequence</label>
-	
-						<div class="col-sm-10">
-							<input type="text" name="seq" id="tag-seq" class="form-control" value="{{ $tag->seq or old('seq') }}">
-						</div>
-					
-					</div>
-					
+							
 					<script>
 
 						//function to show the selected item in the dropdown
