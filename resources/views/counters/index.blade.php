@@ -44,8 +44,6 @@
 				<tr>
 					<th><nobr><a href="{{ createOrderLink('date', $order, $dir, $page) }}">Date</a> <div class="{{ createOrderLinkImage('date', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('counter_category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('counter_category_id', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('calories', $order, $dir, $page) }}">Calories</a> <div class="{{ createOrderLinkImage('calories', $order, $dir) }}"></div></nobr></th>
-					<th><nobr><a href="{{ createOrderLink('distance', $order, $dir, $page) }}">Distance</a> <div class="{{ createOrderLinkImage('distance', $order, $dir) }}"></div></nobr></th>
 					<th>Action</th>
 					</tr>
 				</thead>
@@ -56,8 +54,6 @@
 								<a href="/counter/{{ $counter->id }}/update"><div>{{ date('d.m.Y', strtotime($counter->date)) }}</a>
 							</td>
 							<td class="table-text"><div class="btn {{ $counter->css_class }}">{{ $counter->cname }}</div></td>
-							<td class="table-text">{{ $counter->calories }}</td>
-							<td class="table-text">{{ $counter->distance }}</td>
 							
 							<!-- Task Action Buttons -->
 							<td>
