@@ -101,7 +101,7 @@ class CounterController extends Controller
     		$request->session()->put('counter_page', $request->page);
     	$page = $request->session()->get('counter_page');
     	
-    	$counters = $counters->orderBy($order, $dir)->paginate(50);
+    	$counters = $counters->orderBy($order, $dir)->orderBy('date', 'ASC')->paginate(50);
     	
         return view('counters.index', [
         	'counters' => $counters,
@@ -129,6 +129,7 @@ class CounterController extends Controller
     	return view('counters.update', [
     			'countercategories' => $countercategories,
     			'counter_category_id' => $user->counter_category_id,
+    			'cnt' => 0,
     			])->withCounter(new Counter());
     
     }
@@ -143,11 +144,63 @@ class CounterController extends Controller
     public function update(Request $request, Counter $counter) {
     	
     	$countercategories = Countercategory::All(['id', 'name']);
+    	$user = User::find($request->user()->id);
+    	
+    	//handle categories filter
+    	$ses_category_id = $user->counter_category_id;
+    	 
+    	//base query
+    	$counters = DB::table('counters')
+    	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
+    	->select(
+    			'counters.id'
+    	);
+    	 
+    	//handle categories
+    	if ($ses_category_id)
+    		$counters->where('counter_category_id', '=', $ses_category_id);
+    	 
+    	//handle sort order
+    	$order = $request->session()->get('counter_order');
+    	if (!$order)
+    		$order = 'date';
+    	 
+    	//handle sort direction
+    	$dir = $request->session()->get('counter_dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	 
+    	$counters = $counters->orderBy($order, $dir)->orderBy('date', 'ASC')->paginate(50);
+    	
+    	$previous_id = 0;
+    	$next_id = 0;
+    	$cnt = 0;
+    	$found = false;
+    	foreach ($counters as $temp) {
+    		 
+    		if ($found) {
+    			$next_id = $temp->id;
+    			break;
+    		}
+    		 
+    		if ($temp->id == $counter->id) {
+    			$found = true;
+    		}
+    		 
+    		$cnt++;
+    		if (!$found)
+    			$previous_id = $temp->id;
+    		 
+    	}
 
     	return view('counters.update', [
     			'countercategories' => $countercategories,
 				'counter' => $counter,
     			'counter_category_id' => False,
+    			'previous_id' => $previous_id,
+    			'next_id' => $next_id,
+    			'cnt' => $cnt,
+    			'total' => count($counters),
     			])->withCounter($counter);
     }
     

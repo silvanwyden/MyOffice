@@ -145,6 +145,7 @@ class PasspackController extends Controller
     			'categories' => $categories,
     			'category_id' => $user->passpack_category_id,
     			'pwd' => '',
+    			'counter' => 0,
     			])->withPasspack(new Passpack());
     	 
     }

@@ -29,7 +29,28 @@
 	
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					Entry
+					<div class="row">
+					
+						<div class="col-sm-10">
+							Counter
+						</div>
+					
+						<div class="col-sm-2" style="text-align: right;">
+					
+							@if ($cnt > 0)
+								{{ $cnt }}/{{ $total }} &nbsp;
+						
+								@if ($previous_id > 0)
+									<a href="/counter/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
+								@endif
+								@if ($next_id > 0)
+									<a href="/counter/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
+								@endif
+							@endif
+							
+						</div>
+						
+					</div>
 				</div>
 	
 				<div class="panel-body">
