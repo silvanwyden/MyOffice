@@ -73,6 +73,8 @@ class PasspackController extends Controller
     				'passpacks.id',
     				'passpacks.created_at',
     				'passpacks.updated_at', 
+    				'passpacks.name',
+    				'passpacks.description',
     				'categories.name as cname', 
     				'categories.css_class'
     				);
@@ -184,6 +186,8 @@ class PasspackController extends Controller
 	        	'user' => $request->passpack_user,
 	        	'password' => Crypt::encrypt($request->passpack_password),
 	        	'category_id' => $request->category,
+        		'name' => $request->name,
+        		'description' => $request->description,
 	        );
         
         if ($request->passpack_id) {

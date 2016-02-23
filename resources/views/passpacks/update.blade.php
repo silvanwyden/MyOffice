@@ -41,6 +41,15 @@
 	
 					<!-- Passpack URL -->
 					<div class="form-group">
+						<label for="task-name" class="col-sm-2 control-label">Name</label>
+	
+						<div class="col-sm-10">
+							<input type="text" name="name" id="passpack-name" class="form-control" value="{{ $passpack->name or old('name') }}">
+						</div>
+					</div>
+	
+					<!-- Passpack URL -->
+					<div class="form-group">
 						<label for="task-name" class="col-sm-2 control-label">URL</label>
 	
 						<div class="col-sm-10">
@@ -142,6 +151,15 @@
 						
 					</div>
 					
+					<!-- Passpack Description -->
+					<div class="form-group">
+						<label for="task-name" class="col-sm-2 control-label">Description</label>
+	
+						<div class="col-sm-10">
+							<textarea name="description" id="summernote" class="form-control" >{{ $passpack->description or old('description') }}</textarea>
+						</div>
+					</div>
+					
 					<!-- Action Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
@@ -173,7 +191,7 @@
 	
 		//set cursor to the task name field
 		$(function () {
-			$('#passpack-url').focus();
+			$('#passpack-name').focus();
 		});
 
 		(function() {

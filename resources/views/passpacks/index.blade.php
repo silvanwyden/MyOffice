@@ -47,6 +47,7 @@
 			<table class="table table-striped passpack-table" id="clickable">
 				<thead>
 				<tr>
+					<th><nobr><a href="{{ createOrderLink('name', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('name', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('url', $order, $dir, $page) }}">URL</a> <div class="{{ createOrderLinkImage('url', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('category_id', $order, $dir, $page) }}">Category</a> <div class="{{ createOrderLinkImage('category_id', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('user', $order, $dir, $page) }}">User</a> <div class="{{ createOrderLinkImage('user', $order, $dir) }}"></div></nobr></th>
@@ -56,12 +57,12 @@
 				<tbody>
 					@foreach ($passpacks as $passpack)
 						<tr>
-							<!-- td class="table-text"><div>{{ $passpack->id }}</div></td-->
 							<td class="table-text">
 								<a href="/passpack/{{ $passpack->id }}/update">
-									<div>{{ $passpack->url }}</div>
+									<div>{{ $passpack->name }}</div>
 								</a>
 							</td>
+							<td class="table-text"><div>{{ $passpack->url }}</div></td>
 							<td class="table-text"><div class="btn {{ $passpack->css_class }}">{{ $passpack->cname }}</div></td>
 							<td class="table-text"><div>{{ $passpack->user }}</div></td>
 							

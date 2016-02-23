@@ -17,6 +17,8 @@ class Passpack extends Model
     		'user', 
     		'password', 
     		'category_id', 
+    		'name',
+    		'description',
     	];
 
     
