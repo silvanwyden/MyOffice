@@ -168,7 +168,7 @@ class CountercategoryController extends Controller
      * @param  Task  $task
      * @return Response
      */
-    public function destroy(Request $request, Tag $countercategory)
+    public function destroy(Request $request, Countercategory $countercategory)
     {
 
     	$countercategory->delete();
