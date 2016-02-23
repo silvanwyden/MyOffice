@@ -288,6 +288,8 @@ class PersonController extends Controller
     	
     	$tags_sel = Tag::find(explode(",", $person->tag_ids));
     	
+    	$children = Person::where('parent_id', '=', $person->id)->orderBy('searchname')->get();
+    	
     	return view('persons.update', [
     			'categories' => $categories,
 				'person' => $person,
@@ -299,6 +301,7 @@ class PersonController extends Controller
     			'previous_id' => $previous_id,
     			'counter' => $counter,
     			'total' => count($persons),
+    			'children' => $children,
     			])->withPerson($person);
     }
     

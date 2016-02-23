@@ -266,6 +266,7 @@
 						        $( "#parent_name" ).val( ui.item.value );
 						        $( "#parent_id" ).val( ui.item.key );
 						        $( "#parent-address" ).hide();
+						        $( "#parent-link" ).attr('href', '/person/' + ui.item.key + '/update').show();
 						 
 						        return false;
 						      } 
@@ -274,6 +275,7 @@
 						    $("#parent_name").change(function(){
 						  		$( "#parent_id" ).val('');
 						  		$( "#parent-address" ).show();
+						  		$( "#parent-link" ).hide();
 							});
 						 
 						  });
@@ -285,8 +287,15 @@
 						</script>
 						
 						<div class="col-sm-10">
-							<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $person->parent_id }}" style="width: 100%;">
-							<input type="text" name="parent_name" id="parent_name" class="form-control" value="{{ getParentPerson($person->parent_id) }}" style="width: 100%;">
+							<div class="input-group">
+								<input type="hidden" name="parent_id" id="parent_id" class="form-control" value="{{ $person->parent_id }}" style="width: 100%;">
+								<input type="text" name="parent_name" id="parent_name" class="form-control" value="{{ getParentPerson($person->parent_id) }}" style="width: 100%;">
+								<span class="input-group-addon">
+									<a href="" id="parent-link">
+								    	<span class="glyphicon glyphicon-user"></span>
+									</a>
+								</span>
+							</div>
 						</div>
 					</div>
 
@@ -337,6 +346,19 @@
 						</div>
 					</div>
 					
+					@if (count($children) > 0)
+						<div class="form-group">
+							<label for="person-children" class="col-sm-2 control-label">Children</label>
+							<div class="col-sm-10">
+								<div class="list-group">
+									@foreach ($children as $child)
+										<a class="list-group-item" href="/person/{{ $child->id }}/update">{{ $child->searchname }}</a>
+									@endforeach
+								</div>
+							</div>
+						</div>
+					@endif
+					
 					
 					<!-- Action Button -->
 					<div class="form-group">
@@ -375,7 +397,10 @@
 
 			if ($( "#parent_id" ).val() > 0) {
 				$( "#parent-address" ).hide();
+				$( "#parent-link" ).attr('href', '/person/{{ $person->parent_id }}/update').show();
 			}
+			else
+				$( "#parent-link" ).hide();
 			
 		});
 
