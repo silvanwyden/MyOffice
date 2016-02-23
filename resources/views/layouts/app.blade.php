@@ -117,7 +117,7 @@
 			        		<li class="dropdown">
 						    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
 					        	<ul class="dropdown-menu">
-						            <li><a href="#">Categories</a></li>
+						            <li><a href="/countercategories">Counter Categories</a></li>
 						            <li><a href="/tags">Tags</a></li>
 						            <li><a href="#">Stages</a></li>
 						            <li><a href="#">Users</a></li>

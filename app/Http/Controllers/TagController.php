@@ -154,6 +154,10 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+    	
+    	$this->validate($request, [
+    			'name' => 'required|max:255',
+    			]);
     
     	$input = array(
     			'name' => $request->name,

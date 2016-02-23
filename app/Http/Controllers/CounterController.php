@@ -46,7 +46,7 @@ class CounterController extends Controller
     	
     	//get basic objects 
     	$user = User::find($request->user()->id);
-    	$categories = Countercategory::All(['id', 'name']);
+    	$categories = Countercategory::where('inactive', '!=', '1')->orderBy('name')->get();
     	
     	//handle categories filter
     	if ($request->category_id)
@@ -124,7 +124,7 @@ class CounterController extends Controller
     public function create(Request $request) {
     	 
     	$user = User::find($request->user()->id);
-    	$countercategories = Countercategory::All(['id', 'name']);
+    	$countercategories = Countercategory::where('inactive', '!=', '1')->orderBy('name')->get();
     	
     	return view('counters.update', [
     			'countercategories' => $countercategories,
@@ -143,7 +143,7 @@ class CounterController extends Controller
      */
     public function update(Request $request, Counter $counter) {
     	
-    	$countercategories = Countercategory::All(['id', 'name']);
+    	$countercategories = Countercategory::where('inactive', '!=', '1')->orderBy('name')->get();
     	$user = User::find($request->user()->id);
     	
     	//handle categories filter
@@ -295,6 +295,7 @@ class CounterController extends Controller
     			DB::raw('CONCAT(YEAR(date), "-", MONTH(date)) AS condate')
     	)
     	//->groupBy('condate')
+    	->where('countercategories.inactive', '!=', 1)
     	->groupBy('counters.counter_category_id')->get();
     	
     	//select 

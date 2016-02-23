@@ -64,6 +64,13 @@ Route::get('/tag/{tag}/delete', 'TagController@destroy');
 Route::post('/tags/search', 'TagController@search');
 Route::get('/tags/search', 'TagController@search');
 
+// Countercategory Routes
+Route::get('/countercategories', 'CountercategoryController@index');
+Route::get('/countercategory', 'CountercategoryController@create');
+Route::post('/countercategory', 'CountercategoryController@store');
+Route::get('/countercategory/{countercategory}/update', 'CountercategoryController@update');
+Route::get('/countercategory/{countercategory}/delete', 'CountercategoryController@destroy');
+
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

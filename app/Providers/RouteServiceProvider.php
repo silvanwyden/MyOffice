@@ -8,6 +8,7 @@ use App\Person;
 use App\Passpack;
 use App\Note;
 use App\Tag;
+use App\Countercategory;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -36,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('passpack', Passpack::class);
         $router->model('note', Note::class);
         $router->model('tag', Tag::class);
+        $router->model('countercategory', Countercategory::class);
 
         parent::boot($router);
     }
