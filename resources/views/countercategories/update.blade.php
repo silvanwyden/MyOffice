@@ -46,7 +46,6 @@
 						<div class="col-sm-10">
 							<input type="text" name="name" id="countercategory-name" class="form-control" value="{{ $countercategory->name or old('name') }}">
 						</div>
-					
 					</div>
 					
 					<!-- Task inactive -->
@@ -54,13 +53,16 @@
 						<label for="countercategory-name" class="col-sm-2 control-label">inactive</label>
 	
 						<div class="col-sm-10">
-							@if ($countercategory->inactive)
-								<input type="checkbox" name="inactive" id="countercategory-inactive"  value="1" checked>
-							@else
-								<input type="checkbox" name="inactive" id="countercategory-inactive"  value="1">
-							@endif
+							<div class="checkbox">
+	  							<label>
+									@if ($countercategory->inactive)
+										<input type="checkbox" name="inactive" id="countercategory-inactive"  value="1" checked>
+									@else
+										<input type="checkbox" name="inactive" id="countercategory-inactive"  value="1">
+									@endif
+								</label>
+							</div>
 						</div>
-					
 					</div>
 
 					
