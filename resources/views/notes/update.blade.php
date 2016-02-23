@@ -129,40 +129,25 @@
 						</div>
 					</div>
 					
-					
-				<script>
+					<script>
 
-					var elt = $('#tags');
 					var tags = new Bloodhound({
 					    datumTokenizer: function (d) {
 					            return Bloodhound.tokenizers.whitespace(d.isim);
 					        },
 					    queryTokenizer: Bloodhound.tokenizers.whitespace,
-					    
-	
-					        remote: {
-					            url: '/tags/search/?',
-								cache:false,
-					            replace: function(url, query) {
-						            
-					                return url + 'q=' + query + '&category_id=' + $('#category').val();
-					                
-					            },
-					            ajax : {
-					                beforeSend: function(jqXhr, settings){
-					                   settings.type = 'GET';
-					                   settings.hasContent = true;
-					                },
-					                type: "GET"
-
-					            }
-					        }
-					    	
-					
+				        remote: {
+				            url: '/tags/search/?',
+							cache:false,
+				            replace: function(url, query) {
+				                return url + 'q=' + query + '&category_id=' + $('#category').val();
+				            },
+				        }
 					});
 					tags.initialize();
 					tags.clearPrefetchCache();
 
+					var elt = $('#tags');
 					elt.tagsinput({
 					  tagClass: 'label label-default',
 					  itemValue: 'value',
@@ -175,9 +160,9 @@
 					  }
 					});
 					
-					 @foreach ($tags_sel as $tag)
+					@foreach ($tags_sel as $tag)
 					  	 elt.tagsinput('add', { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    });
-					 @endforeach
+					@endforeach
 					  
 					</script>
 								
