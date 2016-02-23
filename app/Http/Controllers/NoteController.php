@@ -141,6 +141,7 @@ class NoteController extends Controller
         	'order' => $order,
         	'dir' => $dir,
         	'category' => $user->note_category,
+        	'category_id' => $user->note_category_id,
         	'search' => $search,
         	'page' => $page,
         	'tags' => $tags,

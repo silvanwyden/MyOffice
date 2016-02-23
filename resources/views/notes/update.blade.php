@@ -153,7 +153,7 @@
 					  itemValue: 'value',
 					  itemText: 'text',
 					  typeaheadjs: {
-					    name: 'cities',
+					    name: 'tags',
 					    displayKey: 'text',
 					    source: tags,
 					    limit: 1000,

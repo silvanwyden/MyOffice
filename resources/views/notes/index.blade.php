@@ -56,40 +56,47 @@
 			</form>
 			
 			<script>
-					var cities = new Bloodhound({
-					  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
-					  queryTokenizer: Bloodhound.tokenizers.whitespace,
-					  local: [ 
-							  @foreach ($tags as $tag)
-							  	 { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    },
-							  @endforeach
-					         ]
-					});
-					cities.initialize();
-					
-					var elt = $('#search');
-					elt.tagsinput({
-						tagClass: 'label label-default',
-					  itemValue: 'value',
-					  itemText: 'text',
-					  typeaheadjs: {
-					    name: 'cities',
-					    displayKey: 'text',
-					    source: cities.ttAdapter()
-					  }
-					});
-					
-					 @foreach ($tags_sel as $tag)
-					  	 elt.tagsinput('add', { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    });
-					 @endforeach
 
-					 $('#search').change(function() {
-				          $('#form-search').submit();
-				       });
+			var tags = new Bloodhound({
+			    datumTokenizer: function (d) {
+			            return Bloodhound.tokenizers.whitespace(d.isim);
+			        },
+			    queryTokenizer: Bloodhound.tokenizers.whitespace,
+		        remote: {
+		            url: '/tags/search/?',
+					cache:false,
+		            replace: function(url, query) {
+		                return url + 'q=' + query + '&category_id={{ $category_id }}';
+		            },
+		        }
+			});
+			tags.initialize();
+			tags.clearPrefetchCache();
 
-					 $('#search-text').change(function() {
-				          $('#form-search').submit();
-				       });
+			var elt = $('#search');
+			elt.tagsinput({
+			  tagClass: 'label label-default',
+			  itemValue: 'value',
+			  itemText: 'text',
+			  typeaheadjs: {
+			    name: 'cities',
+			    displayKey: 'text',
+			    source: tags,
+			    limit: 1000,
+			  }
+			});
+			
+			@foreach ($tags_sel as $tag)
+			  	 elt.tagsinput('add', { "value": {{ $tag->id }} , "text": "{{ $tag->name }}"   , "label": "{{ $tag->css_class }}"    });
+			@endforeach
+					  
+			$('#search').change(function() {
+		          $('#form-search').submit();
+		       });
+
+			$('#search-text').change(function() {
+		          $('#form-search').submit();
+		       });
 					  
 			</script>
 			

@@ -216,19 +216,21 @@ class TagController extends Controller
     	$category_id = $request->category_id;
     	$q = $request->q;
     	 
+    	$tags = Tag::where('name', 'like', '%' . $q . '%');
+    	
     	if ($category_id > 0) {
-    		$tags = Tag::where('category_id', '=', $category_id)
-    		->where('name', 'like', '%' . $q . '%')
-    		->orderBy('name')->limit(5)->get();
-    		 
-    		if (count($tags) > 0) {
-    			foreach ($tags as $tag)
-    				$result .= '{"value": ' . $tag->id . ',"text": "' . $tag->name . '"},';
-    			 
-    			$result = rtrim($result, ",");
-    		}
-    		 
+    		$tags = $tags->where('category_id', '=', $category_id);
     	}
+    	
+    	$tags = $tags->orderBy('name')->limit(5)->get();
+    		 
+    	if (count($tags) > 0) {
+    		foreach ($tags as $tag)
+    			$result .= '{"value": ' . $tag->id . ',"text": "' . $tag->name . '"},';
+    			 
+    		$result = rtrim($result, ",");
+    	}
+
     	 
     	return '[' . $result . ']';
     	 
