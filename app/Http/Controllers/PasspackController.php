@@ -91,15 +91,17 @@ class PasspackController extends Controller
     			$request->session()->forget('passpack_search');
     	}
     	$search = $request->session()->get('passpack_search');
-    	if (strlen($search) > 0)
-    		$passpacks->where('passpacks.url', 'like', "%" . $search . "%");
+    	if (strlen($search) > 0) {
+    		$passpacks->where('passpacks.url', 'like', "%" . $search . "%")
+    					->orWhere('passpacks.name', 'like', "%" . $search . "%");
+    	}
     	
     	//handle sort order
     	if ($request->order)
     		$request->session()->put('passpack_order', $request->order);
     	$order = $request->session()->get('passpack_order');
     	if (!$order)
-    		$order = 'url';
+    		$order = 'name';
     	
     	//handle sort direction
     	if ($request->dir)
@@ -113,7 +115,7 @@ class PasspackController extends Controller
     		$request->session()->put('passpack_page', $request->page);
     	$page = $request->session()->get('passpack_page');
     	
-    	$passpacks = $passpacks->orderBy($order, $dir)->paginate(50);
+    	$passpacks = $passpacks->orderBy($order, $dir)->orderBy('passpacks.name', 'ASC')->paginate(50);
     	
         return view('passpacks.index', [
         	'categories' => $categories,
@@ -157,14 +159,72 @@ class PasspackController extends Controller
     public function update(Request $request, Passpack $passpack) {
     
     	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
-    	
+    	$user = User::find($request->user()->id);
     	$password = Crypt::decrypt($passpack->password);
+    	
+    	//handle categories filter
+    	$ses_category_id = $user->passpack_category_id;
+    	 
+    	//base query
+    	$passpacks = DB::table('passpacks')
+    	->leftjoin('categories', 'passpacks.category_id', '=', 'categories.id')
+    	->select(
+    			'passpacks.id'
+    	);
+    	 
+    	//handle categories
+    	if ($ses_category_id)
+    		$passpacks->where('category_id', '=', $ses_category_id);
+    	 
+    	//handle search
+    	$search = $request->session()->get('passpack_search');
+	    if (strlen($search) > 0) {
+	    		$passpacks->where('passpacks.url', 'like', "%" . $search . "%")
+	    					->orWhere('passpacks.name', 'like', "%" . $search . "%");
+	    	}
+    	 
+    	//handle sort order
+    	$order = $request->session()->get('passpack_order');
+    	if (!$order)
+    		$order = 'name';
+    	 
+    	//handle sort direction
+    	$dir = $request->session()->get('dir');
+    	if (!$dir)
+    		$dir = 'ASC';
+    	 
+    	$passpacks = $passpacks->orderBy('passpacks.' . $order, $dir)->orderBy('passpacks.name', 'ASC')->paginate(50);
+    	
+    	$previous_id = 0;
+    	$next_id = 0;
+    	$counter = 0;
+    	$found = false;
+    	foreach ($passpacks as $temp) {
+    	
+    		if ($found) {
+    			$next_id = $temp->id;
+    			break;
+    		}
+    	
+    		if ($temp->id == $passpack->id) {
+    			$found = true;
+    		}
+    	
+    		$counter++;
+    		if (!$found)
+    			$previous_id = $temp->id;
+    	
+    	}
     
     	return view('passpacks.update', [
     			'categories' => $categories,
     			'passpack' => $passpack,
     			'pwd' => $password,
     			'category_id' => False,
+    			'previous_id' => $previous_id,
+    			'next_id' => $next_id,
+    			'counter' => $counter,
+    			'total' => count($passpacks),
     			])->withPasspack($passpack);
     }
     

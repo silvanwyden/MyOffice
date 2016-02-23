@@ -29,7 +29,28 @@
 		
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					PassPack
+					<div class="row">
+					
+						<div class="col-sm-10">
+							PassPack
+						</div>
+					
+						<div class="col-sm-2" style="text-align: right;">
+					
+							@if ($counter > 0)
+								{{ $counter }}/{{ $total }} &nbsp;
+						
+								@if ($previous_id > 0)
+									<a href="/passpack/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
+								@endif
+								@if ($next_id > 0)
+									<a href="/passpack/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
+								@endif
+							@endif
+							
+						</div>
+						
+					</div>
 				</div>
 				
 				<div class="panel-body">
