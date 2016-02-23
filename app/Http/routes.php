@@ -38,6 +38,8 @@ Route::post('/person', 'PersonController@store');
 Route::get('/person/{person}/update', 'PersonController@update');
 Route::get('/person/{person}/delete', 'PersonController@destroy');
 Route::get('/persons/excel', 'PersonController@excel');
+Route::get('/persons/search', 'PersonController@search');
+
 
 // Passpack Routes
 Route::get('/passpacks', 'PasspackController@index');

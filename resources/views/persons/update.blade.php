@@ -227,15 +227,18 @@
 						<script>
 						
 						  $(function() {
-						  	var availableTags = [
-											  	@foreach ($parents as $p)
-											  		{key: {{ $p->id }} ,value: '{{ $p->lastname . " " . $p->surname }}'},
-											  	@endforeach
-							 					];
+						  	
+						  	var getData = function (request, response) {
+						        $.getJSON(
+						            "/persons/search/?active_id={{ $person->id }}&q=" + request.term,
+						            function (data) {
+						                response(data);
+						            });
+						    };
 							
 						    $( "#parent_name" ).autocomplete({
 						      minLength: 0,
-						      source: availableTags,
+						      source: getData,
 						      mustMatch: true,
 						      focus: function( event, ui ) {
 						        $( "#parent_name" ).val( ui.item.value );
@@ -255,6 +258,10 @@
 							});
 						 
 						  });
+
+
+						  
+													  
 
 						</script>
 						

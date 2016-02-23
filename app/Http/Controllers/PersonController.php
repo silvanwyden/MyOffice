@@ -502,13 +502,33 @@ class PersonController extends Controller
     			//->cc('silvan@wyden.com');
     			});
     			 
-    			
-    		
     		}
     
     }
     
     
+    public function search(Request $request) {
+    
+    	Log::info("search request for persons");
+    
+    	$result = '';
+    	$q = $request->q;
+    
+    	$persons = Person::where('searchname', 'like', '%' . $q . '%')
+    		->where('id', '!=', $request->active_id)
+    		->where('parent_id', '<=' , 0)
+			->orderBy('searchname')->limit(10)->get();
+    	 
+    	if (count($persons) > 0) {
+    		foreach ($persons as $person)
+    			$result .= '{"key": ' . $person->id . ',"value": "' . $person->searchname . '"},';
+    
+    		$result = rtrim($result, ",");
+    	}
+    
+    	return '[' . $result . ']';
+    
+    }
     
     
 }
