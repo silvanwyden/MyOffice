@@ -273,7 +273,6 @@ class NoteController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:255',
-        	//'tag_ids' => 'check_tags($request->tag_ids, $request->category_id)',
         ]);
         
         //check if tags belong all to the category_id

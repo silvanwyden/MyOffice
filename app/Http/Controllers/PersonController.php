@@ -16,6 +16,7 @@ use DB;
 use Excel;
 use Log;
 use Mail;
+use Redirect;
 
 class PersonController extends Controller
 {
@@ -169,6 +170,7 @@ class PersonController extends Controller
         	'dir' => $dir,
         	'page' => $page,
         	'category' => $user->person_category,
+        	'category_id' => $user->person_category_id,
         	'filter_parent' => $filter_parent,
         	'filter_child' => $filter_child,
         	'tags' => $tags,
@@ -215,7 +217,6 @@ class PersonController extends Controller
     	$user = User::find($request->user()->id);
     	$categories = Category::where('is_note', '=', 0)->orderBy('seq')->get();
     	$tags = Tag::All(['id', 'name', 'css_class']);
-    	$tags_sel = Tag::find(explode(",", $person->tag_ids));
     	$parents = Person::All(['id', 'lastname', 'surname']);
     	
     	
@@ -285,6 +286,8 @@ class PersonController extends Controller
     	
     	}
     	
+    	$tags_sel = Tag::find(explode(",", $person->tag_ids));
+    	
     	return view('persons.update', [
     			'categories' => $categories,
 				'person' => $person,
@@ -308,7 +311,16 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-    	//print "tags:" . $request->tags; //-> tags:1,4,6
+    	
+    	//check if tags belong all to the category_id
+    	foreach(explode(",", $request->tags) as $temp) {
+    		$t = Tag::find($temp);
+    		if ($t) {
+    			if ($t->category_id != $request->category)
+    				return Redirect::back()->withErrors('Tag ' . $t->name . ' is from the wrong category!')->withInput();
+    		}
+    	}
+    	
     	$date = False;
     	$birthday = False;
     	if ($request->birthdate) {
