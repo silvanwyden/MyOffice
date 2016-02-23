@@ -126,9 +126,13 @@ class CountercategoryController extends Controller
     			'name' => 'required|max:255',
     			]);
     	
+    	$inactive = 0;
+    	if ($request->inactive)
+    		$inactive = 1;
+    	
     	$input = array(
     			'name' => $request->name,
-    			'inactive' => $request->inactive,
+    			'inactive' => $inactive,
     	);
     
     	if ($request->countercategory_id) {
