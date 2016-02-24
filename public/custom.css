@@ -9,6 +9,13 @@
 	#unseen table th:nth-child(6){display: none;}
 }
 
+@media only screen and (max-width: 640px) {
+	#unseen table td:nth-child(2),
+	#unseen table th:nth-child(2),
+	#unseen table td:nth-child(6),
+	#unseen table th:nth-child(6){display: none;}
+}
+
 @media only screen and (max-width: 630px) {
 	#unseen-counters table td:nth-child(3),
 	#unseen-counters table th:nth-child(3),
@@ -17,12 +24,57 @@
 }
 
 @media only screen and (max-width: 630px) {
-	#unseen-persons table td:nth-child(2),
-	#unseen-persons table th:nth-child(2),
+	#unseen-persons table td:nth-child(4),
+	#unseen-persons table th:nth-child(4),
 	#unseen-persons table td:nth-child(5),
 	#unseen-persons table th:nth-child(5),
 	#unseen-persons table td:nth-child(6),
-	#unseen-persons table th:nth-child(6){display: none;}
+	#unseen-persons table th:nth-child(6),
+	#unseen-persons table td:nth-child(7),
+	#unseen-persons table th:nth-child(7),
+	#unseen-persons table td:nth-child(8),
+	#unseen-persons table th:nth-child(8){display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+	#unseen-persons table td:nth-child(4),
+	#unseen-persons table th:nth-child(4),
+	#unseen-persons table td:nth-child(5),
+	#unseen-persons table th:nth-child(5),
+	#unseen-persons table td:nth-child(7),
+	#unseen-persons table th:nth-child(7),
+	#unseen-persons table td:nth-child(8),
+	#unseen-persons table th:nth-child(8){display: none;}
+}
+
+@media only screen and (max-width: 630px) {
+	#unseen-notes table td:nth-child(2),
+	#unseen-notes table th:nth-child(2),
+	#unseen-notes table td:nth-child(4),
+	#unseen-notes table th:nth-child(4){display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+	#unseen-notes table td:nth-child(2),
+	#unseen-notes table th:nth-child(2),
+	#unseen-notes table td:nth-child(4),
+	#unseen-notes table th:nth-child(4){display: none;}
+}
+
+@media only screen and (max-width: 630px) {
+	#unseen-passpack table td:nth-child(2),
+	#unseen-passpack table th:nth-child(2),
+	#unseen-passpack table td:nth-child(3),
+	#unseen-passpack table th:nth-child(3),
+	#unseen-passpack table td:nth-child(5),
+	#unseen-passpack table th:nth-child(5){display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+	#unseen-passpack table td:nth-child(2),
+	#unseen-passpack table th:nth-child(2),
+	#unseen-passpack table td:nth-child(5),
+	#unseen-passpack table th:nth-child(5){display: none;}
 }
 
 .panel-body {

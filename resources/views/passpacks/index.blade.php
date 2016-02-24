@@ -43,7 +43,7 @@
 			</div>
 			
 		</div>
-		<div id="unseen">
+		<div id="unseen-passpack">
 			<table class="table table-striped passpack-table" id="clickable">
 				<thead>
 				<tr>

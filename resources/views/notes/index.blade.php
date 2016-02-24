@@ -101,7 +101,7 @@
 			</script>
 			
 		</div>
-		<div id="unseen">
+		<div id="unseen-notes">
 		
 			<div class="col-sm-2">
 				@foreach($tags as $tag)
