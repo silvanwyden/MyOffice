@@ -49,7 +49,7 @@
 					@foreach ($tags as $tag)
 						<tr>
 							<td class="table-text">
-								<a href="/tag/{{ $tag->id }}/update">
+								<a href="/tag/{{ $tag->id }}/update?page={{ $page }}">
 									<div>{{ $tag->name }}</div>
 								</a>
 							</td>

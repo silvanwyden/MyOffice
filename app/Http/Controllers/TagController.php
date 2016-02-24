@@ -95,7 +95,13 @@ class TagController extends Controller
     		$request->session()->put('tag_page', $request->page);
     	$page = $request->session()->get('tag_page');
     	
-    	$tags = $tags->orderBy($order, $dir)->get();
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    	$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$tags = $tags->orderBy($order, $dir)->paginate($pagination_number);
     	
         return view('tags.index', [
         	'tags' => $tags,
@@ -123,6 +129,7 @@ class TagController extends Controller
     	return view('tags.update', [
     			'categories' => $categories,
     			'category_id' => $request->session()->get('tag_category_id'),
+    			'page' => $request->session()->get('tag_page'),
     			])->withTag(new Tag());
     
     }
@@ -142,6 +149,7 @@ class TagController extends Controller
     			'categories' => $categories,
 				'tag' => $tag,
     			'category_id' => False,
+    			'page' => $request->session()->get('tag_page'),
     			])->withTag($tag);
     }
     
@@ -203,8 +211,9 @@ class TagController extends Controller
     	$tag->delete();
     
     	$request->session()->flash('alert-success', 'Tag was successful deleted!');
+    	$page = $request->session()->get('tag_page');
     
-    	return redirect('/tags');
+    	return redirect('/tags?page=' . $page);
     }
     
     
