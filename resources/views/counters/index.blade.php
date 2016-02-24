@@ -51,7 +51,7 @@
 					@foreach ($counters as $counter)
 						<tr>
 							<td class="table-text">
-								<a href="/counter/{{ $counter->id }}/update"><div>{{ date('d.m.Y', strtotime($counter->date)) }}</a>
+								<a href="/counter/{{ $counter->id }}/update?page={{ $page }}"><div>{{ date('d.m.Y', strtotime($counter->date)) }}</a>
 							</td>
 							<td class="table-text"><div class="btn {{ $counter->css_class }}">{{ $counter->cname }}</div></td>
 							

@@ -101,7 +101,13 @@ class CounterController extends Controller
     		$request->session()->put('counter_page', $request->page);
     	$page = $request->session()->get('counter_page');
     	
-    	$counters = $counters->orderBy($order, $dir)->orderBy('date', 'ASC')->paginate(50);
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    	$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$counters = $counters->orderBy($order, $dir)->orderBy('date', 'ASC')->paginate($pagination_number);
     	
         return view('counters.index', [
         	'counters' => $counters,
@@ -130,6 +136,7 @@ class CounterController extends Controller
     			'countercategories' => $countercategories,
     			'counter_category_id' => $user->counter_category_id,
     			'cnt' => 0,
+    			'page' => $request->session()->get('counter_page'),
     			])->withCounter(new Counter());
     
     }
@@ -170,7 +177,9 @@ class CounterController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	 
-    	$counters = $counters->orderBy($order, $dir)->orderBy('date', 'ASC')->paginate(50);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$counters = $counters->orderBy($order, $dir)->orderBy('date', 'ASC')->paginate($pagination_number);
     	
     	$previous_id = 0;
     	$next_id = 0;
@@ -201,6 +210,7 @@ class CounterController extends Controller
     			'next_id' => $next_id,
     			'cnt' => $cnt,
     			'total' => count($counters),
+    			'page' => $request->session()->get('counter_page'),
     			])->withCounter($counter);
     }
     
@@ -264,8 +274,9 @@ class CounterController extends Controller
     	$counter->delete();
     
     	$request->session()->flash('alert-success', 'Counter was successful deleted!');
+    	$page = $request->session()->get('counter_page');
     
-    	return redirect('/counters');
+    	return redirect('/counters?page=' . $page);
     }
     
     
