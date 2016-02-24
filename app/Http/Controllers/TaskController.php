@@ -147,7 +147,13 @@ class TaskController extends Controller
     		$request->session()->put('page', $request->page);
     	$page = $request->session()->get('page');
     	
-    	$tasks = $tasks->orderBy('tasks.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('tasks.name', 'ASC')->paginate(50);
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    	$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$tasks = $tasks->orderBy('tasks.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('tasks.name', 'ASC')->paginate($pagination_number);
     	
         return view('tasks.index', [
         	'categories' => $categories,
@@ -185,6 +191,7 @@ class TaskController extends Controller
     			'stages' => $stages,
     			'category_id' => $user->category_id,
     			'counter' => 0,
+    			'page' => $request->session()->get('page'),
     			])->withTask(new Task());
     	 
     }
@@ -241,7 +248,9 @@ class TaskController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	
-    	$tasks = $tasks->orderBy('tasks.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('tasks.name', 'ASC')->paginate(50);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$tasks = $tasks->orderBy('tasks.'. $order, $dir)->orderBy('deadline', 'ASC')->orderBy('tasks.name', 'ASC')->paginate($pagination_number);
     	
     	$previous_id = 0;
     	$next_id = 0;
@@ -274,6 +283,7 @@ class TaskController extends Controller
     			'next_id' => $next_id,
     			'counter' => $counter,
     			'total' => count($tasks),
+    			'page' => $request->session()->get('page'),
     			])->withTask($task);
     }
     
@@ -343,8 +353,9 @@ class TaskController extends Controller
         $task->delete();
         
         $request->session()->flash('alert-success', 'Task was successful deleted!');
-
-        return redirect('/tasks');
+        $page = $request->session()->get('page');
+        
+        return redirect('/tasks?page=' . $page);
     }
     
     
@@ -362,8 +373,9 @@ class TaskController extends Controller
     	$task->save();
     	
     	$request->session()->flash('alert-success', 'Task was successful changed to stage done!');
-    
-    	return redirect('/tasks');
+    	$page = $request->session()->get('page');
+    	
+    	return redirect('/tasks?page=' . $page);
     }
     
 }

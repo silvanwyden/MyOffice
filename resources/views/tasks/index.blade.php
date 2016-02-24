@@ -79,7 +79,7 @@
 						<tr>
 							<!-- td class="table-text"><div>{{ $task->id }}</div></td-->
 							<td class="table-text">
-								<a href="/task/{{ $task->id }}/update">
+								<a href="/task/{{ $task->id }}/update?page={{ $page }}">
 									<div>{{ $task->name }}</div>
 								</a>
 							</td>
