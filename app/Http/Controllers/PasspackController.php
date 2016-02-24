@@ -115,7 +115,13 @@ class PasspackController extends Controller
     		$request->session()->put('passpack_page', $request->page);
     	$page = $request->session()->get('passpack_page');
     	
-    	$passpacks = $passpacks->orderBy($order, $dir)->orderBy('passpacks.name', 'ASC')->paginate(50);
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    	$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$passpacks = $passpacks->orderBy($order, $dir)->orderBy('passpacks.name', 'ASC')->paginate($pagination_number);
     	
         return view('passpacks.index', [
         	'categories' => $categories,
@@ -146,6 +152,7 @@ class PasspackController extends Controller
     			'category_id' => $user->passpack_category_id,
     			'pwd' => '',
     			'counter' => 0,
+    			'page' => $request->session()->get('passpack_page'),
     			])->withPasspack(new Passpack());
     	 
     }
@@ -194,7 +201,9 @@ class PasspackController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	 
-    	$passpacks = $passpacks->orderBy('passpacks.' . $order, $dir)->orderBy('passpacks.name', 'ASC')->paginate(50);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$passpacks = $passpacks->orderBy('passpacks.' . $order, $dir)->orderBy('passpacks.name', 'ASC')->paginate($pagination_number);
     	
     	$previous_id = 0;
     	$next_id = 0;
@@ -226,6 +235,7 @@ class PasspackController extends Controller
     			'next_id' => $next_id,
     			'counter' => $counter,
     			'total' => count($passpacks),
+    			'page' => $request->session()->get('passpack_page'),
     			])->withPasspack($passpack);
     }
     
@@ -288,8 +298,9 @@ class PasspackController extends Controller
         $passpack->delete();
         
         $request->session()->flash('alert-success', 'Passpack was successful deleted!');
+        $page = $request->session()->get('passpack_page');
 
-        return redirect('/passpacks');
+        return redirect('/passpacks?page=' . $page);
     }
     
     

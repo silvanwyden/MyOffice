@@ -19,7 +19,7 @@
 				<div class="col-sm-8">
 				  <div class="btn-group" role="group" aria-label="first">
 				  
-				  		<a href="/passpacks" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<a href="/passpacks?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 			  			
@@ -41,10 +41,10 @@
 								{{ $counter }}/{{ $total }} &nbsp;
 						
 								@if ($previous_id > 0)
-									<a href="/passpack/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
+									<a href="/passpack/{{ $previous_id }}/update?page={{ $page }}" class="glyphicon glyphicon-chevron-left"></a>
 								@endif
 								@if ($next_id > 0)
-									<a href="/passpack/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
+									<a href="/passpack/{{ $next_id }}/update?page={{ $page }}" class="glyphicon glyphicon-chevron-right"></a>
 								@endif
 							@endif
 							
@@ -192,7 +192,7 @@
 								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
 							</button>
 							
-							<a href="/passpacks" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
+							<a href="/passpacks?page={{ $page }}" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($passpack->id)
 							<nobr>

@@ -58,7 +58,7 @@
 					@foreach ($passpacks as $passpack)
 						<tr>
 							<td class="table-text">
-								<a href="/passpack/{{ $passpack->id }}/update">
+								<a href="/passpack/{{ $passpack->id }}/update?page={{ $page }}">
 									<div>{{ $passpack->name }}</div>
 								</a>
 							</td>
