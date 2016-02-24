@@ -73,7 +73,13 @@ class CountercategoryController extends Controller
     		$request->session()->put('countercategories_page', $request->page);
     	$page = $request->session()->get('countercategories_page');
     	
-    	$countercategories = $countercategories->orderBy($order, $dir)->paginate(50);
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    	$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$countercategories = $countercategories->orderBy($order, $dir)->paginate($pagination_number);
     	
         return view('countercategories.index', [
         	'order' => $order,
@@ -95,6 +101,7 @@ class CountercategoryController extends Controller
     	 
     	return view('countercategories.update', [
     			'countercategory' => new Countercategory(),
+    			'page' => $request->session()->get('countercategories_page'),
     			])->withCountercategorys(new Countercategory());
     
     }
@@ -110,6 +117,7 @@ class CountercategoryController extends Controller
     	
     	return view('countercategories.update', [
 				'countercategory' => $countercategory,
+    			'page' => $request->session()->get('countercategories_page'),
     			])->withCountercategorys($countercategory);
     }
     
@@ -150,7 +158,7 @@ class CountercategoryController extends Controller
     		 
     	}
     
-    	$page = $request->session()->get('countercategory_page');
+    	$page = $request->session()->get('countercategories_page');
     	 
     if ($request->save_edit)
     		return redirect('/countercategory/' . $countercategory->id . '/update');
@@ -174,8 +182,9 @@ class CountercategoryController extends Controller
     	$countercategory->delete();
     
     	$request->session()->flash('alert-success', 'Counter Category was successful deleted!');
+    	$page = $request->session()->get('countercategories_page');
     
-    	return redirect('/countercategories');
+    	return redirect('/countercategories?page=' . $page);
     }
     
 

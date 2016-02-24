@@ -95,7 +95,7 @@ class TagController extends Controller
     		$request->session()->put('tag_page', $request->page);
     	$page = $request->session()->get('tag_page');
     	
-    	$tags = $tags->orderBy($order, $dir)->paginate(50);
+    	$tags = $tags->orderBy($order, $dir)->get();
     	
         return view('tags.index', [
         	'tags' => $tags,

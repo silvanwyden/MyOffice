@@ -19,7 +19,7 @@
 				<div class="col-sm-8">
 				  <div class="btn-group" role="group" aria-label="first">
 				  
-				  		<a href="/countercategories" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<a href="/countercategories?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 			  			
@@ -77,7 +77,7 @@
 								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
 							</button>
 							
-							<a href="/countercategories" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
+							<a href="/countercategories?page={{ $page }}" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($countercategory->id)
 							<nobr>

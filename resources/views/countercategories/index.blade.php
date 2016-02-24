@@ -36,7 +36,7 @@
 					@foreach ($countercategories as $countercategory)
 						<tr>
 							<td class="table-text">
-								<a href="/countercategory/{{ $countercategory->id }}/update">
+								<a href="/countercategory/{{ $countercategory->id }}/update?page={{ $page }}">
 									<div>{{ $countercategory->name }}</div>
 								</a>
 							</td>
