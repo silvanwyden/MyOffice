@@ -42,9 +42,16 @@
 					@else
 						<a href="/persons?filter_child=1" class="btn btn-default">Child</a>
 					@endif
+					
+					@if ($filter_birthday == 1)
+						<a href="/persons?filter_birthday=-1" class="btn btn-default active"><span class="fa fa-birthday-cake"></span></a>	
+					@else
+						<a href="/persons?filter_birthday=1" class="btn btn-default"><span class="fa fa-birthday-cake"></span></a>	
+					@endif
+					
 									
 					<a href="/persons/excel" class="btn btn-default"><span class="glyphicon glyphicon-export"></span></a>	
-			
+					
 				</div>
 			</div>
 			

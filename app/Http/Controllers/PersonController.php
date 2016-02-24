@@ -154,6 +154,16 @@ class PersonController extends Controller
     	if ($filter_child == 1)
     		$persons->where('parent_id', '>', 0);
     	
+    	if ($request->filter_birthday == 1)
+    		$request->session()->put('filter_birthday', 1);
+    	elseif ($request->filter_birthday == -1)
+    	$request->session()->put('filter_birthday', 0);
+    	$filter_birthday = $request->session()->get('filter_birthday');
+    	if ($filter_birthday == 1) {
+    		$persons->where('birthday', '>', 0);
+    		$order = 'birthday';
+    	}
+    	
     	//handle pagination -> we don't want to lose the page
     	if ($request->page)
     		$request->session()->put('person_page', $request->page);
@@ -173,6 +183,7 @@ class PersonController extends Controller
         	'category_id' => $user->person_category_id,
         	'filter_parent' => $filter_parent,
         	'filter_child' => $filter_child,
+        	'filter_birthday' => $filter_birthday,
         	'tags' => $tags,
         	'tags_sel' => $tags_sel,
         	'search_text' => $search_text,
