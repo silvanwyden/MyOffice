@@ -19,7 +19,7 @@
 				<div class="col-sm-8">
 				  <div class="btn-group" role="group" aria-label="first">
 				  
-				  		<a href="/notes" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<a href="/notes?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 			  			
@@ -41,10 +41,10 @@
 								{{ $counter }}/{{ $total }} &nbsp;
 						
 								@if ($previous_id > 0)
-									<a href="/note/{{ $previous_id }}/update" class="glyphicon glyphicon-chevron-left"></a>
+									<a href="/note/{{ $previous_id }}/update?page={{ $page }}" class="glyphicon glyphicon-chevron-left"></a>
 								@endif
 								@if ($next_id > 0)
-									<a href="/note/{{ $next_id }}/update" class="glyphicon glyphicon-chevron-right"></a>
+									<a href="/note/{{ $next_id }}/update?page={{ $page }}" class="glyphicon glyphicon-chevron-right"></a>
 								@endif
 							@endif
 							
@@ -196,11 +196,11 @@
 								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
 							</button>
 							
-							<a href="/tasks" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
+							<a href="/notes?page={{ $page }}" class="btn btn-warning" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-minus"></i> Cancel</a>
 							
 							@if ($note->id)
 							<nobr>
-								<a href="/task/{{ $note->id }}/delete" class="delete btn btn-danger" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-remove"></i> Delete</a>
+								<a href="/note/{{ $note->id }}/delete" class="delete btn btn-danger" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-remove"></i> Delete</a>
 							</nobr>		
 							@endif
 							

@@ -133,7 +133,13 @@ class NoteController extends Controller
     		$request->session()->put('note_page', $request->page);
     	$page = $request->session()->get('note_page');
     	
-    	$notes = $notes->orderBy('notes.'. $order, $dir)->orderBy('notes.title', 'ASC')->paginate(50);
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    	$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$notes = $notes->orderBy('notes.'. $order, $dir)->orderBy('notes.title', 'ASC')->paginate($pagination_number);
     	
         return view('notes.index', [
         	'categories' => $categories,
@@ -170,6 +176,7 @@ class NoteController extends Controller
     			'counter' => 0,
     			'tags' => $tags,
     			'tags_sel' => array(),
+    			'page' => $request->session()->get('note_page'),
     			])->withNote(new Note());
     	 
     }
@@ -227,7 +234,9 @@ class NoteController extends Controller
     	if (!$dir)
     		$dir = 'ASC';
     	
-    	$notes = $notes->orderBy('notes.'. $order, $dir)->orderBy('notes.title', 'ASC')->paginate(50);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$notes = $notes->orderBy('notes.'. $order, $dir)->orderBy('notes.title', 'ASC')->paginate($pagination_number);
     	
     	$previous_id = 0;
     	$next_id = 0;
@@ -260,6 +269,7 @@ class NoteController extends Controller
     			'next_id' => $next_id,
     			'counter' => $counter,
     			'total' => count($notes),
+    			'page' => $request->session()->get('note_page'),
     			])->withNote($note);
     }
 
@@ -308,7 +318,7 @@ class NoteController extends Controller
 	        
 	        }
 
-	    $page = $request->session()->get('page');
+	    $page = $request->session()->get('note_page');
 
 	    if ($request->save_edit)
         	return redirect('/note/' . $note->id . '/update');
@@ -331,8 +341,9 @@ class NoteController extends Controller
         $note->delete();
         
         $request->session()->flash('alert-success', 'Note was successful deleted!');
+        $page = $request->session()->get('note_page');
 
-        return redirect('/notes');
+        return redirect('/notes?page=' . $page);
     }
     
     

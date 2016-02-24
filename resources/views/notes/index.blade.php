@@ -127,7 +127,7 @@
 							<tr>
 								<!-- td class="table-text"><div>{{ $note->id }}</div></td-->
 								<td class="table-text">
-									<a href="/note/{{ $note->id }}/update">
+									<a href="/note/{{ $note->id }}/update?page={{ $page }}">
 										<div>{{ $note->title }}</div>
 									</a>
 								</td>
