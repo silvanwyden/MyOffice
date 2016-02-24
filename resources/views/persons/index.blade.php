@@ -139,7 +139,7 @@
 				<tbody>
 					@foreach ($persons as $person)
 						<tr>
-							<td class="table-text"><a href="/person/{{ $person->id }}/update">{{ $person->searchname }}</a></td>
+							<td class="table-text"><a href="/person/{{ $person->id }}/update?page={{ $page }}">{{ $person->searchname }}</a></td>
 							<td class="table-text">{{ $person->phone }}</td>
 							<td class="table-text">{{ $person->mobile }}</td>
 							<td class="table-text">
@@ -168,6 +168,7 @@
 					@endforeach
 				</tbody>
 			</table>
+
 			{!! $persons->appends([])->render() !!}
 	
 	</div>

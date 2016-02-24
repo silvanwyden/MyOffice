@@ -169,7 +169,13 @@ class PersonController extends Controller
     		$request->session()->put('person_page', $request->page);
     	$page = $request->session()->get('person_page');
     	
-    	$persons = $persons->orderBy($order, $dir)->orderBy('searchname')->paginate(100);
+    	if ($request->n)
+    		$request->session()->put('pagination_number', $request->n);
+    	elseif ($request->session()->get('pagination_number') < 1)
+    		$request->session()->put('pagination_number', 100);
+    	$pagination_number = $request->session()->get('pagination_number');
+    	
+    	$persons = $persons->orderBy($order, $dir)->orderBy('searchname')->paginate($pagination_number);
     	
     	$tags = Tag::All(['id', 'name', 'css_class']);
     	
@@ -213,6 +219,7 @@ class PersonController extends Controller
     			'parents' => $parents,
     			'counter' => 0,
     			'children' => array(),
+    			'page' => $request->session()->get('person_page'),
     			])->withPerson(new Person());
     
     }
@@ -274,8 +281,16 @@ class PersonController extends Controller
     	$filter_child = $request->session()->get('filter_child');
     	if ($filter_child == 1)
     		$persons->where('parent_id', '>', 0);
+    	
+    	$filter_birthday = $request->session()->get('filter_birthday');
+    	if ($filter_birthday == 1) {
+    		$persons->where('birthday', '>', 0);
+    		$order = 'birthday';
+    	}
+    	
+    	$pagination_number = $request->session()->get('pagination_number');
     	    		
-    	$persons = $persons->orderBy($order, $dir)->orderBy('searchname')->paginate(100);
+    	$persons = $persons->orderBy($order, $dir)->orderBy('searchname')->paginate($pagination_number);
    
     	$previous_id = 0;
     	$next_id = 0;
@@ -314,6 +329,7 @@ class PersonController extends Controller
     			'counter' => $counter,
     			'total' => count($persons),
     			'children' => $children,
+    			'page' => $request->session()->get('person_page'),
     			])->withPerson($person);
     }
     
@@ -405,10 +421,10 @@ class PersonController extends Controller
     {
 
     	$person->delete();
-    
+    	$page = $request->session()->get('person_page');
     	$request->session()->flash('alert-success', 'Person was successful deleted!');
     
-    	return redirect('/persons');
+    	return redirect('/persons?page=' . $page);
     }
     
     
