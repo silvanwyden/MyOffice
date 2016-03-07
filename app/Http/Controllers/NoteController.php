@@ -112,7 +112,7 @@ class NoteController extends Controller
     	}
     	$search_text = $request->session()->get('note_search_text');
     	if (strlen($search_text) > 0)
-    		$notes->where('notes.title', 'like', "%" . $search_text . "%")->orWhere('notes.description', 'like', "%" . $search_text . "%");
+    		$notes->where('notes.title', 'like', "%" . $search_text . "%");
     	
     	//handle sort order
     	if ($request->order)
@@ -222,7 +222,7 @@ class NoteController extends Controller
     	}
     	$search_text = $request->session()->get('note_search_text');
     	if (strlen($search_text) > 0)
-    		$notes->where('notes.title', 'like', "%" . $search_text . "%")->orWhere('notes.description', 'like', "%" . $search_text . "%");
+    		$notes->where('notes.title', 'like', "%" . $search_text . "%");
 
     	//handle sort order
     	$order = $request->session()->get('note_order');
