@@ -117,7 +117,7 @@ class TaskController extends Controller
     	}
     	$search = $request->session()->get('search');
     	if (strlen($search) > 0)
-    		$tasks->where('tasks.name', 'like', "%" . $search . "%")->orWhere('tasks.description', 'like', "%" . $search . "%");
+    		$tasks->where('tasks.name', 'like', "%" . $search . "%");
     	
     	//handle filters
     	if ($request->filter_deadline == 1)
@@ -231,7 +231,7 @@ class TaskController extends Controller
     	//handle search
     	$search = $request->session()->get('search');
     	if (strlen($search) > 0)
-    		$tasks->where('tasks.name', 'like', "%" . $search . "%")->orWhere('tasks.description', 'like', "%" . $search . "%");
+    		$tasks->where('tasks.name', 'like', "%" . $search . "%");
     	 
     	//handle filters
     	$filter_deadline = $request->session()->get('filter_deadline');
