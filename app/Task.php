@@ -6,6 +6,7 @@ use App\User;
 use App\Category;
 use App\Priority;
 use App\Stage;
+use App\Fileentry;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -54,6 +55,11 @@ class Task extends Model
     public function stage()
     {
     	return $this->belongsTo(Stage::class);
+    }
+    
+    public function getFiles()
+    {
+    	return Fileentry::where('task_id', '=', $this->id)->orderBy('original_filename')->get();
     }
     
 }

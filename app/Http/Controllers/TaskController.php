@@ -14,6 +14,11 @@ use App\Repositories\TaskRepository;
 use DateTime;
 use App\Session;
 use DB;
+use Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
+use App\Fileentry;
 
 class TaskController extends Controller
 {
@@ -377,5 +382,24 @@ class TaskController extends Controller
     	
     	return redirect('/tasks?page=' . $page);
     }
+    
+    public function upload(Request $request, Task $task)
+    {
+    	Log::info('Uploading Files!');
+    	
+    	$file = $request->file;
+    	$extension = $file->getClientOriginalExtension();
+    	Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
+    	$entry = new Fileentry();
+    	$entry->mime = $file->getClientMimeType();
+    	$entry->original_filename = $file->getClientOriginalName();
+    	$entry->filename = $file->getFilename().'.'.$extension;
+    	$entry->task_id = $task->id;
+    	
+    	$entry->save();
+    	
+    	return ['success' => false, 'data' => 200];
+    }
+
     
 }

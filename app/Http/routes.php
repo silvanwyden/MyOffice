@@ -22,6 +22,7 @@ Route::post('/task', 'TaskController@store');
 Route::get('/task/{task}/update', 'TaskController@update');
 Route::get('/task/{task}/delete', 'TaskController@destroy');
 Route::get('/task/{task}/done', 'TaskController@done');
+Route::post('/task/{task}/upload', 'TaskController@upload');
 
 // Counters Routes
 Route::get('/counters', 'CounterController@index');
@@ -70,6 +71,9 @@ Route::get('/countercategory', 'CountercategoryController@create');
 Route::post('/countercategory', 'CountercategoryController@store');
 Route::get('/countercategory/{countercategory}/update', 'CountercategoryController@update');
 Route::get('/countercategory/{countercategory}/delete', 'CountercategoryController@destroy');
+
+//FileEntry Routes
+Route::get('/fileentry/get/{fileid}', 'FileEntryController@get');
 
 
 // Authentication Routes...

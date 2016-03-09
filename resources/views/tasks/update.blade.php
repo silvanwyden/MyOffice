@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+	<script src="/dropzone.js"></script>
+	<link rel="stylesheet" href="/dropzone.css">
+
 	<div class="container">
 	
 		<div class="flash-message">
@@ -11,7 +14,7 @@
 		      @endif
 		    @endforeach
 	  	</div> <!-- end .flash-message -->
-	
+	  	
 		<form action="/task" method="POST" class="form-horizontal">
 			{{ csrf_field() }}
 	
@@ -59,7 +62,7 @@
 	
 					<!-- if we are updating a task we need to know the task ID -->
 					<input type="hidden" name="task_id" value="{{ $task->id or '' }}" />
-	
+						
 					<!-- Task Name -->
 					<div class="form-group">
 						<label for="task-name" class="col-sm-2 control-label">Task</label>
@@ -232,10 +235,28 @@
 							
 						</div>
 					</div>
-						
 				</div>
 			</div>
 		</form>
+		
+		<!--  show uploaded files -->
+		<div>
+			<ul>
+				@foreach ($task->getFiles() as $file)
+					<li><a href="/fileentry/get/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a></li>
+				@endforeach
+			</ul>
+		</div>
+		
+		<!-- File upload -->
+		<div id="dropzone">
+		  	<form action="/task/{{ $task->id }}/upload" class="dropzone needsclick" id="demo-upload">
+		  		{{ csrf_field() }}
+      			<div class="dz-message needsclick">Drop files here or click to upload.<br /></div>
+		    </form>
+		</div>
+		<br />
+		
 	</div>
 	
 	<script>
