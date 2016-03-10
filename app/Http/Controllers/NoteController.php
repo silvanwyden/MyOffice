@@ -15,6 +15,10 @@ use App\Session;
 use DB;
 use Log;
 use Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
+use App\Fileentry;
 
 class NoteController extends Controller
 {
@@ -348,7 +352,23 @@ class NoteController extends Controller
     
     
     
+    public function upload(Request $request, Note $note)
+    {
+    	Log::info('Uploading Files!');
     
+    	$file = $request->file;
+    	$extension = $file->getClientOriginalExtension();
+    	Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
+    	$entry = new Fileentry();
+    	$entry->mime = $file->getClientMimeType();
+    	$entry->original_filename = $file->getClientOriginalName();
+    	$entry->filename = $file->getFilename().'.'.$extension;
+    	$entry->model_id = "note," . $note->id;
+    	 
+    	$entry->save();
+    	 
+    	return ['success' => false, 'data' => 200];
+    }
 
     
 }

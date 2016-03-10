@@ -55,6 +55,8 @@ Route::get('/note', ['middleware' => 'auth', 'uses' => 'NoteController@create'])
 Route::post('/note', ['middleware' => 'auth', 'uses' => 'NoteController@store']);
 Route::get('/note/{note}/update', ['middleware' => 'auth', 'uses' => 'NoteController@update']);
 Route::get('/note/{note}/delete', ['middleware' => 'auth', 'uses' => 'NoteController@destroy']);
+Route::post('/note/{note}/upload', ['middleware' => 'auth', 'uses' => 'NoteController@upload']);
+
 
 // Tag Routes
 Route::get('/tags', ['middleware' => 'auth', 'uses' => 'TagController@index']);

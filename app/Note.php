@@ -19,6 +19,13 @@ class Note extends Model
     		'category_id', 
     		'tag_ids'
     	];
+    
+    
+    public function getFiles()
+    {
+    	$model_id = "note," . $this->id;
+    	return Fileentry::where('model_id', '=', $model_id)->orderBy('original_filename')->get();
+    }
 
 
     

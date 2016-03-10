@@ -59,8 +59,8 @@ class Task extends Model
     
     public function getFiles()
     {
-    	$task_id = "task," . $this->id;
-    	return Fileentry::where('model_id', '=', $task_id)->orderBy('original_filename')->get();
+    	$model_id = "task," . $this->id;
+    	return Fileentry::where('model_id', '=', $model_id)->orderBy('original_filename')->get();
     }
     
 }
