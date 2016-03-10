@@ -17,8 +17,7 @@ class CreateFileentriesTable extends Migration
         	$table->string('filename');
         	$table->string('mime');
         	$table->string('original_filename');
-        	$table->integer('task_id');
-        	$table->integer('note_id');
+        	$table->string('model_id');
         	$table->timestamps();
         });
     }

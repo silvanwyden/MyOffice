@@ -386,7 +386,7 @@ class TaskController extends Controller
     public function upload(Request $request, Task $task)
     {
     	Log::info('Uploading Files!');
-    	
+
     	$file = $request->file;
     	$extension = $file->getClientOriginalExtension();
     	Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
@@ -394,7 +394,7 @@ class TaskController extends Controller
     	$entry->mime = $file->getClientMimeType();
     	$entry->original_filename = $file->getClientOriginalName();
     	$entry->filename = $file->getFilename().'.'.$extension;
-    	$entry->task_id = $task->id;
+    	$entry->model_id = "task," . $task->id;
     	
     	$entry->save();
     	

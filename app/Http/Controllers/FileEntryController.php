@@ -17,10 +17,19 @@ class FileEntryController extends Controller
 	public function get($fileid){
 	
 		$entry = Fileentry::where('id', '=', $fileid)->firstOrFail();
-		$file = Storage::disk('local')->get($entry->filename);
+		//$file = Storage::disk('local')->get($entry->filename);
+		
+		$pathToFile=storage_path()."/app/".$entry->filename;
+		return response()->download($pathToFile, $entry->original_filename);
 	
-		return (new Response($file, 200))
-		->header('Content-Type', $entry->mime);
+		////->header('Content-Type', $entry->mime, 'Filename', 'test');
+	}
+	
+	public function destroy(Request $request, Fileentry $fileentry)
+	{
+
+		$fileentry->delete();
+		
 	}
 	
 }

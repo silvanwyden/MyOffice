@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Fileentry;
 use App\Task;
 use App\Counter;
 use App\Person;
@@ -38,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('note', Note::class);
         $router->model('tag', Tag::class);
         $router->model('countercategory', Countercategory::class);
+        $router->model('fileentry', Fileentry::class);
 
         parent::boot($router);
     }

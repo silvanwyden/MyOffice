@@ -256,22 +256,24 @@
 					<div id="files" class="tab-pane fade">
 					    
 					    <!--  show uploaded files -->
-						<div class="list-group" style="padding: 10px";>
+						<ul class="list-group" style="padding: 10px";>
 							@foreach ($task->getFiles() as $file)
-								<a class="list-group-item" href="/fileentry/get/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>
+								<li class="list-group-item">
+									<a  href="/fileentry/get/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
+									<a href="/fileentry/delete/{{ $file->id }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
+								</li>
 							@endforeach
-						</div>
+						</ul>
 					    
 					    <!-- File upload -->
 					    @if ($task->id)
-							<div id="dropzone">
+							<div id="dropzone" style="padding: 10px">
 							  	<form action="/task/{{ $task->id }}/upload" class="dropzone needsclick" id="demo-upload">
 							  		{{ csrf_field() }}
 					      			<div class="dz-message needsclick">Drop files here or click to upload.</div>
 							    </form>
 							</div>
 						@endif
-						<br />
 									    
 				  	</div>
 				
