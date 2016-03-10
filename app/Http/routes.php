@@ -16,64 +16,64 @@ Route::get('/', function () {
 })->middleware('guest');
 
 // Task Routes
-Route::get('/tasks', 'TaskController@index');
-Route::get('/task', 'TaskController@create');
-Route::post('/task', 'TaskController@store');
-Route::get('/task/{task}/update', 'TaskController@update');
-Route::get('/task/{task}/delete', 'TaskController@destroy');
-Route::get('/task/{task}/done', 'TaskController@done');
-Route::post('/task/{task}/upload', 'TaskController@upload');
+Route::get('/tasks', ['middleware' => 'auth', 'uses' => 'TaskController@index']);
+Route::get('/task', ['middleware' => 'auth', 'uses' => 'TaskController@create']);
+Route::post('/task', ['middleware' => 'auth', 'uses' => 'TaskController@store']);
+Route::get('/task/{task}/update', ['middleware' => 'auth', 'uses' => 'TaskController@update']);
+Route::get('/task/{task}/delete', ['middleware' => 'auth', 'uses' => 'TaskController@destroy']);
+Route::get('/task/{task}/done', ['middleware' => 'auth', 'uses' => 'TaskController@done']);
+Route::post('/task/{task}/upload', ['middleware' => 'auth', 'uses' => 'TaskController@upload']);
 
 // Counters Routes
-Route::get('/counters', 'CounterController@index');
-Route::get('/counter', 'CounterController@create');
-Route::post('/counter', 'CounterController@store');
-Route::get('/counter/{counter}/update', 'CounterController@update');
-Route::get('/counter/{counter}/delete', 'CounterController@destroy');
-Route::get('/counter/stats', 'CounterController@stats');
+Route::get('/counters', ['middleware' => 'auth', 'uses' => 'CounterController@index']);
+Route::get('/counter', ['middleware' => 'auth', 'uses' => 'CounterController@create']);
+Route::post('/counter', ['middleware' => 'auth', 'uses' => 'CounterController@store']);
+Route::get('/counter/{counter}/update', ['middleware' => 'auth', 'uses' => 'CounterController@update']);
+Route::get('/counter/{counter}/delete', ['middleware' => 'auth', 'uses' => 'CounterController@destroy']);
+Route::get('/counter/stats', ['middleware' => 'auth', 'uses' => 'CounterController@stats']);
 
 // Persons Routes
-Route::get('/persons', 'PersonController@index');
-Route::get('/person', 'PersonController@create');
-Route::post('/person', 'PersonController@store');
-Route::get('/person/{person}/update', 'PersonController@update');
-Route::get('/person/{person}/delete', 'PersonController@destroy');
-Route::get('/persons/excel', 'PersonController@excel');
-Route::get('/persons/search', 'PersonController@search');
+Route::get('/persons', ['middleware' => 'auth', 'uses' => 'PersonController@index']);
+Route::get('/person', ['middleware' => 'auth', 'uses' => 'PersonController@create']);
+Route::post('/person', ['middleware' => 'auth', 'uses' => 'PersonController@store']);
+Route::get('/person/{person}/update', ['middleware' => 'auth', 'uses' => 'PersonController@update']);
+Route::get('/person/{person}/delete', ['middleware' => 'auth', 'uses' => 'PersonController@destroy']);
+Route::get('/persons/excel', ['middleware' => 'auth', 'uses' => 'PersonController@excel']);
+Route::get('/persons/search', ['middleware' => 'auth', 'uses' => 'PersonController@search']);
 
 
 // Passpack Routes
-Route::get('/passpacks', 'PasspackController@index');
-Route::get('/passpack', 'PasspackController@create');
-Route::post('/passpack', 'PasspackController@store');
-Route::get('/passpack/{passpack}/update', 'PasspackController@update');
-Route::get('/passpack/{passpack}/delete', 'PasspackController@destroy');
+Route::get('/passpacks', ['middleware' => 'auth', 'uses' => 'PasspackController@index']);
+Route::get('/passpack', ['middleware' => 'auth', 'uses' => 'PasspackController@create']);
+Route::post('/passpack', ['middleware' => 'auth', 'uses' => 'PasspackController@store']);
+Route::get('/passpack/{passpack}/update', ['middleware' => 'auth', 'uses' => 'PasspackController@update']);
+Route::get('/passpack/{passpack}/delete', ['middleware' => 'auth', 'uses' => 'PasspackController@destroy']);
 
 // Notes Routes
-Route::get('/notes', 'NoteController@index');
-Route::get('/note', 'NoteController@create');
-Route::post('/note', 'NoteController@store');
-Route::get('/note/{note}/update', 'NoteController@update');
-Route::get('/note/{note}/delete', 'NoteController@destroy');
+Route::get('/notes', ['middleware' => 'auth', 'uses' => 'NoteController@index']);
+Route::get('/note', ['middleware' => 'auth', 'uses' => 'NoteController@create']);
+Route::post('/note', ['middleware' => 'auth', 'uses' => 'NoteController@store']);
+Route::get('/note/{note}/update', ['middleware' => 'auth', 'uses' => 'NoteController@update']);
+Route::get('/note/{note}/delete', ['middleware' => 'auth', 'uses' => 'NoteController@destroy']);
 
 // Tag Routes
-Route::get('/tags', 'TagController@index');
-Route::get('/tag', 'TagController@create');
-Route::post('/tag', 'TagController@store');
-Route::get('/tag/{tag}/update', 'TagController@update');
-Route::get('/tag/{tag}/delete', 'TagController@destroy');
-Route::post('/tags/search', 'TagController@search');
-Route::get('/tags/search', 'TagController@search');
+Route::get('/tags', ['middleware' => 'auth', 'uses' => 'TagController@index']);
+Route::get('/tag', ['middleware' => 'auth', 'uses' => 'TagController@create']);
+Route::post('/tag', ['middleware' => 'auth', 'uses' => 'TagController@store']);
+Route::get('/tag/{tag}/update', ['middleware' => 'auth', 'uses' => 'TagController@update']);
+Route::get('/tag/{tag}/delete', ['middleware' => 'auth', 'uses' => 'TagController@destroy']);
+Route::post('/tags/search', ['middleware' => 'auth', 'uses' => 'TagController@search']);
+Route::get('/tags/search', ['middleware' => 'auth', 'uses' => 'TagController@search']);
 
 // Countercategory Routes
-Route::get('/countercategories', 'CountercategoryController@index');
-Route::get('/countercategory', 'CountercategoryController@create');
-Route::post('/countercategory', 'CountercategoryController@store');
-Route::get('/countercategory/{countercategory}/update', 'CountercategoryController@update');
-Route::get('/countercategory/{countercategory}/delete', 'CountercategoryController@destroy');
+Route::get('/countercategories', ['middleware' => 'auth', 'uses' => 'CountercategoryController@index']);
+Route::get('/countercategory', ['middleware' => 'auth', 'uses' => 'CountercategoryController@create']);
+Route::post('/countercategory', ['middleware' => 'auth', 'uses' => 'CountercategoryController@store']);
+Route::get('/countercategory/{countercategory}/update', ['middleware' => 'auth', 'uses' => 'CountercategoryController@update']);
+Route::get('/countercategory/{countercategory}/delete', ['middleware' => 'auth', 'uses' => 'CountercategoryController@destroy']);
 
 //FileEntry Routes
-Route::get('/fileentry/get/{fileid}', 'FileEntryController@get');
+Route::get('/fileentry/get/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@get']);
 
 
 // Authentication Routes...
