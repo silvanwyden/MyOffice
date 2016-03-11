@@ -51,16 +51,14 @@ class CounterController extends Controller
     	//handle categories filter
     	if ($request->category_id)
     		if ($request->category_id > 0) {
-    		$user->counter_category_id = $request->category_id;
-    		$user->counter_category = Countercategory::find($request->category_id)->name;
-    		$user->save();
+    		$request->session()->put('counter_category_id', $request->category_id);
+    		$request->session()->put('counter_category', Countercategory::find($request->category_id)->name);
     	}
     	else {
-    		$user->counter_category_id = False;
-    		$user->counter_category = "All Categories";
-    		$user->save();
+    		$request->session()->put('counter_category_id', False);
+    		$request->session()->put('counter_category', "All Categories");
     	}
-    	$ses_category_id = $user->counter_category_id;
+    	$ses_category_id = $request->session()->get('counter_category_id');
     	
     	//base query
     	$counters = DB::table('counters')
@@ -115,7 +113,7 @@ class CounterController extends Controller
         	'order' => $order,
         	'dir' => $dir,
         	'page' => $page,
-        	'category' => $user->counter_category,
+        	'category' => $request->session()->get('counter_category'),
         ]);
         
     }
@@ -134,7 +132,7 @@ class CounterController extends Controller
     	
     	return view('counters.update', [
     			'countercategories' => $countercategories,
-    			'counter_category_id' => $user->counter_category_id,
+    			'counter_category_id' => $request->session()->get('counter_category_id'),
     			'cnt' => 0,
     			'page' => $request->session()->get('counter_page'),
     			])->withCounter(new Counter());
@@ -154,7 +152,7 @@ class CounterController extends Controller
     	$user = User::find($request->user()->id);
     	
     	//handle categories filter
-    	$ses_category_id = $user->counter_category_id;
+    	$ses_category_id = $request->session()->get('counter_category_id');
     	 
     	//base query
     	$counters = DB::table('counters')
