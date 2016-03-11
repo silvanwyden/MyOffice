@@ -74,7 +74,7 @@ class CounterController extends Controller
     			'counters.updated_at',
     			'countercategories.name as cname',
     			'countercategories.css_class'
-    	);
+    	)->where('countercategories.inactive', '!=', '1');
     	
     	//handle categories
     	if ($ses_category_id)
@@ -159,7 +159,7 @@ class CounterController extends Controller
     	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
     	->select(
     			'counters.id'
-    	);
+    	)->where('countercategories.inactive', '!=', '1');
     	 
     	//handle categories
     	if ($ses_category_id)
