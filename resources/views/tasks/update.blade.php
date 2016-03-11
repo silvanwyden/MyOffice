@@ -259,7 +259,8 @@
 						<ul class="list-group" style="padding: 10px";>
 							@foreach ($task->getFiles() as $file)
 								<li class="list-group-item">
-									<a  href="/fileentry/get/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
+									<a  href="/fileentry/open/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
+									<a href="/fileentry/get/{{ $file->id }}" class="btn btn-danger glyphicon glyphicon-download"></a>
 									<!-- <a href="/fileentry/delete/{{ $file->id }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a> -->
 								</li>
 							@endforeach
