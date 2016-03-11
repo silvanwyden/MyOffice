@@ -58,16 +58,14 @@ class NoteController extends Controller
     	//handle categories filter
     	if ($request->category_id)
     		if ($request->category_id > 0) {
-	    		$user->note_category_id = $request->category_id;
-	    		$user->note_category = Category::find($request->category_id)->name;
-	    		$user->save();
+	    		$request->session()->put('note_category_id', $request->category_id);
+	    		$request->session()->put('note_category',Category::find($request->category_id)->name);
 	    	}
 	    	else {
-	    		$user->note_category_id = False;
-	    		$user->note_category = "All Categories";
-	    		$user->save();
+	    		$request->session()->put('note_category_id', False);
+	    		$request->session()->put('note_category', "All Categories");
     	}
-    	$ses_category_id = $user->note_category_id;
+    	$ses_category_id = $request->session()->get('note_category_id');
     	
     	if ($ses_category_id)
     		$tags = Tag::where('category_id', '=', $ses_category_id)->orderBy('name')->get();
@@ -150,8 +148,8 @@ class NoteController extends Controller
             'notes' => $notes,
         	'order' => $order,
         	'dir' => $dir,
-        	'category' => $user->note_category,
-        	'category_id' => $user->note_category_id,
+        	'category' => $request->session()->get('note_category'),
+        	'category_id' => $request->session()->get('note_category_id'),
         	'search' => $search,
         	'page' => $page,
         	'tags' => $tags,
@@ -176,7 +174,7 @@ class NoteController extends Controller
     	
     	return view('notes.update', [
     			'categories' => $categories,
-    			'category_id' => $user->note_category_id,
+    			'category_id' => $request->session()->get('note_category_id'),
     			'counter' => 0,
     			'tags' => $tags,
     			'tags_sel' => array(),
@@ -204,7 +202,7 @@ class NoteController extends Controller
     	->select('notes.id as id');
     	    	 
     	//handle categories
-    	$ses_category_id = $user->note_category_id;
+    	$ses_category_id = $request->session()->get('note_category_id');
     	if ($ses_category_id)
     		$notes->where('category_id', '=', $ses_category_id);
 
