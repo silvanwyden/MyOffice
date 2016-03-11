@@ -351,8 +351,18 @@ class TaskController extends Controller
      */
     public function destroy(Request $request, Task $task)
     {
+    	
+    	//first we have to delelte all the files
+    	$model_id = 'task,' . $task->id;
+    	$entries = Fileentry::where('model_id', '=', $model_id)->get();
+    	foreach ($entries as $entry) {
+    		$file = Storage::disk('local')->delete($entry->filename);
+    		$fname = $entry->original_filename;
+    		$entry->delete();
+    		Log::info('Deleted Files:' . $fname);
+    	}
+    	
         $this->authorize('destroy', $task);
-
         $task->delete();
         
         $request->session()->flash('alert-success', 'Task was successful deleted!');
