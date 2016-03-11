@@ -26,13 +26,13 @@ class FileEntryController extends Controller
 	}
 	
 	public function open($fileid){
- +	
- +		$entry = Fileentry::where('id', '=', $fileid)->firstOrFail();
- +		$file = Storage::disk('local')->get($entry->filename);
- +	
- +		return (new Response($file, 200))
- +		->header('Content-Type', $entry->mime);
- +	}
+ 
+ 		$entry = Fileentry::where('id', '=', $fileid)->firstOrFail();
+ 		$file = Storage::disk('local')->get($entry->filename);
+ 	
+ 		return (new Response($file, 200))
+ 		->header('Content-Type', $entry->mime);
+ 	}
 	
 	public function destroy(Request $request, Fileentry $fileentry)
 	{
