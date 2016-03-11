@@ -335,7 +335,7 @@ class TaskController extends Controller
 	    $page = $request->session()->get('page');
         
 	    if ($request->save_edit)
-        	return redirect('/task/' . $task->id . '/update');
+        	return redirect('/task/' . $task->id . '/update?page=' . $page);
 	    else
         	return redirect('/tasks?page=' . $page);
     }
