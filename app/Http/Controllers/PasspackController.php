@@ -52,16 +52,14 @@ class PasspackController extends Controller
     	//handle categories filter
     	if ($request->category_id)
     		if ($request->category_id > 0) {
-	    		$user->passpack_category_id = $request->category_id;
-	    		$user->passpack_category = Category::find($request->category_id)->name;
-	    		$user->save();
+	    		$request->session()->put('passpack_category_id', $request->category_id);
+	    		$request->session()->put('passpack_category', Category::find($request->category_id)->name);
 	    	}
 	    	else {
-	    		$user->passpack_category_id = False;
-	    		$user->passpack_category = "All Categories";
-	    		$user->save();
+	    		$request->session()->put('passpack_category_id', False);
+	    		$request->session()->put('passpack_category', "All Categories");
     	}
-    	$ses_category_id = $user->passpack_category_id;
+    	$ses_category_id = $request->session()->get('passpack_category_id');
     	
     	//base query
     	$passpacks = DB::table('passpacks')
@@ -128,7 +126,7 @@ class PasspackController extends Controller
             'passpacks' => $passpacks,
         	'order' => $order,
         	'dir' => $dir,
-        	'category' => $user->passpack_category,
+        	'category' => $request->session()->get('passpack_category'),
         	'search' => $search,
         	'page' => $page,
         ]);
@@ -149,7 +147,7 @@ class PasspackController extends Controller
     	    	
     	return view('passpacks.update', [
     			'categories' => $categories,
-    			'category_id' => $user->passpack_category_id,
+    			'category_id' => $request->session()->get('passpack_category_id'),
     			'pwd' => '',
     			'counter' => 0,
     			'page' => $request->session()->get('passpack_page'),
@@ -171,7 +169,7 @@ class PasspackController extends Controller
     	$password = Crypt::decrypt($passpack->password);
     	
     	//handle categories filter
-    	$ses_category_id = $user->passpack_category_id;
+    	$ses_category_id = $request->session()->get('passpack_category_id');
     	 
     	//base query
     	$passpacks = DB::table('passpacks')
