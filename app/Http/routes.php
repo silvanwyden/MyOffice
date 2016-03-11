@@ -77,7 +77,7 @@ Route::get('/countercategory/{countercategory}/delete', ['middleware' => 'auth',
 //FileEntry Routes
 Route::get('/fileentry/get/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@get']);
 Route::get('/fileentry/open/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@open']);
-Route::get('/fileentry/delete/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@destroy']);
+Route::get('/fileentry/delete/{fileentry}', ['middleware' => 'auth', 'uses' => 'FileEntryController@destroy']);
 
 
 // Authentication Routes...

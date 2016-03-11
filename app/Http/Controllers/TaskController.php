@@ -193,6 +193,7 @@ class TaskController extends Controller
     			'category_id' => $request->session()->get('category_id'),
     			'counter' => 0,
     			'page' => $request->session()->get('page'),
+    			'filetab' => 0,
     			])->withTask(new Task());
     	 
     }
@@ -285,6 +286,7 @@ class TaskController extends Controller
     			'counter' => $counter,
     			'total' => count($tasks),
     			'page' => $request->session()->get('page'),
+    			'filetab' => $request->filetab,
     			])->withTask($task);
     }
     

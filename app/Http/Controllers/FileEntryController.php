@@ -10,6 +10,7 @@ use App\Fileentry;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
+use Log;
 
 class FileEntryController extends Controller
 {
@@ -37,7 +38,17 @@ class FileEntryController extends Controller
 	public function destroy(Request $request, Fileentry $fileentry)
 	{
 
+		$entry = Fileentry::where('id', '=', $fileentry->id)->firstOrFail();
+		$model = explode(",", $entry->model_id);
+		$file = Storage::disk('local')->delete($entry->filename);
+		$fname = $entry->original_filename;
 		$fileentry->delete();
+		
+		Log::info('Deleted Files:' . $fname);
+		
+		$request->session()->flash('alert-success', 'File successful deleted!');
+		
+		return redirect('/' . $model[0] . '/' . $model[1] . '/update?filetab=1');
 		
 	}
 	

@@ -179,6 +179,7 @@ class NoteController extends Controller
     			'tags' => $tags,
     			'tags_sel' => array(),
     			'page' => $request->session()->get('note_page'),
+    			'files' => 0,
     			])->withNote(new Note());
     	 
     }
@@ -272,6 +273,7 @@ class NoteController extends Controller
     			'counter' => $counter,
     			'total' => count($notes),
     			'page' => $request->session()->get('note_page'),
+    			'filetab' => $request->filetab,
     			])->withNote($note);
     }
 

@@ -58,13 +58,28 @@
 				
 				<div class="heading" style="padding:10px;">
 					<ul class="nav nav-tabs">
-					  	<li class="active"><a data-toggle="tab" href="#general">General</a></li>
-					  	<li><a data-toggle="tab" href="#files">Files <span class="badge">{{ count($task->getFiles()) }}</span></a></li>
+				  		@if ($filetab)
+				  			<li>
+			  			@else
+			  				<li class="active">
+			  			@endif
+				  			<a data-toggle="tab" href="#general">General</a></li>
+				  			
+					  	@if ($filetab)
+				  			<li class="active">
+			  			@else
+			  				<li>
+			  			@endif
+			  				<a data-toggle="tab" href="#files">Files <span class="badge">{{ count($task->getFiles()) }}</span></a></li>
 					</ul>
 				</div>
 				
 				<div class="tab-content">
-				 	<div id="general" class="tab-pane fade in active">
+					@if ($filetab)
+				 		<div id="general" class="tab-pane fade">
+			 		@else
+			 			<div id="general" class="tab-pane fade in active">
+			 		@endif
 
 						<div class="panel-body">
 							<!-- Display Validation Errors -->
@@ -253,15 +268,19 @@
 					</div>
 				</form>
 					
-					<div id="files" class="tab-pane fade">
+					@if ($filetab)
+				 		<div id="files" class="tab-pane fade in active">
+			 		@else
+			 			<div id="files" class="tab-pane fade ">
+			 		@endif
 					    
 					    <!--  show uploaded files -->
 						<ul class="list-group" style="padding: 10px";>
 							@foreach ($task->getFiles() as $file)
 								<li class="list-group-item">
 									<a  href="/fileentry/open/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
-									<a href="/fileentry/get/{{ $file->id }}" class="btn btn-danger glyphicon glyphicon-download"></a>
-									<!-- <a href="/fileentry/delete/{{ $file->id }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a> -->
+									<a href="/fileentry/get/{{ $file->id }}" class="btn btn-info glyphicon glyphicon-download"></a>
+									<a href="/fileentry/delete/{{ $file->id }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</li>
 							@endforeach
 						</ul>
