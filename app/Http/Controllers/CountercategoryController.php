@@ -51,7 +51,8 @@ class CountercategoryController extends Controller
     	->select(
     			'countercategories.id',
     			'countercategories.name',
-    			'countercategories.inactive'
+    			'countercategories.inactive',
+    			'countercategories.css_class'
     	);
     	    	
     	//handle sort order
@@ -141,6 +142,7 @@ class CountercategoryController extends Controller
     	$input = array(
     			'name' => $request->name,
     			'inactive' => $inactive,
+    			'css_class' => $request->css_class,
     	);
     
     	if ($request->countercategory_id) {

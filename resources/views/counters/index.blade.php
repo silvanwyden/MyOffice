@@ -32,6 +32,7 @@
 					</div>
 					
 					<a href="/counter/stats" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span></a>
+					<a href="/countercategories" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span></a>
 					
 				</div>
 			</div>

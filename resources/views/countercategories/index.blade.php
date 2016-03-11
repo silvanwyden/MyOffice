@@ -28,6 +28,7 @@
 				<thead>
 				<tr>
 					<th><nobr><a href="{{ createOrderLink('name', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('name', $order, $dir) }}"></div></nobr></th>
+					<th><nobr><a href="{{ createOrderLink('css_class', $order, $dir, $page) }}">CSS Class</a> <div class="{{ createOrderLinkImage('css_class', $order, $dir) }}"></div></nobr></th>
 					<th><nobr><a href="{{ createOrderLink('inactive', $order, $dir, $page) }}">Inactive</a> <div class="{{ createOrderLinkImage('inactive', $order, $dir) }}"></div></nobr></th>
 					<th>Action</th>
 					</tr>
@@ -40,6 +41,7 @@
 									<div>{{ $countercategory->name }}</div>
 								</a>
 							</td>
+							<td class="table-text">{{ $countercategory->css_class }}</td>
 							<td class="table-text">{{ $countercategory->inactive }}</td>
 							
 							<!-- Task Action Buttons -->

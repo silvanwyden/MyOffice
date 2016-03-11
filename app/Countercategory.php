@@ -19,7 +19,7 @@ class Countercategory extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'inactive'];
+    protected $fillable = ['name', 'inactive', 'css_class'];
     
 
 

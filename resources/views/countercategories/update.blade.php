@@ -48,6 +48,15 @@
 						</div>
 					</div>
 					
+					<!-- Counter Category CSS Class -->
+					<div class="form-group">
+						<label for="countercategory-css-class" class="col-sm-2 control-label">Name</label>
+	
+						<div class="col-sm-10">
+							<input type="text" name="css_class" id="countercategory-css-class" class="form-control" value="{{ $countercategory->css_class or old('css_class') }}">
+						</div>
+					</div>
+					
 					<!-- Task inactive -->
 					<div class="form-group">
 						<label for="countercategory-name" class="col-sm-2 control-label">inactive</label>
