@@ -60,16 +60,14 @@ class PersonController extends Controller
     	//handle categories filter
     	if ($request->category_id)
     		if ($request->category_id > 0) {
-    		$user->person_category_id = $request->category_id;
-    		$user->person_category = Category::find($request->category_id)->name;
-    		$user->save();
+    		$request->session()->put('person_category_id', $request->category_id);
+    		$request->session()->put('person_category', Category::find($request->category_id)->name);
     	}
     	else {
-    		$user->person_category_id = False;
-    		$user->person_category = "All Categories";
-    		$user->save();
+    		$request->session()->put('person_category_id', False);
+    		$request->session()->put('person_category', "All Categories");
     	}
-    	$ses_category_id = $user->person_category_id;
+    	$ses_category_id = $request->session()->get('person_category_id');
     	
     	//base query
     	$persons = DB::table('persons')
@@ -186,8 +184,8 @@ class PersonController extends Controller
         	'order' => $order,
         	'dir' => $dir,
         	'page' => $page,
-        	'category' => $user->person_category,
-        	'category_id' => $user->person_category_id,
+        	'category' => $request->session()->get('person_category'),
+        	'category_id' => $request->session()->get('person_category_id'),
         	'filter_parent' => $filter_parent,
         	'filter_child' => $filter_child,
         	'filter_birthday' => $filter_birthday,
@@ -214,7 +212,7 @@ class PersonController extends Controller
     	
     	return view('persons.update', [
     			'categories' => $categories,
-    			'category_id' => $user->person_category_id,
+    			'category_id' => $request->session()->get('person_category_id'),
     			'tags' => $tags,
     			'tags_sel' => array(),
     			'parents' => $parents,
@@ -246,7 +244,7 @@ class PersonController extends Controller
     	->select('persons.id as id');
     	
     	//handle categories
-    	$ses_category_id = $user->person_category_id;
+    	$ses_category_id = $request->session()->get('person_category_id');
     	if ($ses_category_id)
     		$persons->where('category_id', '=', $ses_category_id);
     	 
@@ -461,7 +459,7 @@ class PersonController extends Controller
 		    	);
 		    	
 		    	//handle categories
-		    	$ses_category_id = $user->person_category_id;
+		    	$ses_category_id = $request->session()->get('person_category_id');
 		    	if ($ses_category_id)
 		    		$persons->where('category_id', '=', $ses_category_id);
 		    	 
