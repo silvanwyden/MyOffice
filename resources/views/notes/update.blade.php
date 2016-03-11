@@ -250,7 +250,7 @@
 								<li class="list-group-item">
 									<a  href="/fileentry/open/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
 									<a href="/fileentry/get/{{ $file->id }}" class="btn btn-info glyphicon glyphicon-download"></a>
-									<a href="/fileentry/delete/{{ $file->id }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
+									<a href="/fileentry/delete/{{ $file->id }}?page={{ $page }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</li>
 							@endforeach
 						</ul>

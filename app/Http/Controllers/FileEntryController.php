@@ -48,7 +48,7 @@ class FileEntryController extends Controller
 		
 		$request->session()->flash('alert-success', 'File successful deleted!');
 		
-		return redirect('/' . $model[0] . '/' . $model[1] . '/update?filetab=1');
+		return redirect('/' . $model[0] . '/' . $model[1] . '/update?page=' . $request->page . '&filetab=1');
 		
 	}
 	
