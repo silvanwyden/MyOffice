@@ -61,31 +61,27 @@ class TaskController extends Controller
     	//handle stages filter
     	if ($request->stage_id)
     		if ($request->stage_id > 0) {
-    			$user->stage_id = $request->stage_id;
-	    		$user->stage = Stage::find($request->stage_id)->name;
-	    		$user->save();
+    			$request->session()->put('stage_id', $request->stage_id);
+	    		$request->session()->put('stage', Stage::find($request->stage_id)->name);
     		}
     		else {
-    			$user->stage_id = False;
-    			$user->stage = "All Stages";
-    			$user->save();
+    			$request->session()->put('stage_id', False);
+    			$request->session()->put('stage', "All Stages");
     		}
     	
-    	$ses_stage_id = $user->stage_id;
+    	$ses_stage_id = $request->session()->get('stage_id');
     	
     	//handle categories filter
     	if ($request->category_id)
     		if ($request->category_id > 0) {
-	    		$user->category_id = $request->category_id;
-	    		$user->category = Category::find($request->category_id)->name;
-	    		$user->save();
+	    		$request->session()->put('category_id', $request->category_id);
+	    		$request->session()->put('category', Category::find($request->category_id)->name);
 	    	}
 	    	else {
-	    		$user->category_id = False;
-	    		$user->category = "All Categories";
-	    		$user->save();
+	    		$request->session()->put('category_id', False);
+	    		$request->session()->put('category', "All Categories");
     	}
-    	$ses_category_id = $user->category_id;
+    	$ses_category_id = $request->session()->get('category_id');
     	
     	//base query
     	$tasks = DB::table('tasks')
@@ -167,8 +163,8 @@ class TaskController extends Controller
             'tasks' => $tasks,
         	'order' => $order,
         	'dir' => $dir,
-        	'stage' => $user->stage,
-        	'category' => $user->category,
+        	'stage' => $request->session()->get('stage'),
+        	'category' => $request->session()->get('category'),
         	'search' => $search,
         	'page' => $page,
         	'filter_deadline' => $filter_deadline,
@@ -194,7 +190,7 @@ class TaskController extends Controller
     			'categories' => $categories,
     			'priorities' => $priorities,
     			'stages' => $stages,
-    			'category_id' => $user->category_id,
+    			'category_id' => $request->session()->get('category_id'),
     			'counter' => 0,
     			'page' => $request->session()->get('page'),
     			])->withTask(new Task());
@@ -224,12 +220,12 @@ class TaskController extends Controller
     	->where('user_id', '=', $request->user()->id);
     	 
     	//handle stages
-    	$ses_stage_id = $user->stage_id;
+    	$ses_stage_id = $request->session()->get('stage_id');
     	if ($ses_stage_id)
     		$tasks->where('stage_id', '=', $ses_stage_id);
     	 
     	//handle categories
-    	$ses_category_id = $user->category_id;
+    	$ses_category_id = $request->session()->get('category_id');
     	if ($ses_category_id)
     		$tasks->where('category_id', '=', $ses_category_id);
     	 
