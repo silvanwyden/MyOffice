@@ -167,7 +167,7 @@
 
 			//load summernote editor
 		  	$('#summernote').summernote({
-			  	height: 350,
+			  	height: 430,
 			  	toolbar: [
 					['style', ['bold', 'italic', 'underline', 'strikethrough']],
 					['para', ['ul', 'ol',]],
