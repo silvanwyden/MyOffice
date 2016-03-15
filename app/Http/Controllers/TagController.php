@@ -231,7 +231,7 @@ class TagController extends Controller
     		$tags = $tags->where('category_id', '=', $category_id);
     	}
     	
-    	$tags = $tags->orderBy('name')->limit(5)->get();
+    	$tags = $tags->orderBy('name')->limit(10)->get();
     		 
     	if (count($tags) > 0) {
     		foreach ($tags as $tag)
