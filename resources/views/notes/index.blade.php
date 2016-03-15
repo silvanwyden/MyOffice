@@ -30,7 +30,9 @@
 						    @endforeach
 						  </ul>
 					</div>
-			
+					
+					<a href="/tags?category_id={{ category_id }}" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span></a>
+
 				</div>
 			</div>
 			
