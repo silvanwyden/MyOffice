@@ -24,7 +24,8 @@
 				  		<a href="/notes?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
-			  			
+			  			<a href="/tags?category_id={{ $category_id }}" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span></a>
+
 					</div>
 				</div>
 			</div>
