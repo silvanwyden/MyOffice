@@ -12,7 +12,7 @@
 		    @endforeach
 	  	</div> <!-- end .flash-message -->
 	
-		<form action="/passpack" method="POST" class="form-horizontal">
+		<form action="/passpack" method="POST" class="form-horizontal" id="myform">
 			{{ csrf_field() }}
 	
 			<div class="row" style="padding-bottom: 15px;">
@@ -188,6 +188,8 @@
 								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;
 							</button>
 							
+							<input type="hidden" name="save_edit_hidden" id="save-edit-hidden" value=""/>
+							
 							<button type="submit" name="save_edit" class="btn btn-info" value="save_edit" style="margin-bottom: 5px;">
 								<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
 							</button>
@@ -254,6 +256,9 @@
 			passwordField.value = value;
 
 		} 
+
+		shortcut.add("Ctrl+s",function() { $( "#myform" ).submit(); });
+		shortcut.add("Ctrl+e",function() { $( "#save-edit-hidden" ).val('save_edit'); $( "#myform" ).submit(); });
 
 	</script>
 	

@@ -180,6 +180,9 @@
 				$('#search-text').focus();
 		});
 
+		shortcut.add("Ctrl+a",function() { window.location = "/person"; });
+		shortcut.add("Ctrl+d",function() { window.location = "/persons/?search=&btn_search=s"; });
+
 	</script>
 	
 @endsection

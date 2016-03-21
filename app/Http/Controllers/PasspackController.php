@@ -275,7 +275,7 @@ class PasspackController extends Controller
 
 	    $page = $request->session()->get('page');
         	
-	    if ($request->save_edit)
+	    if ($request->save_edit or $request->save_edit_hidden)
 	    	return redirect('/passpack/' . $passpack->id . '/update?page=' . $page);
     	else
     		return redirect('/passpacks?page=' . $page);

@@ -77,6 +77,8 @@
 				$('#search').focus();
 		});
 
+		shortcut.add("Ctrl+a",function() { window.location = "/counter"; });
+
 	</script>
 	
 @endsection

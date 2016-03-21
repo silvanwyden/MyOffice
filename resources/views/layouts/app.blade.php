@@ -33,6 +33,18 @@
 	<link rel="stylesheet" href="/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="/app.css">
     
+    <script type="text/javascript" src="/shortcut.js"></script>
+    
+    <script>
+		
+	    shortcut.add("Ctrl+1",function() { window.location = "/tasks"; });
+	    shortcut.add("Ctrl+2",function() { window.location = "/notes"; });
+	    shortcut.add("Ctrl+3",function() { window.location = "/persons"; });
+	    shortcut.add("Ctrl+4",function() { window.location = "/counters"; });
+	    shortcut.add("Ctrl+5",function() { window.location = "/passpacks"; });
+	
+    </script>
+    
 	<style>
 		body {
 			font-family: 'Raleway';

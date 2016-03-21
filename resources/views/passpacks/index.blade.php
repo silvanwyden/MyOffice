@@ -90,6 +90,9 @@
 				$('#search').focus();
 		});
 
+		shortcut.add("Ctrl+a",function() { window.location = "/passpack"; });
+		shortcut.add("Ctrl+d",function() { window.location = "/passpacks/?search=&btn_search=s"; });
+
 	</script>
 	
 	<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.5/clipboard.min.js"></script>

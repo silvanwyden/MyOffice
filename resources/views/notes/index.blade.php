@@ -160,6 +160,9 @@
 				$('#search-text').focus();
 		});
 
+		shortcut.add("Ctrl+a",function() { window.location = "/note"; });
+		shortcut.add("Ctrl+d",function() { window.location = "/notes/?search=&btn_search=s"; });
+
 	</script>
 	
 @endsection

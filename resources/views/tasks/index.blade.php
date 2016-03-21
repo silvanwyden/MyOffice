@@ -116,6 +116,9 @@
 				$('#search').focus();
 		});
 
+		shortcut.add("Ctrl+a",function() { window.location = "/task"; });
+		shortcut.add("Ctrl+d",function() { window.location = "/tasks/?search=&btn_search=s"; });
+
 	</script>
 	
 @endsection

@@ -189,7 +189,7 @@ class TagController extends Controller
     
     	$page = $request->session()->get('tag_page');
     	 
-    	if ($request->save_edit)
+    	if ($request->save_edit or $request->save_edit_hidden)
     		return redirect('/tag/' . $tag->id . '/update');
     	else
     		return redirect('/tags?page=' . $page);

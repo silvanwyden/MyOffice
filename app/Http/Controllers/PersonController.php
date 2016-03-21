@@ -400,7 +400,7 @@ class PersonController extends Controller
     
     	$page = $request->session()->get('person_page');
     	 
-    	if ($request->save_edit)
+    	if ($request->save_edit or $request->save_edit_hidden)
     		return redirect('/person/' . $person->id . '/update?page=' . $page);
     	else
     		return redirect('/persons?page=' . $page);

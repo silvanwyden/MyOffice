@@ -334,7 +334,7 @@ class NoteController extends Controller
 
 	    $page = $request->session()->get('note_page');
 
-	    if ($request->save_edit)
+	    if ($request->save_edit or $request->save_edit_hidden)
         	return redirect('/note/' . $note->id . '/update?page=' . $page);
 	    else
         	return redirect('/notes?page=' . $page);
