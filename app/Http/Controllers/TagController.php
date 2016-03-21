@@ -189,58 +189,6 @@ class TagController extends Controller
     
     	$page = $request->session()->get('tag_page');
     	 
-    	if ($request->save_edit or $request->save_edit_hidden)
-    		return redirect('/tag/' . $tag->id . '/update');
-    	else
-    		return redirect('/tags?page=' . $page);
-    }
-
-    
-    
-    
-    /**
-     * Destroy the given task.
-     *
-     * @param  Request  $request
-     * @param  Task  $task
-     * @return Response
-     */
-    public function destroy(Request $request, Tag $tag)
-    {
-
-    	$tag->delete();
-    
-    	$request->session()->flash('alert-success', 'Tag was successful deleted!');
-    	$page = $request->session()->get('tag_page');
-    
-    	return redirect('/tags?page=' . $page);
-    }
-    
-    
-    			]);
-    
-    	$input = array(
-    			'name' => $request->name,
-    			'category_id' => $request->category,
-    	);
-    
-    	if ($request->tag_id) {
-    		 
-    		$tag = Tag::find($request->tag_id);
-    		$tag->fill($input)->save();
-    		$request->session()->flash('alert-success', 'Tag was successful updated!');
-    		 
-    	}
-    	else {
-    		 
-    		$tag = new Tag();
-    		$tag = $tag->create($input);
-    		$request->session()->flash('alert-success', 'Tag was successful added!');
-    		 
-    	}
-    
-    	$page = $request->session()->get('tag_page');
-    	 
     	if ($request->save_edit)
     		return redirect('/tag/' . $tag->id . '/update');
     	else
