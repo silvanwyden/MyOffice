@@ -217,6 +217,58 @@ class TagController extends Controller
     }
     
     
+    			]);
+    
+    	$input = array(
+    			'name' => $request->name,
+    			'category_id' => $request->category,
+    	);
+    
+    	if ($request->tag_id) {
+    		 
+    		$tag = Tag::find($request->tag_id);
+    		$tag->fill($input)->save();
+    		$request->session()->flash('alert-success', 'Tag was successful updated!');
+    		 
+    	}
+    	else {
+    		 
+    		$tag = new Tag();
+    		$tag = $tag->create($input);
+    		$request->session()->flash('alert-success', 'Tag was successful added!');
+    		 
+    	}
+    
+    	$page = $request->session()->get('tag_page');
+    	 
+    	if ($request->save_edit)
+    		return redirect('/tag/' . $tag->id . '/update');
+    	else
+    		return redirect('/tags?page=' . $page);
+    }
+
+    
+    
+    
+    /**
+     * Destroy the given task.
+     *
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return Response
+     */
+    public function destroy(Request $request, Tag $tag)
+    {
+
+    	$tag->delete();
+    
+    	$request->session()->flash('alert-success', 'Tag was successful deleted!');
+    	$page = $request->session()->get('tag_page');
+    
+    	return redirect('/tags?page=' . $page);
+    }
+    
+    
     public function search(Request $request) {
     
     	Log::info("search request for tags:" . $request->category_id);
@@ -231,7 +283,7 @@ class TagController extends Controller
     		$tags = $tags->where('category_id', '=', $category_id);
     	}
     	
-    	$tags = $tags->orderBy('name')->limit(5)->get();
+    	$tags = $tags->orderBy('name')->limit(10)->get();
     		 
     	if (count($tags) > 0) {
     		foreach ($tags as $tag)
