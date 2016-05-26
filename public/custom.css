@@ -134,8 +134,9 @@ body {
 	height: 32px;
 }
 
-.outdated  {
+.outdated  a{
 	font-weight: bold;
 	text-transform: uppercase;
+	color: red !important;
 	}
 }
