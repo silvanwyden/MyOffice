@@ -101,6 +101,23 @@ use App\Person;
     function decriptString($string) {
     	return Crypt::decrypt($string);
     	}
+    	
+	function isHighestOutdated($prio, $date) {
+    	
+    	if ($date == '0000-00-00' or $prio != 'Highest')
+    		return '';
+    	
+    	$datetime1 = new DateTime($date);
+    	$datetime2 = new DateTime('now');
+    	$difference = $datetime2->diff($datetime1);
+    	$difference = $difference->format('%r%a');
+
+    	if ($difference < 0)
+    		return "outdated";
+    	else 
+    		return "";
+    	    	
+    }    	
     
     
 ?>

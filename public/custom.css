@@ -133,3 +133,9 @@ body {
 .bootstrap-tagsinput {
 	height: 32px;
 }
+
+.outdated  {
+	font-weight: bold;
+	text-transform: uppercase;
+	}
+}

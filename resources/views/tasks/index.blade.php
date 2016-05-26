@@ -78,7 +78,7 @@
 					@foreach ($tasks as $task)
 						<tr>
 							<!-- td class="table-text"><div>{{ $task->id }}</div></td-->
-							<td class="table-text">
+							<td class="table-text  {{ isHighestOutdated($task->pname, $task->deadline) }}">
 								<a href="/task/{{ $task->id }}/update?page={{ $page }}">
 									<div>{{ $task->name }}</div>
 								</a>
@@ -118,6 +118,11 @@
 
 		shortcut.add("Ctrl+a",function() { window.location = "/task"; });
 		shortcut.add("Ctrl+d",function() { window.location = "/tasks/?search=&btn_search=s"; });
+		@if ($filter_deadline == 1)
+			shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=-1"; });
+		@else
+			shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=1"; });
+		@endif	
 
 	</script>
 	
