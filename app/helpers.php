@@ -112,7 +112,7 @@ use App\Person;
     	$difference = $datetime2->diff($datetime1);
     	$difference = $difference->format('%r%a');
 
-    	if ($difference < 0)
+    	if ($difference === '-0')
     		return "outdated";
     	else 
     		return "";
