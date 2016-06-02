@@ -182,7 +182,7 @@
 					</div>
 					
 					<!-- Action Button -->
-					<div class="form-group">
+					<div class="form-group button-group">
 						<div class="col-sm-offset-2 col-sm-9">
 							<button type="submit" class="btn btn-primary" style="margin-bottom: 5px;">
 								<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;

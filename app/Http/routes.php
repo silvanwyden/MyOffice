@@ -79,6 +79,9 @@ Route::get('/fileentry/get/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEn
 Route::get('/fileentry/open/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@open']);
 Route::get('/fileentry/delete/{fileentry}', ['middleware' => 'auth', 'uses' => 'FileEntryController@destroy']);
 
+//common Routes
+Route::get('/common/about', ['middleware' => 'auth', 'uses' => 'CommonController@about']);
+
 
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');

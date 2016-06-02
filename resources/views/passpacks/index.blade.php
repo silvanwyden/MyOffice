@@ -90,7 +90,7 @@
 				$('#search').focus();
 		});
 
-		shortcut.add("Ctrl+a",function() { window.location = "/passpack"; });
+		shortcut.add("Ctrl+m",function() { window.location = "/passpack"; });
 		shortcut.add("Ctrl+d",function() { window.location = "/passpacks/?search=&btn_search=s"; });
 
 	</script>

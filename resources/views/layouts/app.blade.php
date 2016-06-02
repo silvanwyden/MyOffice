@@ -139,6 +139,7 @@
 						    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
 					          	<ul class="dropdown-menu">
 						            <li><a href="#">Change Password</a></li>
+						            <li><a href="/common/about">About</a></li>
 						            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
 					          	</ul>
 					        </li>

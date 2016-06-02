@@ -98,7 +98,7 @@
   		display:none;
   		}
   		
-  #search, #search-text, .tags, .bootstrap-tagsinput {
+  #search, #search-text, .tags, .bootstrap-tagsinput span span, .caret {
   		display: none !important;
   } 	
  		
@@ -135,20 +135,21 @@
   		text-align: left !important;
   }
   
-  .form-control {
-  		border: 0px;
+  .form-control, .panel-default, div, textarea {
+  		border: 0px !important;
   }
   
   .button-group, .heading, .note-resizebar, .panel-heading .col-sm-2 {
   		display: none;
   }
   
-  .panel-default {
-  		border: 0px;
+  
+  .container, .panel-body, .panel-heading, .panel-heading div div {
+  		padding: 0px !important;
   }
   
-  .container {
-  		padding: 0px !important;
+  .row {
+  		margin: 0px !important;
   }
   
   .panel-heading .col-sm-10 {

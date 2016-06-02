@@ -116,7 +116,7 @@
 				$('#search').focus();
 		});
 
-		shortcut.add("Ctrl+a",function() { window.location = "/task"; });
+		shortcut.add("Ctrl+m",function() { window.location = "/task"; });
 		shortcut.add("Ctrl+d",function() { window.location = "/tasks/?search=&btn_search=s"; });
 		@if ($filter_deadline == 1)
 			shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=-1"; });
