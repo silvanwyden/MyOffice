@@ -205,7 +205,7 @@
 							@endif
 							
 							<!-- Description -->
-							<div class="form-group">
+							<div class="form-group description-summernote">
 								<label for="task-description" class="col-sm-2 control-label">Description</label>
 			
 								<div class="col-sm-10">
@@ -214,7 +214,7 @@
 							</div>
 							
 							<!-- Action Button -->
-							<div class="form-group">
+							<div class="form-group button-group">
 								<div class="col-sm-offset-2 col-sm-9">
 									<button type="submit" class="btn btn-primary" style="margin-bottom: 5px;">
 										<i class="glyphicon glyphicon-floppy-save"></i> Save&nbsp;

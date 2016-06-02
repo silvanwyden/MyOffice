@@ -123,6 +123,44 @@
   	padding: 2px !important;
   }
   
+  .note-editable {
+  		height: auto !important;
+  }
+  
+  .form-group .col-sm-10 {
+  		width: 100%;
+  }
+  
+  .form-group label {
+  		text-align: left !important;
+  }
+  
+  .form-control {
+  		border: 0px;
+  }
+  
+  .button-group, .heading, .note-resizebar, .panel-heading .col-sm-2 {
+  		display: none;
+  }
+  
+  .panel-default {
+  		border: 0px;
+  }
+  
+  .container {
+  		padding: 0px !important;
+  }
+  
+  .panel-heading .col-sm-10 {
+  		font-size: 25px;
+  		font-weight: bold;
+  }
+  
+  .col-sm-10 input {
+  		font-size: 12px !important;
+  		padding: 0px;
+  }
+  
 }
 
 body {
