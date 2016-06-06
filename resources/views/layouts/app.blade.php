@@ -121,18 +121,12 @@
 			        		</li>
 			        		<li class="{{ Request::is( 'warranties') ? 'active' : '' }}">
 				        		<a href="/warranties?page=1">Warranties
-				        			@if(isset($passpacks))
-										<span class="badge">{{ $passpacks->total() }}</span>
+				        			@if(isset($warranties))
+										<span class="badge">{{ $warranties->total() }}</span>
 									@endif
 				        		</a>
 			        		</li>
-			        		<li class="{{ Request::is( 'vouchers') ? 'active' : '' }}">
-				        		<a href="/vouchers?page=1">Vouchers
-				        			@if(isset($passpacks))
-										<span class="badge">{{ $passpacks->total() }}</span>
-									@endif
-				        		</a>
-			        		</li>
+			        		
 		        		</ul>
 	        		@endif
 	        		

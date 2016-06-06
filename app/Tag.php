@@ -28,6 +28,12 @@ class Tag extends Model
     	
     }
     
+    public function getNumberWarranties() {
+    	 
+    	return Warranty::where('tag_ids', 'like', "%," . $this->id . ",%")->count();
+    	 
+    }
+    
 
 
 }

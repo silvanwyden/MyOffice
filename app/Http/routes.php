@@ -41,7 +41,6 @@ Route::get('/person/{person}/delete', ['middleware' => 'auth', 'uses' => 'Person
 Route::get('/persons/excel', ['middleware' => 'auth', 'uses' => 'PersonController@excel']);
 Route::get('/persons/search', ['middleware' => 'auth', 'uses' => 'PersonController@search']);
 
-
 // Passpack Routes
 Route::get('/passpacks', ['middleware' => 'auth', 'uses' => 'PasspackController@index']);
 Route::get('/passpack', ['middleware' => 'auth', 'uses' => 'PasspackController@create']);
@@ -56,7 +55,6 @@ Route::post('/note', ['middleware' => 'auth', 'uses' => 'NoteController@store'])
 Route::get('/note/{note}/update', ['middleware' => 'auth', 'uses' => 'NoteController@update']);
 Route::get('/note/{note}/delete', ['middleware' => 'auth', 'uses' => 'NoteController@destroy']);
 Route::post('/note/{note}/upload', ['middleware' => 'auth', 'uses' => 'NoteController@upload']);
-
 
 // Tag Routes
 Route::get('/tags', ['middleware' => 'auth', 'uses' => 'TagController@index']);
@@ -81,6 +79,15 @@ Route::get('/fileentry/delete/{fileentry}', ['middleware' => 'auth', 'uses' => '
 
 //common Routes
 Route::get('/common/about', ['middleware' => 'auth', 'uses' => 'CommonController@about']);
+
+// Warranty Routes
+Route::get('/warranties', ['middleware' => 'auth', 'uses' => 'WarrantyController@index']);
+Route::get('/warranty', ['middleware' => 'auth', 'uses' => 'WarrantyController@create']);
+Route::post('/warranty', ['middleware' => 'auth', 'uses' => 'WarrantyController@store']);
+Route::get('/warranty/{warranty}/update', ['middleware' => 'auth', 'uses' => 'WarrantyController@update']);
+Route::get('/warranty/{warranty}/delete', ['middleware' => 'auth', 'uses' => 'WarrantyController@destroy']);
+Route::post('/warranty/{warranty}/upload', ['middleware' => 'auth', 'uses' => 'WarrantyController@upload']);
+
 
 
 // Authentication Routes...

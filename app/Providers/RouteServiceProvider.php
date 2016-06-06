@@ -8,6 +8,7 @@ use App\Counter;
 use App\Person;
 use App\Passpack;
 use App\Note;
+use App\Warranty;
 use App\Tag;
 use App\Countercategory;
 use Illuminate\Routing\Router;
@@ -40,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('tag', Tag::class);
         $router->model('countercategory', Countercategory::class);
         $router->model('fileentry', Fileentry::class);
+        $router->model('warranty', Warranty::class);
 
         parent::boot($router);
     }
