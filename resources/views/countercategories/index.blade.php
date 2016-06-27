@@ -17,6 +17,8 @@
 			  <div class="btn-group" role="group" aria-label="first">
 			  
 			  		<a href="/countercategory" class="btn btn-primary">New</a>
+			  		<a href="/counters" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></a>
+			  		<a href="/countercategories" class="btn btn-default active"><span class="glyphicon glyphicon-cog"></span></a>
 						
 				</div>
 			</div>

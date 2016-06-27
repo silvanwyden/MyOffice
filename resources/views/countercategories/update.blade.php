@@ -19,9 +19,10 @@
 				<div class="col-sm-8">
 				  <div class="btn-group" role="group" aria-label="first">
 				  
-				  		<a href="/countercategories?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 				  		<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
+			  			<a href="/counters" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></a>
+			  			<a href="/countercategories" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span></a>
 			  			
 					</div>
 				</div>
