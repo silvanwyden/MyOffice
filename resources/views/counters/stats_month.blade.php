@@ -68,8 +68,8 @@
 				  ykeys: ['value'],
 				  // Labels for the ykeys -- will be displayed when you hover over the
 				  // chart.
-				  labels: ['Items']
-			  
+				  labels: ['Items'],
+				  hideHover: 'always',
 				});
 
 			</script>
