@@ -305,7 +305,8 @@ class CounterController extends Controller
     	)
     	//->groupBy('condate')
     	->where('countercategories.inactive', '!=', 1)
-    	->groupBy('counters.counter_category_id')->get();
+    	->groupBy('counters.counter_category_id')
+    	->orderBy('items', 'DESC')->get();
     	
     	//select 
 //CONCAT( YEAR( date ) , '-', MONTH( date ) ) AS thedate

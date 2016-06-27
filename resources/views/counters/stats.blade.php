@@ -35,7 +35,7 @@
 				  // the chart.
 				  data: [
 					@foreach($cats as $cat)
- 						   { cat: '{{ $cat->cname }}', value: {{ $cat->items }} },			    
+ 						   { cat: '{{ $cat->cname }} ({{ $cat->items }})', value: {{ $cat->items }} },			    
  				    @endforeach
 
 
