@@ -351,5 +351,76 @@ class CounterController extends Controller
     			]);
     }
     
+    /**
+     * Update a new task: load date and forward to view
+     *
+     * @param  Request  $request, Task $task
+     * @return view
+     */
+    public function stats_month(Request $request) {
+    
+    	$categories = Countercategory::where('inactive', '!=', '1')->orderBy('name')->get();
+    	
+    	//handle categories filter
+    	if ($request->category_id)
+    		if ($request->category_id > 0) {
+    		$request->session()->put('counter_category_id', $request->category_id);
+    		$request->session()->put('counter_category', Countercategory::find($request->category_id)->name);
+    	}
+    	else {
+    		$request->session()->put('counter_category_id', False);
+    		$request->session()->put('counter_category', "All Categories");
+    	}
+    	$ses_category = $request->session()->get('counter_category');
+    	$ses_category_id = $request->session()->get('counter_category_id');
+    	 
+    	//handle months
+    	$months = DB::table('counters')
+    	-> select(DB::raw('distinct CONCAT(YEAR(date), "-", MONTH(date)) AS date'))
+    	->orderby('date')->get();
+    	
+    	if ($ses_category_id > 0) {
+    		    	 
+	    	$counters = DB::table('counters')
+	    	->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
+	    	->select(
+	    			'counters.id as cid',
+	    			'countercategories.name as cname',
+	    			'countercategories.id as ccid',
+	    			DB::raw('extract(month from date) as month'),
+	    			DB::raw('extract(year from date) as year'),
+	    			DB::raw('count(counters.id) as items')
+	    	)
+	    	->where('counter_category_id', '=', $ses_category_id)
+	    	->groupBy('month', 'year')
+	    	->orderBy('date')
+	    	->get();
+    	}
+    	else {
+    		
+    		$counters = DB::table('counters')
+    		->leftjoin('countercategories', 'counters.counter_category_id', '=', 'countercategories.id')
+    		->select(
+    				'counters.id as cid',
+    				'countercategories.name as cname',
+    				'countercategories.id as ccid',
+    				DB::raw('extract(month from date) as month'),
+    				DB::raw('extract(year from date) as year'),
+    				DB::raw('count(counters.id) as items')
+    		)
+    		->groupBy('month', 'year')
+    		->orderBy('date')
+    		->get();
+    		
+    	}
+    
+    
+    	return view('counters.stats_month', [
+    			'cats' => $counters,
+    			'categories' => $categories,
+    			'category' => $ses_category,
+    			]);
+    }
+    
     
 }

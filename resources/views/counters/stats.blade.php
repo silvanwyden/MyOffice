@@ -13,7 +13,13 @@
 			<div class="col-sm-8">
 			  <div class="btn-group" role="group" aria-label="first">
 			  
-			  		<a href="/counters" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+			  		
+			  		
+			  		<a href="/counter" class="btn btn-primary">New</a>
+					
+					<a href="/counters" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+					<a href="/counter/stats_month" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span></a>
+					<a href="/countercategories" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span></a>
 			  		
 				</div>
 			</div>

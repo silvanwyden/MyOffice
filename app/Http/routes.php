@@ -31,6 +31,8 @@ Route::post('/counter', ['middleware' => 'auth', 'uses' => 'CounterController@st
 Route::get('/counter/{counter}/update', ['middleware' => 'auth', 'uses' => 'CounterController@update']);
 Route::get('/counter/{counter}/delete', ['middleware' => 'auth', 'uses' => 'CounterController@destroy']);
 Route::get('/counter/stats', ['middleware' => 'auth', 'uses' => 'CounterController@stats']);
+Route::get('/counter/stats_month', ['middleware' => 'auth', 'uses' => 'CounterController@stats_month']);
+
 
 // Persons Routes
 Route::get('/persons', ['middleware' => 'auth', 'uses' => 'PersonController@index']);

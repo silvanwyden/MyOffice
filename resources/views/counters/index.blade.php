@@ -17,7 +17,9 @@
 			  <div class="btn-group" role="group" aria-label="first">
 			  
 			  		<a href="/counter" class="btn btn-primary">New</a>
-			
+					<a href="/counter/stats" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span></a>
+			  		<a href="/counter/stats_month" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span></a>
+			  		
 					<div class="btn-group" role="group">
 						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						     <span class="selection">{{ $category or "All Categories" }}</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -31,7 +33,6 @@
 						  </ul>
 					</div>
 					
-					<a href="/counter/stats" class="btn btn-default"><span class="glyphicon glyphicon-stats"></span></a>
 					<a href="/countercategories" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span></a>
 					
 				</div>
