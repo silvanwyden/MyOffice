@@ -77,6 +77,22 @@
 	#unseen-passpack table th:nth-child(5){display: none;}
 }
 
+@media only screen and (max-width: 630px) {
+	#unseen-warranties table td:nth-child(2),
+	#unseen-warranties table th:nth-child(2),
+	#unseen-warranties table td:nth-child(3),
+	#unseen-warranties table th:nth-child(3),
+	#unseen-warranties table td:nth-child(5),
+	#unseen-warranties table th:nth-child(5){display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+	#unseen-warranties table td:nth-child(3),
+	#unseen-warranties table th:nth-child(3),
+	#unseen-warranties table td:nth-child(5),
+	#unseen-warranties table th:nth-child(5){display: none;}
+}
+
 .panel-body {
 	padding: 15px;
 }
