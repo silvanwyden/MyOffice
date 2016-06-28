@@ -194,10 +194,10 @@
 							  
 							</script>
 										
-							<!-- Read/Write -->
+							<!-- Create/Write -->
 							@if ($warranty->id)
 							<div class="form-group">
-								<label for="task-created" class="col-sm-2 control-label">Read/Write</label>
+								<label for="task-created" class="col-sm-2 control-label">Create/Write</label>
 			
 								<div class="col-sm-10" style="padding-top: 7px;">{{ date('d.m.Y G:i:s', strtotime($warranty->created_at)) }} | {{ date('d.m.Y G:i:s', strtotime($warranty->updated_at)) }}</div>
 			

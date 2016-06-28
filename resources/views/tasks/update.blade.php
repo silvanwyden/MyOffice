@@ -223,10 +223,10 @@
 								</div>
 							</div>
 							
-							<!-- Read/Write -->
+							<!-- Create/Write -->
 							@if ($task->id)
 							<div class="form-group">
-								<label for="task-created" class="col-sm-2 control-label">Read/Write</label>
+								<label for="task-created" class="col-sm-2 control-label">Create/Write</label>
 			
 								<div class="col-sm-10" style="padding-top: 7px;">{{ date('d.m.Y G:i:s', strtotime($task->created_at)) }} | {{ date('d.m.Y G:i:s', strtotime($task->updated_at)) }}</div>
 			
