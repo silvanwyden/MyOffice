@@ -459,7 +459,7 @@ class PersonController extends Controller
 		    	);
 		    	
 		    	//handle categories
-		    	$ses_category_id = $request->session()->get('person_category_id');
+		    	$ses_category_id = $this->temp_request->session()->get('person_category_id');
 		    	if ($ses_category_id)
 		    		$persons->where('category_id', '=', $ses_category_id);
 		    	 
