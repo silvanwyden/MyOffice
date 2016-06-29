@@ -3684,6 +3684,90 @@
       }
     };
 
+	/**
+     * Add a new row
+     *
+     * @param {WrappedRange} rng
+     * @param {String} position (top/bottom)
+     * @return {Node}
+     */
+    this.addRow = function (rng, position) {
+      var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
+
+      var currentTr = $(cell).closest('tr');
+      var nbCell = currentTr.find('td').length;
+
+      var html = $('<tr></tr>');
+      for (var idCell = 0; idCell < nbCell; idCell++)
+      {
+        html.append('<td>' + dom.blank + '</td>');
+      }
+
+      if (position === 'top')
+      {
+        currentTr.before(html);
+      }
+      else
+      {
+        currentTr.after(html);
+      }
+
+    };
+
+    /**
+     * Add a new col
+     *
+     * @param {WrappedRange} rng
+     * @param {String} position (left/right)
+     * @return {Node}
+     */
+    this.addCol = function (rng, position) {
+      var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
+      var table = dom.ancestor(cell, dom.isTable);
+
+      var currentTr = $(cell).closest('tr');
+      var cellPos = currentTr.find('td').index($(cell));
+      var nbTr = $(table).find('tr').length;
+
+      for (var idTr = 0; idTr < nbTr; idTr++)
+      {
+        var r = $(table).find('tr')[idTr];
+        var c = $(r).find('td')[cellPos];
+        if (position === 'right')
+        {
+          $(c).after('<td>' + dom.blank + '</td>');
+        }
+        else
+        {
+          $(c).before('<td>' + dom.blank + '</td>');
+        }
+      }
+
+    };
+
+    /**
+     * Delete current row
+     *
+     * @param {WrappedRange} rng
+     * @return {Node}
+     */
+    this.deleteRow = function (rng) {
+      var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
+      $(cell).closest('tr').remove();
+    };
+
+    /**
+     * Delete current col
+     *
+     * @param {WrappedRange} rng
+     * @return {Node}
+     */
+    this.deleteCol = function (rng) {
+      var cell = dom.ancestor(rng.commonAncestor(), dom.isCell);
+      var colPos = $(cell).closest('td,th').prevAll('td,th').length;
+      $(cell).closest('table').find('tr').find('td:eq(' + colPos + '),th:eq(' + colPos + ')').remove();
+    };
+
     /**
      * create empty table element
      *
@@ -4344,6 +4428,62 @@
       rng.insertNode(table.createTable(dimension[0], dimension[1], options));
     });
 
+     /**
+     * @method addRow
+     *
+     *
+     */
+    this.addRow = function (position) {
+      var rng = this.createRange($editable);
+      if (rng.isCollapsed() && rng.isOnCell()) {
+        beforeCommand();
+        table.addRow(rng, position);
+        afterCommand();
+      }
+    };
+
+     /**
+     * @method addCol
+     *
+     *
+     */
+    this.addCol = function (position) {
+      var rng = this.createRange($editable);
+      if (rng.isCollapsed() && rng.isOnCell()) {
+        beforeCommand();
+        table.addCol(rng, position);
+        afterCommand();
+      }
+    };
+
+    /**
+     * @method deleteRow
+     *
+     *
+     */
+    this.deleteRow = function () {
+      var rng = this.createRange($editable);
+      if (rng.isCollapsed() && rng.isOnCell()) {
+        beforeCommand();
+        table.deleteRow(rng);
+        afterCommand();
+      }
+    };
+
+    /**
+     * @method deleteCol
+     *
+     *
+     */
+    this.deleteCol = function () {
+      var rng = this.createRange($editable);
+      if (rng.isCollapsed() && rng.isOnCell()) {
+        beforeCommand();
+        table.deleteCol(rng);
+        afterCommand();
+      }
+    };
+
     /**
      * float me
      *
@@ -4891,6 +5031,14 @@
     };
 
     this.update = function (target) {
+
+      if (dom.isCell(target)) {
+        context.invoke('tablePopover.update', target);
+        return;
+      } else {
+        context.invoke('tablePopover.hide', target);
+      }
+
       var isImage = dom.isImg(target);
       var $selection = this.$handle.find('.note-control-selection');
 
@@ -5072,6 +5220,7 @@
       this.addToolbarButtons();
       this.addImagePopoverButtons();
       this.addLinkPopoverButtons();
+      this.addTablePopoverButtons();
       this.fontInstalledMap = {};
     };
 
@@ -5597,6 +5746,64 @@
       });
     };
 
+    /**
+     * table : [
+     *
+     *
+     *
+     * ],
+     */
+    this.addTablePopoverButtons = function () {
+      context.memo('button.addRowUp', function () {
+        return ui.button({
+          className: 'btn-md fa fa-arrow-circle-up',
+          contents: ui.icon(options.icons.arrowUp),
+          tooltip: 'Add row before',
+          click: context.createInvokeHandler('editor.addRow', 'top')
+        }).render();
+      });
+      context.memo('button.addRowDown', function () {
+        return ui.button({
+          className: 'btn-md fa fa-arrow-circle-down',
+          contents: ui.icon(options.icons.arrowDown),
+          tooltip: 'Add row after',
+          click: context.createInvokeHandler('editor.addRow', 'bottom')
+        }).render();
+      });
+      context.memo('button.addColLeft', function () {
+        return ui.button({
+          className: 'btn-md fa fa-arrow-circle-left',
+          contents: ui.icon(options.icons.arrowLeft),
+          tooltip: 'Add column  left',
+          click: context.createInvokeHandler('editor.addCol', 'left')
+        }).render();
+      });
+      context.memo('button.addColRight', function () {
+        return ui.button({
+          className: 'btn-md fa fa-arrow-circle-right',
+          contents: ui.icon(options.icons.arrowRight),
+          tooltip: 'Add column right',
+          click: context.createInvokeHandler('editor.addCol', 'right')
+        }).render();
+      });
+      context.memo('button.deleteRow', function () {
+        return ui.button({
+          className: 'btn-md fa fa-arrows-h',
+          contents: ui.icon(options.icons.arrowsH),
+          tooltip: 'delete row',
+          click: context.createInvokeHandler('editor.deleteRow')
+        }).render();
+      });
+      context.memo('button.deleteCol', function () {
+        return ui.button({
+          className: 'btn-md fa fa-arrows-v',
+          contents: ui.icon(options.icons.arrowsV),
+          tooltip: 'delete col',
+          click: context.createInvokeHandler('editor.deleteCol')
+        }).render();
+      });
+    };
+
     this.build = function ($container, groups) {
       for (var groupIdx = 0, groupLen = groups.length; groupIdx < groupLen; groupIdx++) {
         var group = groups[groupIdx];
@@ -6111,6 +6318,59 @@
       });
     };
   };
+
+
+
+
+
+  var TablePopover = function (context) {
+    var ui = $.summernote.ui;
+
+    var options = context.options;
+
+    this.shouldInitialize = function () {
+      return !list.isEmpty(options.popover.table);
+    };
+
+    this.initialize = function () {
+      this.$popover = ui.popover({
+        className: 'note-table-popover'
+      }).render().appendTo('body');
+      var $content = this.$popover.find('.popover-content');
+
+      context.invoke('buttons.build', $content, options.popover.table);
+    };
+
+    this.destroy = function () {
+      this.$popover.remove();
+    };
+
+    this.update = function (target) {
+      if (dom.isCell(target)) {
+        var pos = dom.posFromPlaceholder(target);
+        this.$popover.css({
+          display: 'block',
+          left: pos.left,
+          top: pos.top
+        });
+      } else {
+        this.hide();
+      }
+    };
+
+    this.hide = function () {
+      this.$popover.hide();
+    };
+  };
+
+
+
+
+
+
+
+
+
 
   var ImagePopover = function (context) {
     var ui = $.summernote.ui;
@@ -6727,6 +6987,7 @@
         'linkPopover': LinkPopover,
         'imageDialog': ImageDialog,
         'imagePopover': ImagePopover,
+	'tablePopover': TablePopover,
         'videoDialog': VideoDialog,
         'helpDialog': HelpDialog,
         'airPopover': AirPopover
@@ -6757,6 +7018,10 @@
         ],
         link: [
           ['link', ['linkDialogShow', 'unlink']]
+        ],	
+        table: [
+          ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+          ['delete', ['deleteRow', 'deleteCol']]
         ],
         air: [
           ['color', ['color']],
@@ -6899,8 +7164,14 @@
         'align': 'note-icon-align',
         'alignCenter': 'note-icon-align-center',
         'alignJustify': 'note-icon-align-justify',
-        'alignLeft': 'note-icon-align-left',
+        'alignLeft': 'note-icon-align-o-left',
         'alignRight': 'note-icon-align-right',
+	'arrowDown': 'note-icon-arrow-circle-down',
+        'arrowLeft': 'note-icon-arrow-circle-left',
+        'arrowRight': 'note-icon-arrow-circle-right',
+        'arrowUp': 'note-icon-arrow-circle-up',
+        'arrowsH': 'note-icon-arrows-h',
+        'arrowsV': 'note-icon-arrows-v',
         'indent': 'note-icon-align-indent',
         'outdent': 'note-icon-align-outdent',
         'arrowsAlt': 'note-icon-arrows-alt',
@@ -6939,3 +7210,8 @@
   });
 
 }));
+
+
+
+
+
