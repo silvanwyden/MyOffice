@@ -7164,7 +7164,7 @@
         'align': 'note-icon-align',
         'alignCenter': 'note-icon-align-center',
         'alignJustify': 'note-icon-align-justify',
-        'alignLeft': 'note-icon-align-o-left',
+        'alignLeft': 'note-icon-align-left',
         'alignRight': 'note-icon-align-right',
 	'arrowDown': 'note-icon-arrow-circle-down',
         'arrowLeft': 'note-icon-arrow-circle-left',
