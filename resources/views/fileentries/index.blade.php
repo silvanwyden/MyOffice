@@ -34,41 +34,47 @@
 		<div id="unseen-fileentries">
 					
 			<div class="col-sm-10">
-		
-				<table class="table table-striped fileentry-table">
-					<thead>
-					<tr>
-						<th><nobr><a href="{{ createOrderLink('original_filename', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('original_filename', $order, $dir) }}"></div></nobr></th>
-						<th><nobr><a href="{{ createOrderLink('mime', $order, $dir, $page) }}">Type</a> <div class="{{ createOrderLinkImage('mime', $order, $dir) }}"></div></nobr></th>
-						<th><nobr><a href="{{ createOrderLink('model_id', $order, $dir, $page) }}">Model</a> <div class="{{ createOrderLinkImage('model_id', $order, $dir) }}"></div></nobr></th>
-						<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach ($fileentries as $fileentry)
-							<tr>
-								<!-- td class="table-text"><div>{{ $fileentry->id }}</div></td-->
-								<td class="table-text">
-									<a id="file_{{ $fileentry->id }}" href="/fileentry/open/{{ $fileentry->id }}" target="_blank">{{ $fileentry->original_filename}}</a>&nbsp;
-								</td>
-								<td class="table-text">{{ explode("/", $fileentry->mime)[1] }}</td>
-								<td class="table-text">
-									<a href="/{{ explode(",", $fileentry->model_id)[0] }}/{{ explode(",", $fileentry->model_id)[1] }}/update">{{ ucfirst(explode(",", $fileentry->model_id)[0]) }}</a>
-								</td>
-															
-								<!-- fileentry Action Buttons -->
-								<td>
-									<nobr>
-										
-										<a id="file_download{{ $fileentry->id }}" href="/fileentry/get/{{ $fileentry->id }}" class="btn btn-primary glyphicon glyphicon-download"></a>
-										<a id="file_rename{{ $fileentry->id }}"href="javascript:Rename({{ $fileentry->id }});" class="btn btn-info glyphicon glyphicon-pencil"></a>
-										<a id="file_delete{{ $fileentry->id }}"href="/fileentry/delete/{{ $fileentry->id }}?page={{ $page }}&redirect=fileentries" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
-									</nobr>				
-								</td>
+				<form action="/fileentry" method="POST" class="form-horizontal" id="myform">
+				
+							{{ csrf_field() }}
+							
+					<input type="hidden" name="rename_file_id" id="rename_file_id" value=""/>
+				
+					<table class="table table-striped fileentry-table">
+						<thead>
+						<tr>
+							<th><nobr><a href="{{ createOrderLink('original_filename', $order, $dir, $page) }}">Name</a> <div class="{{ createOrderLinkImage('original_filename', $order, $dir) }}"></div></nobr></th>
+							<th><nobr><a href="{{ createOrderLink('mime', $order, $dir, $page) }}">Type</a> <div class="{{ createOrderLinkImage('mime', $order, $dir) }}"></div></nobr></th>
+							<th><nobr><a href="{{ createOrderLink('model_id', $order, $dir, $page) }}">Model</a> <div class="{{ createOrderLinkImage('model_id', $order, $dir) }}"></div></nobr></th>
+							<th>Action</th>
 							</tr>
-						@endforeach
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							@foreach ($fileentries as $fileentry)
+								<tr>
+									<!-- td class="table-text"><div>{{ $fileentry->id }}</div></td-->
+									<td class="table-text">
+										<a id="file_{{ $fileentry->id }}" href="/fileentry/open/{{ $fileentry->id }}" target="_blank">{{ $fileentry->original_filename}}</a>&nbsp;
+									</td>
+									<td class="table-text">{{ explode("/", $fileentry->mime)[1] }}</td>
+									<td class="table-text">
+										<a href="/{{ explode(",", $fileentry->model_id)[0] }}/{{ explode(",", $fileentry->model_id)[1] }}/update">{{ ucfirst(explode(",", $fileentry->model_id)[0]) }}</a>
+									</td>
+																
+									<!-- fileentry Action Buttons -->
+									<td>
+										<nobr>
+											
+											<a id="file_download{{ $fileentry->id }}" href="/fileentry/get/{{ $fileentry->id }}" class="btn btn-primary glyphicon glyphicon-download"></a>
+											<a id="file_rename{{ $fileentry->id }}"href="javascript:Rename({{ $fileentry->id }});" class="btn btn-info glyphicon glyphicon-pencil"></a>
+											<a id="file_delete{{ $fileentry->id }}"href="/fileentry/delete/{{ $fileentry->id }}?page={{ $page }}&redirect=fileentries" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
+										</nobr>				
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</form>
 				{!! $fileentries->appends([])->render() !!}
 			</div>
 	

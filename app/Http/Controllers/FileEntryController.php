@@ -116,6 +116,28 @@ class FileEntryController extends Controller
 	}
 	
 	
+	/**
+	 * Validate AND Save/Crate a new task.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
+	
+		$page = $request->session()->get('page');
+	
+		$rename_id = $request->rename_file_id;
+		$filename = $request->rename_file;
+			
+		$input = array('original_filename' => $filename);
+		$entry = Fileentry::find($rename_id);
+		$entry->fill($input)->save();
+		$request->session()->flash('alert-success', 'File was successful renamed!');
+			
+		return redirect('/fileentries?page=' . $page);
+	
+	}
     
 	public function get($fileid){
 	
