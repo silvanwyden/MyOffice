@@ -126,6 +126,13 @@
 									@endif
 				        		</a>
 			        		</li>
+			        		<li class="{{ Request::is( 'fileentries') ? 'active' : '' }}">
+				        		<a href="/fileentries?page=1">Files
+				        			@if(isset($fileentries))
+										<span class="badge">{{ $fileentries->total() }}</span>
+									@endif
+				        		</a>
+			        		</li>
 			        		
 		        		</ul>
 	        		@endif
