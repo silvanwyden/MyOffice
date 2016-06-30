@@ -31,8 +31,10 @@ class FileEntryController extends Controller
  		$entry = Fileentry::where('id', '=', $fileid)->firstOrFail();
  		$file = Storage::disk('local')->get($entry->filename);
  	
- 		return (new Response($file, 200))
- 		->header('Content-Type', $entry->mime);
+ 		return (new Response($file, 200, [
+ 				'Content-Type' => $entry->mime,
+ 				'Content-Disposition' => 'inline; filename="'.$entry->original_filename.'"',
+ 				]));
  	}
 	
 	public function destroy(Request $request, Fileentry $fileentry)
