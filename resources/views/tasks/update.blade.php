@@ -22,7 +22,7 @@
 				<div class="col-sm-8">
 				  <div class="btn-group" role="group" aria-label="first">
 				  
-				  		<a href="/tasks?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+				  		<a href="/tasks?page={{ $page }}#task_{{ $task->id }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
 				  		<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Save</button>
 						<button type="submit" class="btn btn-info" name="save_edit" value="save_edit" ><span class="glyphicon glyphicon-floppy-saved"></span> Save&Edit</button>
 			  			

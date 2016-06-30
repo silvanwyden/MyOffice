@@ -76,7 +76,7 @@
 				</thead>
 				<tbody>
 					@foreach ($tasks as $task)
-						<tr>
+						<tr id="task_{{ $task->id }}">
 							<!-- td class="table-text"><div>{{ $task->id }}</div></td-->
 							<td class="table-text  {{ isHighestOutdated($task->pname, $task->deadline) }}">
 								<a href="/task/{{ $task->id }}/update?page={{ $page }}">
