@@ -309,6 +309,21 @@ class TaskController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		
+		$page = $request->session()->get('page');
+		
+		if ($request->save_edit_hidden == "save_edit_rename_filename") {
+			$rename_id = $request->rename_file_id;
+			$filename = $request->rename_file;
+			
+			$input = array('original_filename' => $filename);
+			$entry = Fileentry::find($rename_id);
+			$entry->fill($input)->save();
+			$request->session()->flash('alert-success', 'File was successful renamed!');
+			
+			return redirect('/task/' . $request->task_id . '/update?page=' . $page . '&filetab=1');
+		}
+		
 		$this->validate($request, [
 				'name' => 'required|max:255',
 				]);
@@ -341,8 +356,6 @@ class TaskController extends Controller
 			$request->session()->flash('alert-success', 'Task was successful added!');
 			 
 		}
-
-		$page = $request->session()->get('page');
 
 		if ($request->save_edit or $request->save_edit_hidden)
 			return redirect('/task/' . $task->id . '/update?page=' . $page);
