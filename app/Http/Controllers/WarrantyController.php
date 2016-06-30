@@ -297,6 +297,21 @@ class WarrantyController extends Controller
      */
     public function store(Request $request)
     {
+    	
+    	$page = $request->session()->get('page');
+    	
+    	if ($request->save_edit_hidden == "save_edit_rename_filename") {
+    		$rename_id = $request->rename_file_id;
+    		$filename = $request->rename_file;
+    			
+    		$input = array('original_filename' => $filename);
+    		$entry = Fileentry::find($rename_id);
+    		$entry->fill($input)->save();
+    		$request->session()->flash('alert-success', 'File was successful renamed!');
+    			
+    		return redirect('/warranty/' . $request->warranty_id . '/update?page=' . $page . '&filetab=1');
+    	}
+    	
         $this->validate($request, [
             'title' => 'required|max:255',
         ]);
@@ -341,8 +356,6 @@ class WarrantyController extends Controller
 	        $request->session()->flash('alert-success', 'Warranty was successful added!');
 	        
 	        }
-
-	    $page = $request->session()->get('warranty_page');
 
 	    if ($request->save_edit or $request->save_edit_hidden)
         	return redirect('/warranty/' . $warranty->id . '/update?page=' . $page);

@@ -221,6 +221,7 @@
 									</button>
 									
 									<input type="hidden" name="save_edit_hidden" id="save-edit-hidden" value=""/>
+									<input type="hidden" name="rename_file_id" id="rename_file_id" value=""/>
 									
 									<button type="submit" name="save_edit" class="btn btn-info" value="save_edit" style="margin-bottom: 5px;">
 										<i class="glyphicon glyphicon-floppy-saved"></i> Save&Edit&nbsp;
@@ -251,9 +252,12 @@
 						<ul class="list-group" style="padding: 10px";>
 							@foreach ($note->getFiles() as $file)
 								<li class="list-group-item">
-									<a  href="/fileentry/open/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
-									<a href="/fileentry/get/{{ $file->id }}" class="btn btn-info glyphicon glyphicon-download"></a>
-									<a href="/fileentry/delete/{{ $file->id }}?page={{ $page }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
+									<div class="form-inline input-append">
+										<a id="file_{{ $file->id }}" href="/fileentry/open/{{ $file->id }}" target="_blank">{{ $file->original_filename}}</a>&nbsp;
+										<a id="file_download{{ $file->id }}" href="/fileentry/get/{{ $file->id }}" class="btn btn-primary glyphicon glyphicon-download"></a>
+										<a id="file_rename{{ $file->id }}"href="javascript:Rename({{ $file->id }});" class="btn btn-info glyphicon glyphicon-pencil"></a>
+										<a id="file_delete{{ $file->id }}"href="/fileentry/delete/{{ $file->id }}?page={{ $page }}" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
+									</div>
 								</li>
 							@endforeach
 						</ul>
@@ -282,6 +286,17 @@
 
 		shortcut.add("Ctrl+s",function() { $( "#myform" ).submit(); });
 		shortcut.add("Ctrl+e",function() { $( "#save-edit-hidden" ).val('save_edit'); $( "#myform" ).submit(); });
+
+		function Rename(file_id) {
+			$('#file_' + file_id).replaceWith("<input id='rename_file' name='rename_file' type='text' value='" + $('#file_' + file_id).text() + "' class='form-control' />");
+			$('#file_download' + file_id).replaceWith("<button type='submit' class='btn btn-primary' style='margin-bottom: 5px;'><i class='glyphicon glyphicon-floppy-save'></i> Rename&nbsp;</button>");
+			$('#file_rename' + file_id).replaceWith("<a href='' class='btn btn-warning' style='margin-bottom: 5px;'><i class='glyphicon glyphicon-minus'></i> Cancel</a>");
+			$('#file_delete' + file_id).hide();
+			$('#save-edit-hidden').val('save_edit_rename_filename');
+			$('#rename_file_id').val(file_id);
+			$('#rename_file').focus();
+			
+		}
 
 	</script>
 	

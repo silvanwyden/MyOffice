@@ -295,6 +295,21 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
+    	
+    	$page = $request->session()->get('page');
+    	
+    	if ($request->save_edit_hidden == "save_edit_rename_filename") {
+    		$rename_id = $request->rename_file_id;
+    		$filename = $request->rename_file;
+    			
+    		$input = array('original_filename' => $filename);
+    		$entry = Fileentry::find($rename_id);
+    		$entry->fill($input)->save();
+    		$request->session()->flash('alert-success', 'File was successful renamed!');
+    			
+    		return redirect('/note/' . $request->note_id . '/update?page=' . $page . '&filetab=1');
+    	}
+    	
         $this->validate($request, [
             'title' => 'required|max:255',
         ]);
@@ -308,8 +323,6 @@ class NoteController extends Controller
         	}
         }
         	
-        
-        
         $input = array(
 	            'title' => $request->title,
 	        	'description' => $request->description,
@@ -331,8 +344,6 @@ class NoteController extends Controller
 	        $request->session()->flash('alert-success', 'Note was successful added!');
 	        
 	        }
-
-	    $page = $request->session()->get('note_page');
 
 	    if ($request->save_edit or $request->save_edit_hidden)
         	return redirect('/note/' . $note->id . '/update?page=' . $page);
