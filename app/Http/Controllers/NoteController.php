@@ -346,7 +346,7 @@ class NoteController extends Controller
 	        }
 
 	    if ($request->save_edit or $request->save_edit_hidden)
-        	return redirect('/note/' . $note->id . '/update?page=' . $page);
+        	return redirect('/note/' . $note->id . '/update?page=' . $page . "&filetab=" . $request->filetab);
 	    else
         	return redirect('/notes?page=' . $page);
     }

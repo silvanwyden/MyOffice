@@ -358,7 +358,7 @@ class WarrantyController extends Controller
 	        }
 
 	    if ($request->save_edit or $request->save_edit_hidden)
-        	return redirect('/warranty/' . $warranty->id . '/update?page=' . $page);
+        	return redirect('/warranty/' . $warranty->id . '/update?page=' . $page . "&filetab=" . $request->filetab);
 	    else
         	return redirect('/warranties?page=' . $page);
     }

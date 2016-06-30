@@ -63,14 +63,14 @@
 			  			@else
 			  				<li class="active">
 			  			@endif
-				  			<a data-toggle="tab" href="#general">General</a></li>
+				  			<a data-toggle="tab" href="#general" onclick="javascript:$('#filetab').val(0);">General</a></li>
 				  			
 					  	@if ($filetab)
 				  			<li class="active">
 			  			@else
 			  				<li>
 			  			@endif
-			  				<a data-toggle="tab" href="#files">Files <span class="badge">{{ count($note->getFiles()) }}</span></a></li>
+			  				<a data-toggle="tab" href="#files" onclick="javascript:$('#filetab').val(1);">Files <span class="badge">{{ count($note->getFiles()) }}</span></a></li>
 					</ul>
 				</div>
 				
@@ -87,6 +87,9 @@
 			
 							<!-- if we are updating a task we need to know the task ID -->
 							<input type="hidden" name="note_id" value="{{ $note->id or '' }}" />
+							
+							<!--  to save in javascript which was the opened tab -->
+							<input type="hidden" id="filetab" name="filetab" value="{{ $filetab or '' }}" />
 			
 							<!-- Note Name -->
 							<div class="form-group">

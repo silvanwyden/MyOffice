@@ -357,8 +357,8 @@ class TaskController extends Controller
 			 
 		}
 
-		if ($request->save_edit or $request->save_edit_hidden)
-			return redirect('/task/' . $task->id . '/update?page=' . $page);
+		if ($request->save_edit or $request->save_edit_hidden) 
+			return redirect('/task/' . $task->id . '/update?page=' . $page . "&filetab=" . $request->filetab);
 		else
 			return redirect('/tasks?page=' . $page);
 	}
