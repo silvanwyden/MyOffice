@@ -46,15 +46,17 @@
 					<input type="hidden" name="rename_file_id" id="rename_file_id" value=""/>
 				
 						<div class="row">
-						  	<div class="col-xs-6 col-md-3">
+						  	
 
 								@foreach ($fileentries as $fileentry)
-									<a href="#" class="thumbnail">
-										<img src="/fileentry/open_thumb/{{ $fileentry->id }}"/>
-									</a>
+									<div class="col-xs-6 col-md-3">
+										<a href="#" class="thumbnail">
+											<img src="/fileentry/open_thumb/{{ $fileentry->id }}"/>
+										</a>
+									</div>
 								@endforeach
 							
-							</div>
+							
 						</div>
 	
 				</form>
