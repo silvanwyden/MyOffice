@@ -93,6 +93,18 @@
 	#unseen-warranties table th:nth-child(5){display: none;}
 }
 
+@media only screen and (max-width: 630px) {
+	#unseen-fileentries table td:nth-child(2),
+	#unseen-fileentries table th:nth-child(2),
+	#unseen-fileentries table td:nth-child(3),
+	#unseen-fileentries table th:nth-child(3){display: none;}
+}
+
+@media only screen and (max-width: 640px) {
+	#unseen-fileentries table td:nth-child(2),
+	#unseen-fileentries table th:nth-child(2){display: none;}
+}
+
 .panel-body {
 	padding: 15px;
 }
