@@ -13,7 +13,7 @@
 	  	</div> <!-- end .flash-message -->
 		
 		<div class="row">
-			<div class="col-sm-6" style="padding-bottom: 6px;">
+			<div class="col-sm-8" style="padding-bottom: 6px;">
 			  <div class="btn-group" role="group" aria-label="first">
 			  	&nbsp;
 			  </div>
@@ -22,7 +22,7 @@
 			<form action="{{ url('fileentries') }}" method="GET" class="form-horizontal" id="form-search">
            			 {!! csrf_field() !!}
 				
-				<div class="col-sm-3" style="padding-bottom: 6px;">
+				<div class="col-sm-4" style="padding-bottom: 6px;">
 					<input type="text" name="search_text" id="search-text" class="form-control" placeholder="Search" value="{{ $search_text or '' }}">
            		</div>
         		
@@ -33,7 +33,7 @@
 		</div>
 		<div id="unseen-fileentries">
 					
-			<div class="col-sm-10">
+			<div class="col-sm-12">
 				<form action="/fileentry" method="POST" class="form-horizontal" id="myform">
 				
 							{{ csrf_field() }}
