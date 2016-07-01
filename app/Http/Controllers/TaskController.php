@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use App\Fileentry;
+include 'ImageResize.php';
+use \Eventviva\ImageResize;
+
+
 
 class TaskController extends Controller
 {
@@ -427,6 +431,14 @@ class TaskController extends Controller
 		$entry->filename = $file->getFilename().'.'.$extension;
 		$entry->model_id = "task," . $task->id;
 		 
+		
+		//create thumb for images
+		if (strpos($file->getClientMimeType(), "image/") !== false) {
+			$image = new ImageResize($file);
+			$image->resizeToHeight(150);
+			$entry->thumb = $image->getImageAsString();
+		}
+		
 		$entry->save();
 		 
 		return ['success' => false, 'data' => 200];

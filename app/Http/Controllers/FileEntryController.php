@@ -59,7 +59,8 @@ class FileEntryController extends Controller
 				'fileentries.created_at',
 				'fileentries.updated_at',
 				'fileentries.model_id',
-				'fileentries.mime'
+				'fileentries.mime',
+				'fileentries.thumb'
 		);
 		 
 		
@@ -156,6 +157,16 @@ class FileEntryController extends Controller
  		$file = Storage::disk('local')->get($entry->filename);
  	
  		return (new Response($file, 200, [
+ 				'Content-Type' => $entry->mime,
+ 				'Content-Disposition' => 'inline; filename="'.$entry->original_filename.'"',
+ 				]));
+ 	}
+ 	
+ 	public function open_thumb($fileid){
+ 	
+ 		$entry = Fileentry::where('id', '=', $fileid)->firstOrFail();
+ 
+ 		return (new Response($entry->thumb, 200, [
  				'Content-Type' => $entry->mime,
  				'Content-Disposition' => 'inline; filename="'.$entry->original_filename.'"',
  				]));

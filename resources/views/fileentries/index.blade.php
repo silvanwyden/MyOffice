@@ -59,6 +59,9 @@
 									<td class="table-text">{{ explode("/", $fileentry->mime)[1] }}</td>
 									<td class="table-text">
 										<a href="/{{ explode(",", $fileentry->model_id)[0] }}/{{ explode(",", $fileentry->model_id)[1] }}/update">{{ ucfirst(explode(",", $fileentry->model_id)[0]) }}</a>
+										@if ($fileentry->thumb)
+											<img src="/fileentry/open_thumb/{{ $fileentry->id }}"/>
+										@endif
 									</td>
 																
 									<!-- fileentry Action Buttons -->
