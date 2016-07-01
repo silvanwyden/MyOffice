@@ -76,11 +76,14 @@ Route::get('/countercategory/{countercategory}/delete', ['middleware' => 'auth',
 
 //FileEntry Routes
 Route::get('/fileentries', ['middleware' => 'auth', 'uses' => 'FileEntryController@index']);
+Route::get('/fileentries_img', ['middleware' => 'auth', 'uses' => 'FileEntryController@index_img']);
 Route::post('/fileentry', ['middleware' => 'auth', 'uses' => 'FileEntryController@store']);
 Route::get('/fileentry/get/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@get']);
 Route::get('/fileentry/open/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@open']);
 Route::get('/fileentry/open_thumb/{fileid}', ['middleware' => 'auth', 'uses' => 'FileEntryController@open_thumb']);
 Route::get('/fileentry/delete/{fileentry}', ['middleware' => 'auth', 'uses' => 'FileEntryController@destroy']);
+Route::post('/fileentries/upload', ['middleware' => 'auth', 'uses' => 'FileEntryController@upload']);
+
 
 //common Routes
 Route::get('/common/about', ['middleware' => 'auth', 'uses' => 'CommonController@about']);

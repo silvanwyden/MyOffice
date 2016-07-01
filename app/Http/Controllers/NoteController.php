@@ -394,8 +394,7 @@ class NoteController extends Controller
     	$entry->mime = $file->getClientMimeType();
     	$entry->original_filename = $file->getClientOriginalName();
     	$entry->filename = $file->getFilename().'.'.$extension;
-    	$entry->model_id = "note," . $note->id;
-    	 
+    	$entry->model_id = "note," . $note->id; 
     	$entry->save();
     	 
     	return ['success' => false, 'data' => 200];

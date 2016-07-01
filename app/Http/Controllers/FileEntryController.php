@@ -14,6 +14,8 @@ use App\Repositories\FileEntryRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Log;
+include 'ImageResize.php';
+use \Eventviva\ImageResize;
 
 class FileEntryController extends Controller
 {
@@ -59,9 +61,9 @@ class FileEntryController extends Controller
 				'fileentries.created_at',
 				'fileentries.updated_at',
 				'fileentries.model_id',
-				'fileentries.mime',
-				'fileentries.thumb'
-		);
+				'fileentries.mime'
+		)
+		->where('model_id', '>', 0);
 		 
 		
 		//handle search
@@ -107,6 +109,85 @@ class FileEntryController extends Controller
 		$fileentries = $fileentries->orderBy('fileentries.'. $order, $dir)->paginate($pagination_number);
 		 
 		return view('fileentries.index', [
+				'fileentries' => $fileentries,
+				'order' => $order,
+				'dir' => $dir,
+				'page' => $page,
+				'search_text' => $search_text,
+				]);
+	
+	}
+	
+	
+	/**
+	 * Display a list of all of the user's Warranty.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
+	public function index_img(Request $request)
+	{
+			
+		//get basic objects
+		$user = User::find($request->user()->id);
+			
+		//base query
+		$fileentries = DB::table('fileentries')
+		->select(
+				'fileentries.original_filename',
+				'fileentries.id',
+				'fileentries.created_at',
+				'fileentries.updated_at',
+				'fileentries.model_id',
+				'fileentries.mime',
+				'fileentries.thumb'
+		)
+		->where('model_id', '=', 0);
+			
+	
+		//handle search
+		if ($request->btn_search == "s") {
+			if ($request->search_text)
+				$request->session()->put('fileentry_search_text', $request->search_text);
+			else
+				$request->session()->forget('fileentry_search_text');
+		}
+		$search_text = $request->session()->get('fileentry_search_text');
+		if (strlen($search_text) > 0) {
+			$fileentries->where(function($query) use ($search_text)
+			{
+				$query->where('fileentries.original_filename', 'like', "%" . $search_text . "%");
+			});
+		}
+			
+		//handle sort order
+		if ($request->order)
+			$request->session()->put('fileentry_order', $request->order);
+		$order = $request->session()->get('fileentry_order');
+		if (!$order)
+			$order = 'original_filename';
+			
+		//handle sort direction
+		if ($request->dir)
+			$request->session()->put('fileentry_dir', $request->dir);
+		$dir = $request->session()->get('fileentry_dir');
+		if (!$dir)
+			$dir = 'ASC';
+			
+		//handle pagination -> we don't want to lose the page
+		if ($request->page)
+			$request->session()->put('fileentry_page', $request->page);
+		$page = $request->session()->get('fileentry_page');
+			
+		if ($request->n)
+			$request->session()->put('pagination_number', $request->n);
+		elseif ($request->session()->get('pagination_number') < 1)
+		$request->session()->put('pagination_number', 100);
+		$pagination_number = $request->session()->get('pagination_number');
+			
+		$fileentries = $fileentries->orderBy('fileentries.'. $order, $dir)->paginate($pagination_number);
+			
+		return view('fileentries.index_img', [
 				'fileentries' => $fileentries,
 				'order' => $order,
 				'dir' => $dir,
@@ -190,6 +271,31 @@ class FileEntryController extends Controller
 		else
 			return redirect('/' . $model[0] . '/' . $model[1] . '/update?page=' . $request->page . '&filetab=1');
 		
+	}
+	
+	public function upload(Request $request)
+	{
+		Log::info('Uploading Files!');
+	
+		$file = $request->file;
+		$extension = $file->getClientOriginalExtension();
+		Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
+		$entry = new Fileentry();
+		$entry->mime = $file->getClientMimeType();
+		$entry->original_filename = $file->getClientOriginalName();
+		$entry->filename = $file->getFilename().'.'.$extension;
+		$entry->model_id = "0";
+		 
+		//create thumb for images
+		if (strpos($file->getClientMimeType(), "image/") !== false) {
+			$image = new ImageResize($file);
+			$image->resizeToHeight(150);
+			$entry->thumb = $image->getImageAsString();
+		}
+	
+		$entry->save();
+	
+		return ['success' => false, 'data' => 200];
 	}
 	
 }

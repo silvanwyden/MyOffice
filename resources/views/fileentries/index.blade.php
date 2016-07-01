@@ -15,7 +15,10 @@
 		<div class="row">
 			<div class="col-sm-8" style="padding-bottom: 6px;">
 			  <div class="btn-group" role="group" aria-label="first">
-			  	&nbsp;
+			  	
+			  	<a href="/fileentries?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></a>
+			  	<a href="/fileentries_img?page={{ $page }}" class="btn btn-default"><span class="glyphicon glyphicon-picture"></span></a>
+			  	
 			  </div>
 			</div>
 			
@@ -59,9 +62,6 @@
 									<td class="table-text">{{ explode("/", $fileentry->mime)[1] }}</td>
 									<td class="table-text">
 										<a href="/{{ explode(",", $fileentry->model_id)[0] }}/{{ explode(",", $fileentry->model_id)[1] }}/update">{{ ucfirst(explode(",", $fileentry->model_id)[0]) }}</a>
-										@if ($fileentry->thumb)
-											<img src="/fileentry/open_thumb/{{ $fileentry->id }}"/>
-										@endif
 									</td>
 																
 									<!-- fileentry Action Buttons -->
