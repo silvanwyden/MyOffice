@@ -3,6 +3,10 @@
 @section('content')
 	<script src="/dropzone.js"></script>
 	<link rel="stylesheet" href="/dropzone.css">
+	<link href="/lightbox/css/lightbox.css" rel="stylesheet">
+	<script src="/lightbox/js/lightbox.js"></script>
+	
+	
 	<div class="container">
 
 		<div class="flash-message">
@@ -50,7 +54,7 @@
 
 								@foreach ($fileentries as $fileentry)
 									<div class="col-xs-6 col-md-3">
-										<a href="#" class="thumbnail">
+										<a href="/fileentry/open/{{ $fileentry->id }}" class="thumbnail" data-lightbox="albums" data-title="{{ $fileentry->original_filename }}">
 											<img src="/fileentry/open_thumb/{{ $fileentry->id }}"/>
 										</a>
 									</div>

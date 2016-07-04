@@ -14,8 +14,6 @@ use App\Repositories\FileEntryRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 use Log;
-include 'ImageResize.php';
-use \Eventviva\ImageResize;
 
 class FileEntryController extends Controller
 {
