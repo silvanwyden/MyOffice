@@ -92,7 +92,7 @@ class CounterController extends Controller
     		$request->session()->put('counter_dir', $request->dir);
     	$dir = $request->session()->get('counter_dir');
     	if (!$dir)
-    		$dir = 'ASC';
+    		$dir = 'DESC';
     	
     	//handle pagination -> we don't want to lose the page
     	if ($request->page)
