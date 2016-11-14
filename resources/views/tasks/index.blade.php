@@ -97,7 +97,9 @@
 							<!-- Task Action Buttons -->
 							<td>
 								<nobr>
-									<a href="/task/{{ $task->id }}/done" class="btn btn-info glyphicon glyphicon-ok"></a>
+									<a href="/task/{{ $task->id }}/plus_week" class="btn btn-info glyphicon">W</a>
+									<a href="/task/{{ $task->id }}/plus_month" class="btn btn-info glyphicon">M</a>
+									<a href="/task/{{ $task->id }}/done" class="btn btn-primary glyphicon glyphicon-ok"></a>
 									<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</nobr>				
 							</td>
