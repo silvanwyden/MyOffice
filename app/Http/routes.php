@@ -23,6 +23,8 @@ Route::get('/task/{task}/update', ['middleware' => 'auth', 'uses' => 'TaskContro
 Route::get('/task/{task}/delete', ['middleware' => 'auth', 'uses' => 'TaskController@destroy']);
 Route::get('/task/{task}/done', ['middleware' => 'auth', 'uses' => 'TaskController@done']);
 Route::post('/task/{task}/upload', ['middleware' => 'auth', 'uses' => 'TaskController@upload']);
+Route::get('/task/{task}/plus_week', ['middleware' => 'auth', 'uses' => 'TaskController@plus_week']);
+Route::get('/task/{task}/plus_month', ['middleware' => 'auth', 'uses' => 'TaskController@plus_month']);
 
 // Counters Routes
 Route::get('/counters', ['middleware' => 'auth', 'uses' => 'CounterController@index']);

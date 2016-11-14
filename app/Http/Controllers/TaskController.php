@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\TaskRepository;
 use DateTime;
+use DateInterval;
 use App\Session;
 use DB;
 use Log;
@@ -431,6 +432,48 @@ class TaskController extends Controller
 		$entry->save();
 		 
 		return ['success' => false, 'data' => 200];
+	}
+	
+	/**
+	 * Set the given task deadline + one week'.
+	 *
+	 * @param  Request  $request
+	 * @param  Task  $task
+	 * @return Response
+	 */
+	public function plus_week(Request $request, Task $task)
+	{
+			
+		$now = new DateTime();
+		$deadline = $now->add(new DateInterval('P1W'))->format('Y-m-d');
+		$task->deadline = $deadline;
+		$task->save();
+			
+		$request->session()->flash('alert-success', 'Deadline of task was successful changed to next week!');
+		$page = $request->session()->get('page');
+			
+		return redirect('/tasks?page=' . $page);
+	}
+	
+	/**
+	 * Set the given task deadline + one week'.
+	 *
+	 * @param  Request  $request
+	 * @param  Task  $task
+	 * @return Response
+	 */
+	public function plus_month(Request $request, Task $task)
+	{
+			
+		$now = new DateTime();
+		$deadline = $now->add(new DateInterval('P1M'))->format('Y-m-d');
+		$task->deadline = $deadline;
+		$task->save();
+			
+		$request->session()->flash('alert-success', 'Deadline of task was successful changed to next month!');
+		$page = $request->session()->get('page');
+			
+		return redirect('/tasks?page=' . $page);
 	}
 
 
