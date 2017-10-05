@@ -204,9 +204,9 @@
 		  	});
 
 			//remove info boxes after 5 seconds
-		  	setTimeout(function() {
-		  	  $(".flash-message").slideUp( 300 );
-		  	}, 3000);
+		  	//setTimeout(function() {
+		  	  //$(".flash-message").slideUp( 300 );
+		  	//}, 3000);
 		  			  	
 		  
 		});
