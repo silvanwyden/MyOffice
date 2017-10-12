@@ -124,7 +124,7 @@
 								<div class="col-sm-10">
 									<div class="dropdown-priority">
 									  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-									     <span class="selection">Normal</span>&nbsp;&nbsp;<span class="caret"></span>
+									     <span class="selection">Highest</span>&nbsp;&nbsp;<span class="caret"></span>
 									  </button>
 									  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 									  	@foreach ($priorities as $priority)
@@ -133,7 +133,7 @@
 									  </ul>
 									</div>
 								</div>
-								<input type="hidden" id="priority" name="priority" value="3">
+								<input type="hidden" id="priority" name="priority" value="1">
 							</div>
 							
 							<!-- Stage -->
