@@ -190,7 +190,7 @@ class PersonController extends Controller
         	'filter_child' => $filter_child,
         	'filter_birthday' => $filter_birthday,
         	'tags' => $tags,
-        	'tags_sel' => $tags_sel,
+        	'tags_sel' => $tags_sel, 
         	'search_text' => $search_text,
         ]);
         
