@@ -63,9 +63,8 @@
 </head>
 
 <body>
-	<div class="container" style="padding-top:13px;">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
 			
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -165,9 +164,12 @@
 				
 			</div>
 		</nav>
-	</div>
 
-	@yield('content')
+		<div class="container" style="margin-top: 59px;">
+
+			@yield('content')
+
+		</div>
 	
   	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   	<script>
