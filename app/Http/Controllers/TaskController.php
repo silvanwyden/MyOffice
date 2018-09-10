@@ -100,7 +100,8 @@ class TaskController extends Controller
 				'categories.name as cname',
 				'categories.css_class',
 				'priorities.name as pname',
-				'stages.name as sname'
+				'stages.name as sname',
+                DB::raw('LENGTH(tasks.description) as len_description')
 		)
 		->where('user_id', '=', $request->user()->id);
 		 

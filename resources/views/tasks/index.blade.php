@@ -79,9 +79,14 @@
 						<tr id="task_{{ $task->id }}">
 							<!-- td class="table-text"><div>{{ $task->id }}</div></td-->
 							<td class="table-text  {{ isHighestOutdated($task->pname, $task->deadline) }}">
-								<a href="/task/{{ $task->id }}/update?page={{ $page }}">
-									<div>{{ $task->name }}</div>
-								</a>
+								<div>
+									<a href="/task/{{ $task->id }}/update?page={{ $page }}">
+										{{ $task->name }}
+									</a>
+									@if( $task->len_description > 0 )
+										&nbsp;<span class="glyphicon glyphicon-flash"></span>
+									@endif
+								</div>
 							</td>
 							<td class="table-text"><div class="btn {{ $task->css_class }}">{{ $task->cname }}</div></td>
 							<td class="table-text"><div>{{ $task->pname }}</div></td>
