@@ -102,8 +102,8 @@
 							<!-- Task Action Buttons -->
 							<td>
 								<nobr>
-									<a href="/task/{{ $task->id }}/plus_week" class="btn btn-info glyphicon" style="font-family: 'Raleway';">W</a>
-									<a href="/task/{{ $task->id }}/plus_month" class="btn btn-info glyphicon" style="font-family: 'Raleway';">M</a>
+									<a href="/task/{{ $task->id }}/plus_week"  class="btn btn-default glyphicon glyphicon-forward" title="Put deadline to today +1 week"></a>
+									<a href="/task/{{ $task->id }}/plus_month" class="btn btn-default glyphicon glyphicon-fast-forward" title="Put deadline to today +1 month"></a>
 									<a href="/task/{{ $task->id }}/done" class="btn btn-primary glyphicon glyphicon-ok"></a>
 									<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</nobr>				
