@@ -97,8 +97,8 @@
 							<!-- Task Action Buttons -->
 							<td>
 								<nobr>
-									<a href="/task/{{ $task->id }}/plus_week" class="btn btn-info glyphicon">W</a>
-									<a href="/task/{{ $task->id }}/plus_month" class="btn btn-info glyphicon">M</a>
+									<a href="/task/{{ $task->id }}/plus_week" class="btn btn-info glyphicon" style="font-family: 'Raleway';">W</a>
+									<a href="/task/{{ $task->id }}/plus_month" class="btn btn-info glyphicon" style="font-family: 'Raleway';">M</a>
 									<a href="/task/{{ $task->id }}/done" class="btn btn-primary glyphicon glyphicon-ok"></a>
 									<a href="/task/{{ $task->id }}/delete" class="delete btn btn-danger glyphicon glyphicon-trash"></a>
 								</nobr>				
@@ -109,23 +109,25 @@
 			</table>
 			{!! $tasks->appends([])->render() !!}
 	
-	</div>
-	
-	<script>
+        </div>
 
-		//set cursor to the search field
-		$(function () {
-				$('#search').focus();
-		});
+        <script>
 
-		shortcut.add("Ctrl+m",function() { window.location = "/task"; });
-		shortcut.add("Ctrl+d",function() { window.location = "/tasks/?search=&btn_search=s"; });
-		@if ($filter_deadline == 1)
-			shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=-1"; });
-		@else
-			shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=1"; });
-		@endif	
+            //set cursor to the search field
+            $(function () {
+                    $('#search').focus();
+            });
 
-	</script>
+            shortcut.add("Ctrl+m",function() { window.location = "/task"; });
+            shortcut.add("Ctrl+d",function() { window.location = "/tasks/?search=&btn_search=s"; });
+            @if ($filter_deadline == 1)
+                shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=-1"; });
+            @else
+                shortcut.add("Ctrl+i",function() { window.location = "/tasks?filter_deadline=1"; });
+            @endif
+
+        </script>
+
+    </div>
 	
 @endsection
