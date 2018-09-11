@@ -63,114 +63,114 @@
 </head>
 
 <body>
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
-			
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-			
-		   	    	<a class="navbar-brand" href="/">
-				        <div class="glyphicon glyphicon-cloud"></div>
-				    </a>
-			
-			    </div>
-				
-				<div id="navbar" class="navbar-collapse collapse">
-				    @if (!Auth::guest())
-					    <ul class="nav navbar-nav">
-					    	<li class="{{ Request::is( 'task*') ? 'active' : '' }}">
-					    		<a href="/tasks?page=1">Tasks
-									@if(isset($tasks))
-										<span class="badge">{{ $tasks->total() }}</span>
-									@endif
-								</a>
-							</li>
-							<li class="{{ Request::is( 'note*') ? 'active' : '' }}">
-					    		<a href="/notes?page=1">Notes
-									@if(isset($notes))
-										<span class="badge">{{ $notes->total() }}</span>
-									@endif
-								</a>
-							</li>
-				      		<li class="{{ Request::is( 'person*') ? 'active' : '' }}">
-				        		<a href="/persons?page=1">Persons
-				        			@if(isset($persons))
-										<span class="badge">{{ $persons->total() }}</span>
-									@endif
-				        		</a>
-			        		</li>
-				        	<li class="{{ Request::is( 'counter*') ? 'active' : '' }}">
-				        		<a href="/counters?page=1">Counters
-				        			@if(isset($counters))
-										<span class="badge">{{ $counters->total() }}</span>
-									@endif
-				        		</a>
-			        		</li>
-			        		<li class="{{ Request::is( 'passpack*') ? 'active' : '' }}">
-				        		<a href="/passpacks?page=1">PassPacks
-				        			@if(isset($passpacks))
-										<span class="badge">{{ $passpacks->total() }}</span>
-									@endif
-				        		</a>
-			        		</li>
-			        		<li class="{{ Request::is( 'warranties') ? 'active' : '' }}">
-				        		<a href="/warranties?page=1">Warranties
-				        			@if(isset($warranties))
-										<span class="badge">{{ $warranties->total() }}</span>
-									@endif
-				        		</a>
-			        		</li>
-			        		<li class="{{ Request::is( 'fileentries') ? 'active' : '' }}">
-				        		<a href="/fileentries?page=1">Files
-				        			@if(isset($fileentries))
-										<span class="badge">{{ $fileentries->total() }}</span>
-									@endif
-				        		</a>
-			        		</li>
-			        		
-		        		</ul>
-	        		@endif
-	        		
-	    			<ul class="nav navbar-nav navbar-right">
-						@if (Auth::guest())
-							<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
-						@else
-			        		<li class="dropdown">
-						    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
-					        	<ul class="dropdown-menu">
-						            <li><a href="/countercategories">Counter Categories</a></li>
-						            <li><a href="/tags">Tags</a></li>
-						            <li><a href="#">Stages</a></li>
-						            <li><a href="#">Users</a></li>
-						        </ul>
-					        </li>
-					        <li class="dropdown">
-						    	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
-					          	<ul class="dropdown-menu">
-						            <li><a href="#">Change Password</a></li>
-						            <li><a href="/common/about">About</a></li>
-						            <li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
-					          	</ul>
-					        </li>
-						@endif
-					</ul>
-					
-				</div>
-				
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="/">
+					<div class="glyphicon glyphicon-cloud"></div>
+				</a>
+
 			</div>
-		</nav>
 
-		<div class="container" style="margin-top: 59px; padding-left: 0px; padding-right: 0px;">
+			<div id="navbar" class="navbar-collapse collapse">
+				@if (!Auth::guest())
+					<ul class="nav navbar-nav">
+						<li class="{{ Request::is( 'task*') ? 'active' : '' }}">
+							<a href="/tasks?page=1">Tasks
+								@if(isset($tasks))
+									<span class="badge">{{ $tasks->total() }}</span>
+								@endif
+							</a>
+						</li>
+						<li class="{{ Request::is( 'note*') ? 'active' : '' }}">
+							<a href="/notes?page=1">Notes
+								@if(isset($notes))
+									<span class="badge">{{ $notes->total() }}</span>
+								@endif
+							</a>
+						</li>
+						<li class="{{ Request::is( 'person*') ? 'active' : '' }}">
+							<a href="/persons?page=1">Persons
+								@if(isset($persons))
+									<span class="badge">{{ $persons->total() }}</span>
+								@endif
+							</a>
+						</li>
+						<li class="{{ Request::is( 'counter*') ? 'active' : '' }}">
+							<a href="/counters?page=1">Counters
+								@if(isset($counters))
+									<span class="badge">{{ $counters->total() }}</span>
+								@endif
+							</a>
+						</li>
+						<li class="{{ Request::is( 'passpack*') ? 'active' : '' }}">
+							<a href="/passpacks?page=1">PassPacks
+								@if(isset($passpacks))
+									<span class="badge">{{ $passpacks->total() }}</span>
+								@endif
+							</a>
+						</li>
+						<li class="{{ Request::is( 'warranties') ? 'active' : '' }}">
+							<a href="/warranties?page=1">Warranties
+								@if(isset($warranties))
+									<span class="badge">{{ $warranties->total() }}</span>
+								@endif
+							</a>
+						</li>
+						<li class="{{ Request::is( 'fileentries') ? 'active' : '' }}">
+							<a href="/fileentries?page=1">Files
+								@if(isset($fileentries))
+									<span class="badge">{{ $fileentries->total() }}</span>
+								@endif
+							</a>
+						</li>
 
-			@yield('content')
+					</ul>
+				@endif
+
+				<ul class="nav navbar-nav navbar-right">
+					@if (Auth::guest())
+						<li><a href="/auth/login"><i class="fa fa-btn fa-sign-in"></i>Login</a></li>
+					@else
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span>Settings <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/countercategories">Counter Categories</a></li>
+								<li><a href="/tags">Tags</a></li>
+								<li><a href="#">Stages</a></li>
+								<li><a href="#">Users</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }} <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Change Password</a></li>
+								<li><a href="/common/about">About</a></li>
+								<li><a class="glyphicon glyphicon-log-out" href="/auth/logout">Logout</a></li>
+							</ul>
+						</li>
+					@endif
+				</ul>
+
+			</div>
 
 		</div>
-	
+	</nav>
+
+	<div class="container" style="margin-top: 62px; padding-left: 0px; padding-right: 0px;">
+
+		@yield('content')
+
+	</div>
+
   	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   	<script>
 
@@ -209,16 +209,10 @@
 		  	//setTimeout(function() {
 		  	  //$(".flash-message").slideUp( 300 );
 		  	//}, 3000);
-		  			  	
 		  
 		});
 
-
   	</script>
-  	
-  	
-	
 
-	
 </body>
 </html>
