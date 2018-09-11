@@ -135,6 +135,23 @@
 								</div>
 								<input type="hidden" id="priority" name="priority" value="1">
 							</div>
+
+							<!-- is urgent -->
+							<div class="form-group">
+								<label for="task-name" class="col-sm-2 control-label">Is urgent?</label>
+
+								<div class="col-sm-10">
+									@if ($task->id)
+										<input type="checkbox" name="is_urgent" value="1"
+										@if ($task->is_urgent > 0)
+											checked
+										@endif
+											/>
+									@else
+										<input type="checkbox" name="is_urgent" value="1" />
+									@endif
+								</div>
+							</div>
 							
 							<!-- Stage -->
 							<div class="form-group">

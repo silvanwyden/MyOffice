@@ -23,6 +23,7 @@ class Task extends Model
     		'category_id', 
     		'priority_id',
     		'stage_id',
+            'is_urgent',
     	];
 
     /**

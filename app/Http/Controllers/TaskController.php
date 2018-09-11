@@ -101,6 +101,7 @@ class TaskController extends Controller
 				'categories.css_class',
 				'priorities.name as pname',
 				'stages.name as sname',
+                'tasks.is_urgent',
                 DB::raw('LENGTH(tasks.description) as len_description')
 		)
 		->where('user_id', '=', $request->user()->id);
@@ -345,6 +346,7 @@ class TaskController extends Controller
 				'category_id' => $request->category,
 				'priority_id' => $request->priority,
 				'stage_id' => $request->stage,
+                'is_urgent' => $request->is_urgent or '0',
 		);
 
 		if ($request->task_id) {

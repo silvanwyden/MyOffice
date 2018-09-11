@@ -80,7 +80,12 @@
 							<!-- td class="table-text"><div>{{ $task->id }}</div></td-->
 							<td class="table-text  {{ isHighestOutdated($task->pname, $task->deadline) }}">
 								<div>
-									<a href="/task/{{ $task->id }}/update?page={{ $page }}">
+									<a
+											@if ($task->is_urgent > 0)
+												class="btn btn-info" style="white-space:normal;text-align: left;"
+											@endif
+
+											href="/task/{{ $task->id }}/update?page={{ $page }}">
 										{{ $task->name }}
 									</a>
 									@if( $task->len_description > 0 )
